@@ -28,7 +28,7 @@
                     <td>{{ $data->status_cetak=="Y"?"Sudah" : "Belum" }}</td>
                     <td>
                         <a href="" class="btn btn-sm btn-warning fa fa-eye"></a>
-                        <a href="" class="btn btn-sm btn-success fa fa-print"></a>
+                        <a target="_blank" href="generateSurat/sktm/index.php?data={{ base64_encode($data->id) }}" class="btn btn-sm btn-success fa fa-print"></a>
                     </td>             
                 </tr>
             @endforeach
