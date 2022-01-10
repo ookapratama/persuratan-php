@@ -113,7 +113,7 @@
 
         function content3($teks1)
         {
-            $this->Ln(8);
+            $this->Ln(11);
             $this->Cell(10);
             $this->SetFont('Times','',12);
             $this->MultiCell(0,7,$teks1,0,1,'');
