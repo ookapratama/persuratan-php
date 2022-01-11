@@ -27,99 +27,29 @@
         }
 
         function content1(
-            $teks1, $teks2, $teks3, $teks4
+            $teks1, $teks2
         )
         {
-            $this->Ln(7);
-            $this->Cell(125);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks1,0,1,'L');
-            $this->Ln(2);
-
-            $this->Cell(125);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks2,0,1,'L');
-            $this->Ln(2);
-
-            $this->Cell(125);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks3,0,1,'L');
-            $this->Ln(2);
-
-            $this->Cell(125);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks4,0,1,'L');
-            $this->Ln(2);
-
-            
-        }
-
-        function content2(
-            $teks1, $td1, $teks2, $teks3, $td2, $teks4, $teks5, $td3, $teks6
-        )
-        {
-            $this->Ln(-21);
-            $this->Cell(10);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks1,0,1,'L');
-            $this->Ln(2);
-
-            $this->Ln(-7);
-            $this->Cell(28);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$td1,0,1,'L');
-            $this->Ln(2);
-
-            $this->Ln(-7);
-            $this->Cell(30);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks2,0,1,'L');
-            $this->Ln(2);
-
-            $this->Cell(10);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks3,0,1,'L');
-            $this->Ln(2);
-
-            $this->Ln(-7);
-            $this->Cell(28);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$td2,0,1,'L');
-            $this->Ln(2);
-
-            $this->Ln(-7);
-            $this->Cell(30);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks4,0,1,'L');
-            $this->Ln(2);
-
-            $this->Cell(10);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$teks5,0,1,'L');
-            $this->Ln(2);
-
-            $this->Ln(-7);
-            $this->Cell(28);
-            $this->SetFont('Times','',12);
-            $this->Cell(1,5,$td3,0,1,'L');
-            $this->Ln(2);
-
-            $this->Ln(-7);
-            $this->Cell(30);
+            $this->Ln(10);
+            $this->Cell(93);
             $this->SetFont('Times','BU',12);
-            $this->Cell(1,5,$teks6,0,1,'L');
+            $this->Cell(1,5,$teks1,0,1,'C');
+
+            $this->Cell(93);
+            $this->SetFont('Times','',12);
+            $this->Cell(1,5,$teks2,0,1,'C');
             $this->Ln(2);
         }
 
-        function content3($teks1)
+        function content2($teks1)
         {
-            $this->Ln(11);
+            $this->Ln(2);
             $this->Cell(10);
             $this->SetFont('Times','',12);
             $this->MultiCell(0,7,$teks1,0,1,'');
         }
 
-        function content4(
+        function content3(
             $teks1, $td1, $teks2, $teks3, $td2, $teks4, $teks5, $td3, $teks6,
             $teks7, $td4, $teks8, $teks9, $td5, $teks10, $teks11, $td6, $teks12,
             $teks13, $td7, $teks14
@@ -132,13 +62,13 @@
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(68);
+            $this->Cell(78);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$td1,0,1,'L');
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(70);
+            $this->Cell(80);
             $this->SetFont('Times','B',12);
             $this->Cell(1,5,$teks2,0,1,'L');
             $this->Ln(3);
@@ -149,13 +79,13 @@
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(68);
+            $this->Cell(78);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$td2,0,1,'L');
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(70);
+            $this->Cell(80);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$teks4,0,1,'L');
             $this->Ln(3);
@@ -166,13 +96,13 @@
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(68);
+            $this->Cell(78);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$td3,0,1,'L');
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(70);
+            $this->Cell(80);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$teks6,0,1,'L');
             $this->Ln(3);
@@ -183,13 +113,13 @@
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(68);
+            $this->Cell(78);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$td4,0,1,'L');
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(70);
+            $this->Cell(80);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$teks8,0,1,'L');
             $this->Ln(3);
@@ -200,13 +130,13 @@
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(68);
+            $this->Cell(78);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$td5,0,1,'L');
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(70);
+            $this->Cell(80);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$teks10,0,1,'L');
             $this->Ln(3);
@@ -217,13 +147,13 @@
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(68);
+            $this->Cell(78);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$td6,0,1,'L');
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(70);
+            $this->Cell(80);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$teks12,0,1,'L');
             $this->Ln(3);
@@ -234,32 +164,31 @@
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(68);
+            $this->Cell(78);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$td7,0,1,'L');
             $this->Ln(2);
 
             $this->Ln(-7);
-            $this->Cell(70);
+            $this->Cell(80);
             $this->SetFont('Times','',12);
             $this->Cell(1,5,$teks14,0,1,'L');
             $this->Ln(3);
         }
 
-        function content5($teks1, $teks2)
+        function content4($teks1, $teks2)
         {
-            $this->Ln(4);
+            $this->Ln(1.5);
             $this->Cell(10);
             $this->SetFont('Times','',12);
             $this->MultiCell(0,7,$teks1,0,1,'');
-            $this->Ln(1);
 
             $this->Cell(10);
             $this->SetFont('Times','',12);
             $this->Cell(0,7,$teks2,0,1,'');
         }
 
-        function content6($teks1, $teks2, $teks3)
+        function content5($teks1, $teks2, $teks3)
         {
             $this->Ln(8);
             $this->Cell(150);

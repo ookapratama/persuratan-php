@@ -35,7 +35,6 @@
     $pdf->Line(10,33.8,200,33.8);
 
     $pdf->logo('../../gambar/logo-lutim.png');
-
     
     while ($row = mysqli_fetch_array($surat)) {
         $pdf->content(
@@ -50,7 +49,7 @@
             'Nama',
             $row['nama_pemohon'],//10
             'Tempat/Tanggal Lahir',
-            $row['tempat_lahir'].", ".$row['tgl_lahir'],
+            $row['tempat_lahir'].", ".$pdf->tgl_indo($row['tgl_lahir']),
             'NIK',
             $row['nik'],
             'Pekerjaan',//15
@@ -59,7 +58,7 @@
             $row['alamat'],
             '         Yang bersangkutan diatas adalah benar warga '.$row['alamat'].' yang menurut pengamatan dan pengetahuan kami yang bersangkutan benar-benar Tidak Mampu dan Kurang Mampu.',
             '         Demikian Surat keterangan ini diberikan kepada yang bersangkutan untuk dipergunakan sebagaimana mestinya.',//20
-            'Lampenai, 08 Januari 2022',
+            'Lampenai, '.$pdf->tgl_indo($row['tgl_surat']),
             'Kepala Desa Lampenai',
             'BAHARUDDIN KASIM',
             ':', ':', ':', ':', ':', ':', ':'

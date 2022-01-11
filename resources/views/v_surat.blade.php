@@ -39,9 +39,9 @@
                     <td>{{ $data->tgl_surat }}</td>
                     <td>{{ $data->is_generated=="Y"?"Yes" : "No" }}</td>
                     <td>
-                        <a href="" class="btn btn-sm btn-warning fa fa-eye"></a>
-                        <button type="button" class="btn btn-sm btn-danger fa fa-times" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
-                        <a class="btn btn-sm btn-success fa fa-check" data-toggle="modal" data-target="#setuju{{ $data->id }}"></a>
+                        <a href="" class="btn btn-sm btn-warning fa fa-eye" title="detail"></a>
+                        <button type="button" class="btn btn-sm btn-danger fa fa-times" title="delete" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
+                        <a class="btn btn-sm btn-success fa fa-file-pdf-o" title="generate pdf" data-toggle="modal" data-target="#setuju{{ $data->id }}"></a>
                     </td>             
                 </tr> 
                 

@@ -26,6 +26,16 @@
             $this->Image($gambar,20,10,17,20);
         }
 
+        function tgl_indo($tanggal) {
+
+            $bulan = array(
+                1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            );
+    
+            $pecah = explode('-', $tanggal);
+            return $pecah[2].' '.$bulan[(int)$pecah[1]].' '.$pecah[0];
+        }
+
         function content(
             $teks1, $teks2, $teks3, $teks4, $teks5, $teks6, $teks7, $teks8, $teks9, $teks10,
             $teks11, $teks12, $teks13, $teks14, $teks15, $teks16, $teks17, $teks18, $teks19,

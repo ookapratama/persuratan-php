@@ -126,7 +126,7 @@
 
                     <div class="form-group">
                         <label>Upload File Surat</label>
-                        <input type="text" name="file_surat" class="form-control" value="{{ $disposisi->file_surat }}" required>
+                        <input type="file" name="file_surat" class="form-control" value="{{ $disposisi->file_surat }}" required>
                         <div class="text-danger">
                             @error('file_surat')
                                 {{ $message }}

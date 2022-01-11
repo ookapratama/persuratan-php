@@ -38,7 +38,7 @@ class DisposisiController extends Controller
             'tgl_disposisi' => 'required',
             'isi_disposisi' => 'required',
             'isi_ringkas' => 'required|max:255',
-            'file_surat' => 'required',
+            'file_surat' => 'required|mimes:pdf|max:2048',
         ]);
 
         $request->file('file_surat')->store('public');
@@ -86,7 +86,7 @@ class DisposisiController extends Controller
             'tgl_disposisi' => 'required',
             'isi_disposisi' => 'required',
             'isi_ringkas' => 'required|max:255',
-            'file_surat' => 'required|mimes:pdf',
+            'file_surat' => 'required|mimes:pdf|max:2048',
         ]);
 
         $data->user_approve = $request->get('user_approve');
@@ -100,7 +100,7 @@ class DisposisiController extends Controller
         $data->tgl_disposisi = $request->get('tgl_disposisi');
         $data->isi_disposisi = $request->get('isi_disposisi');
         $data->isi_ringkas = $request->get('isi_ringkas');
-        $data->file_surat = $request->get('file_surat');
+        $data->file_surat = $request->file('file_surat')->hashName();
         $data->save();
 
         return redirect()->route('disposisi')->with('pesan', 'Surat berhasil di-update !');

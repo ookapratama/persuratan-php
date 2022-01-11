@@ -39,43 +39,32 @@
 
     
     // while ($row = mysqli_fetch_array($surat)) {
-        $pdf->content1( //tujuan surat
-            'Kepada',
-            'Yth. Bapak Kapolsek Wotu',
-            'Di',
-            '        Wotu',
+        $pdf->content1(
+            'SURAT KETERANGAN DOMISILI',
+            'Nomor : 1234',
 
         );
 
-        $pdf->content2( //nomor, lampiran, perihal
-            'Nomor', ':', '1234',
-            'Lampiran', ':', '-',
-            'Perihal', ':', 'Surat Keterangan Kehilangan'
-
-            
+        $pdf->content2(
+            '         Yang bertanda tangan di bawah ini Kepala Desa Lampenai Kecamatan Wotu Kabupaten Luwu Timur menerangkan dengan sesungguhnya bahwa :',
         );
 
         $pdf->content3(
-            '         Yang bertanda tangan di bawah ini Kepala Desa Lampenai Kecamatan Wotu Kabupaten Luwu Timur. Menerangkan dengan sebenarnya bahwa :',
+            'Nama', ':', 'MELISA',
+            'Tempat/Tgl. Lahir', ':', 'Wotu, 03 Okotber 1999',
+            'Jenis Kelamin', ':', 'Perempuan',
+            'Agama', ':', 'Kristen',
+            'Pekerjaan', ':', 'Pelajar/Mahasiswa',
+            'Alamat', ':', 'alamat',
+            'NIK', ':', '7324064310990001'
         );
 
         $pdf->content4(
-            'Nama', ':', 'Baharuddin Kasim',
-            'Jenis Kelamin', ':', 'Laki-Laki',
-            'Tempat / Tgl Lahir', ':', 'tempat',
-            'NIK', ':', '134134343355',
-            'Status', ':', 'Kawin',
-            'Agama', ':', 'Islam',
-            'Pekerjaan', ':', 'Kerja',
-            'Alamat', ':', 'alamat',
+            '         Nama tersebut diatas benar adalah Penduduk Dsn Kau, Desa Lampenai, Kec.Wotu Kab. Luwu Timur yang Sampai saat ini berdomisili di Dusun Kau, Desa Lampenai, Kecamatan Wotu, Kabupaten Luwu Timur.',
+            '         Demikian Surat Keterangan ini kami buat untuk digunakan sebagaimana mestinya.'
         );
 
         $pdf->content5(
-            '         Nama tersebut di atas benar adalah Penduduk Desa Lampenai Kec. Wotu Kab. Luwu Timur dan nama tersebut benar memiliki KTP dan KTP tersebut telah hilang atau tercecer di sekitar Kecamatan Wotu.',
-            '         Demikian surat keterangan ini kami buat untuk ditindak lanjuti.',
-        );
-
-        $pdf->content6(
             'Lampenai, 09 Januari 2021',
             'Kepala Desa Lampenai',
             'ZAENAL BACHRIE'
