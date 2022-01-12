@@ -21,6 +21,15 @@ class DisposisiController extends Controller
         return view('v_disposisi', $data);
     }
 
+    public function show($id) {
+        $disposisi = Disposisi::findOrFail($id);
+        $data = [
+            'disposisi' => $disposisi,
+        ];
+
+        return view('v_detailDisposisi', $data);
+    }
+
     public function add() {
         $data = User::all()->where('level_id', 2);
         return view('v_addDisposisi', ['user_approve'=>$data]);

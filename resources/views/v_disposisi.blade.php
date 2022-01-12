@@ -40,11 +40,10 @@
                     <td>{{ $data->tgl_terima }}</td>
                     <td><a href="{{ asset('storage/'.$data->file_surat) }}" target="_blank">file</a></td>
                     <td>
-                        <a href="" class="btn btn-sm btn-success">Detail</a>
-                        <a href="{{ route('edit_disposisi', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete{{ $data->id }}">
-                            Delete
-                        </button>
+                        <a href="{{ route('show_disposisi', $data->id) }}" class="btn btn-sm btn-primary fa fa-eye" title="detail"></a>
+                        <a href="{{ route('edit_disposisi', $data->id) }}" class="btn btn-sm btn-warning fa fa-pencil" title="edit"></a>
+                        <button type="button" class="btn btn-sm btn-danger fa fa-trash"  title="delete" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
+                        <a class="btn btn-sm btn-success fa fa-file-pdf-o" title="generate pdf" data-toggle="modal" data-target=""></a>
                     </td>
                 </tr>
             @endforeach

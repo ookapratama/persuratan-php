@@ -38,6 +38,7 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('/skeluar', [SuratKeluarController::class, 'index']);
 
     Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
+    Route::get('/disposisi/show/{id}', [DisposisiController::class, 'show'])->name('show_disposisi');
     Route::get('/disposisi/add', [DisposisiController::class, 'add'])->name('add_disposisi');
     Route::post('/disposisi/insert', [DisposisiController::class, 'insert'])->name('insert_disposisi');
     Route::get('/disposisi/edit/{id}', [DisposisiController::class, 'edit'])->name('edit_disposisi');
