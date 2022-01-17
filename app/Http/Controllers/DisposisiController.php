@@ -22,7 +22,7 @@ class DisposisiController extends Controller
     }
 
     public function show($id) {
-        $disposisi = Disposisi::findOrFail($id);
+        $disposisi = Disposisi::findOrFail($id)->with('approve_by')->first();
         $data = [
             'disposisi' => $disposisi,
         ];
@@ -74,7 +74,7 @@ class DisposisiController extends Controller
 
     public function edit($id) {
         $data = [
-            'disposisi' => Disposisi::findOrFail($id),
+            'disposisi' => Disposisi::findOrFail($id)->with('approve_by')->first(),
         ];
 
         $data2 = User::all()->where('level_id', 2);

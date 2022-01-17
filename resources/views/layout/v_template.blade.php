@@ -21,6 +21,7 @@
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <link rel="stylesheet" href="{{asset('bootstrap')}}/css/app.css">
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -166,20 +167,31 @@
 
 <!-- jQuery 3 -->
 <script src="{{asset('template')}}/bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- jQuery validate 1.19.3 -->
+<script src="{{asset('template')}}/bower_components/jquery-validation-1.19.3/dist/jquery.validate.min.js"></script>
+
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('template')}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <!-- SlimScroll -->
 <script src="{{asset('template')}}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
 <!-- FastClick -->
 <script src="{{asset('template')}}/bower_components/fastclick/lib/fastclick.js"></script>
+
 <!-- AdminLTE App -->
 <script src="{{asset('template')}}/dist/js/adminlte.min.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('template')}}/dist/js/demo.js"></script>
+
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
+    
   })
 </script>
+@yield('script')
 </body>
 </html>

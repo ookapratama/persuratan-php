@@ -38,7 +38,7 @@
                     <td>{{ $data->no_surat }}</td>
                     <td>{{ $data->asal_surat }}</td>
                     <td>{{ $data->tgl_terima }}</td>
-                    <td><a href="{{ asset('storage/'.$data->file_surat) }}" target="_blank">file</a></td>
+                    <td><a href="{{ asset('storage/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
                     <td>
                         <a href="{{ route('show_disposisi', $data->id) }}" class="btn btn-sm btn-primary fa fa-eye" title="detail"></a>
                         <a href="{{ route('edit_disposisi', $data->id) }}" class="btn btn-sm btn-warning fa fa-pencil" title="edit"></a>

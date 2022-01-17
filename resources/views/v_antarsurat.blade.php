@@ -1,136 +1,73 @@
-@extends('layout.v_template')
+{{-- @extends('layout.v_template')
 @section('title', 'Antar')
 @section('titleNav','Pengantaran Surat')
 
-@section('content')
-<div class="content">
-    <div class="row">
-        <div class="row g-3">
+@section('content') --}}
 
-            <div class="col-md-4">
-                <label class="form-label">Perihal</label>
-                <input type="text" name="perihal" class="form-control" value="{{ $disposisi->perihal }}" style="margin-bottom: 10px" autofocus required>
-                <div class="text-danger">
-                    @error('perihal')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 
-            <div class="col-md-3">
-                <label class="form-label">Asal Surat</label>
-                <input type="text" name="asal_surat" class="form-control" value="{{ $disposisi->asal_surat }}" style="margin-bottom: 10px" required>
-                <div class="text-danger">
-                    @error('asal_surat')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
+    <h1>ini halaman Pengantaran Surat</h1>
 
-            <div class="col-md-3">
-                <label class="form-label">Nomor Surat</label>
-                <input type="text" name="no_surat" class="form-control" value="{{ $disposisi->no_surat }}" style="margin-bottom: 10px" required>
-                <div class="text-danger">
-                    @error('no_surat')
-                        {{ $message }}
-                    @enderror
-                </div>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addMyModal">Open Modal</button>
+<div class="modal fade" id="addMyModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Stuff</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" id="newModalForm">
+          <div class="form-group">
+            <label class="control-label col-md-3" for="email">A p Name:</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" id="pName" name="pName" placeholder="Enter a p name" require/>
             </div>
-
-            <div class="col-md-2">
-                <label class="form-label">Kode Surat</label>
-                <input type="text" name="kode_surat" class="form-control" value="{{ $disposisi->kode_surat }}" style="margin-bottom: 10px" required>
-                <div class="text-danger">
-                    @error('kode_surat')
-                        {{ $message }}
-                    @enderror
-                </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="email">Action:</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" id="action" name="action" placeholder="Enter and action" require>
             </div>
-
-            <div class="col-md-3">
-                <label class="form-label">Tanggal Surat</label>
-                <input type="date" name="tgl_surat" class="form-control" value="{{ $disposisi->tgl_surat }}" style="margin-bottom: 10px" required>
-                <div class="text-danger">
-                    @error('tgl_surat')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <label class="form-label">Tanggal Terima Surat</label>
-                <input type="date" name="tgl_terima" class="form-control" value="{{ $disposisi->tgl_terima }}" style="margin-bottom: 10px" required>
-                <div class="text-danger">
-                    @error('tgl_terima')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <label class="form-label">Tanggal Penyelesaian</label>
-                <input type="date" name="tgl_selesai" class="form-control" value="{{ $disposisi->tgl_selesai }}" style="margin-bottom: 10px" required>
-                <div class="text-danger">
-                    @error('tgl_selesai')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <label class="form-label">Tanggal Disposisi</label>
-                <input type="date" name="tgl_disposisi" class="form-control" value="{{ $disposisi->tgl_disposisi }}" style="margin-bottom: 10px" required>
-                <div class="text-danger">
-                    @error('tgl_disposisi')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
-
-           <div class="col-md-6">
-                <label class="form-label">Isi Ringkas</label>
-                <textarea name="isi_ringkas" class="form-control" rows="3" style="margin-bottom: 10px" required>{{ $disposisi->isi_ringkas }}</textarea>
-                <div class="text-danger">
-                    @error('isi_ringkas')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <label class="form-label">Catatan Disposisi</label>
-                <textarea name="isi_disposisi" class="form-control" rows="3" style="margin-bottom: 10px" required>{{ $disposisi->isi_disposisi }}</textarea>
-                <div class="text-danger">
-                    @error('isi_disposisi')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
-            
-            <div class="col-md-6">
-                <label for="" class="form-label">Yang Menyetujui</label>
-                <select name="user_approve" class="form-control" style="margin-bottom: 10px">
-                    @foreach ($user_approve as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-            </div>                    
-
-            <div class="col-md-6">
-                <label class="form-label">Upload File Surat</label>
-                <input type="file" name="file_surat" class="form-control" value="{{ $disposisi->file_surat }}" style="margin-bottom: 10px" required>
-                <div class="text-danger">
-                    @error('file_surat')
-                        {{ $message }}
-                    @enderror
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-primary btn-success" style="margin-top: 15px">Update</button>
-            </div>
-        </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" id="btnSaveIt">Save</button>
+            <button type="button" class="btn btn-default" id="btnCloseIt" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 
-@endsection
+<script>
+    $(function() {
+
+        $("#newModalForm").validate({
+            rules: {
+                pName: {
+                    required: true,
+                    minlength: 8
+                },
+                action: "required"
+            },
+            messages: {
+                pName: {
+                    required: "Please enter some data",
+                    minlength: "Your data must be at least 8 characters"
+                },
+                action: "Please provide some data"
+            }
+        });
+    });
+</script>
+    
+
+{{-- @endsection --}}
+
+
+
+

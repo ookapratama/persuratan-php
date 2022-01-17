@@ -72,8 +72,8 @@ Route::group(['middleware' => 'admin'], function() {
 
     Route::group(['middleware' => 'superAdmin'], function() {
         Route::get('/user', [KelolaUserController::class, 'index'])->name('user');
-        Route::get('/user/add', [KelolaUserController::class, 'add']);
-        Route::post('/user/insert', [KelolaUserController::class, 'insert']);
+        Route::get('/user/add', [KelolaUserController::class, 'add'])->name('FormAddUser');
+        Route::post('/user/insert', [KelolaUserController::class, 'insert'])->name('user_insert');
         Route::get('/user/edit/{id}', [KelolaUserController::class, 'edit']);
         Route::post('/user/update/{id}', [KelolaUserController::class, 'update'])->name('user_update');
         Route::get('/user/delete/{id}', [KelolaUserController::class,'delete'])->name('user_delete');

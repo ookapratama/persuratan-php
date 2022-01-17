@@ -4,130 +4,110 @@
 
 @section('content')
 
-    <a href="/surat" class="btn btn-sm btn-warning">Kembali</a>
+    <a href="/surat" class="btn btn-sm btn-primary">Kembali</a>
 
     <form action="{{ route('store_sktm') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="content">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="row g-3">
 
-                    <div class="form-group has-feedback">
-                        <label for="">No Surat</label>
-                        <input type="text" name="no_surat" class="form-control" placeholder=""  autofocus required>
-                        {{-- <span class="glyphicon glyphicon-user form-control-feedback"></span> --}}
+                    <div class="col-md-4">
+                        <label class="form-label">No Surat</label>
+                        <input type="text" name="no_surat" class="form-control" value="{{ old('no_surat') }}" style="margin-bottom: 10px" autofocus required>
                         <div class="text-danger">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('no_surat')
+                                {{ $message }}
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="">Yang Menyetujui</label>
-                        {{-- <input name="user_approve" class="form-control" placeholder="" required> --}}
-                        <select name="user_approve" class="form-control">
+                     <div class="col-md-4">
+                        <label class="form-label">Yang Menyetujui</label>                      
+                        <select name="user_approve" class="form-control" style="margin-bottom: 10px">
                             @foreach ($user_approve as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
-                        {{-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> --}}
+                        
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="">Tanggal Surat</label>
-                        <input type="date" name="tgl_surat" class="form-control" required>
-                        {{-- <span class="glyphicon glyphicon-user form-control-feedback"></span> --}}
+                    <div class="col-md-4">
+                        <label class="form-label">Tanggal Surat</label>
+                        <input type="date" name="tgl_surat" class="form-control" value="{{ old('tgl_surat') }}" style="margin-bottom: 10px" required>                       
                         <div class="text-danger">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('tgl_surat')
+                                {{ $message }}
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="">Nama Pemohon</label>
-                        <input type="text" name="nama_pemohon" class="form-control" required>
-                        {{-- <span class="glyphicon glyphicon-user form-control-feedback"></span> --}}
+                    <div class="col-md-4">
+                        <label class="form-label">Nama Pemohon</label>
+                        <input type="text" name="nama_pemohon" class="form-control" value="{{ old('nama_pemohon') }}" style="margin-bottom: 10px" required>                        
                         <div class="text-danger">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('nama_pemohon')
+                                {{ $message }}
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" class="form-control" required>
-                        {{-- <span class="glyphicon glyphicon-user form-control-feedback"></span> --}}
+                    <div class="col-md-4">
+                        <label class="form-label">Tempat Lahir</label>
+                        <input type="text" name="tempat_lahir" class="form-control" value="{{ old('tempat_lahir') }}" style="margin-bottom: 10px" required>                       
                         <div class="text-danger">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('tempat_lahir')
+                                {{ $message }}
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="">Tanggal Lahir</label>
-                        <input type="date" name="tgl_lahir" class="form-control" required>
-                        {{-- <span class="glyphicon glyphicon-user form-control-feedback"></span> --}}
+                    <div class="col-md-4">
+                        <label class="form-label">Tanggal Lahir</label>
+                        <input type="date" name="tgl_lahir" class="form-control" value="{{ old('tgl_lahir') }}" style="margin-bottom: 10px" required>                      
                         <div class="text-danger">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('tgl_lahir')
+                                {{ $message }}
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="">NIK</label>
-                        <input type="text" name="nik" class="form-control" required>
-                        {{-- <span class="glyphicon glyphicon-user form-control-feedback"></span> --}}
+                    <div class="col-md-4">
+                        <label class="form-label">NIK</label>
+                        <input type="number" name="nik" class="form-control" value="{{ old('nik') }}" style="margin-bottom: 10px" required>                       
                         <div class="text-danger">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('nik')
+                                {{ $message }}
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="">Pekerjaan</label>
-                        <input type="text" name="pekerjaan" class="form-control" required>
-                        {{-- <span class="glyphicon glyphicon-user form-control-feedback"></span> --}}
+                    <div class="col-md-4">
+                        <label class="form-label">Pekerjaan</label>
+                        <input type="text" name="pekerjaan" class="form-control" value="{{ old('pekerjaan') }}" style="margin-bottom: 10px" required>                        
                         <div class="text-danger">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('pekerjaan')
+                                {{ $message }}
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="">Alamat</label>
-                        <input type="text" name="alamat" class="form-control" required>
+                    <div class="col-md-4">
+                        <label class="form-label">Alamat</label>
+                        <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}" style="margin-bottom: 10px" required>
                         <div class="text-danger">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('alamat')
+                                {{ $message }}
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                    <div class="col-md-12">
+                        <h4>&emsp;</h4>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success" style="width: 100px">Simpan</button>
                     </div>
                 </div>
             </div>

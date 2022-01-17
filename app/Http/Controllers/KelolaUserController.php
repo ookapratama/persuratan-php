@@ -29,8 +29,8 @@ class KelolaUserController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|unique:users|email:dns',
-            'password' => 'required|min:8|confirmed',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:8',
             'level_id' => 'required',
         ]);
 

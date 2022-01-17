@@ -40,6 +40,18 @@ class SuratKetTidakMampuController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'no_surat' => 'required|max:100',
+            'user_approve' => 'required',
+            'tgl_surat' => 'required',
+            'nama_pemohon' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'nik' => 'required|max:16',
+            'pekerjaan' => 'required',
+            'alamat' => 'required',
+        ]);
+
         $data = new Model();
 
         $data->no_surat = $request->get('no_surat');

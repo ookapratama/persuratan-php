@@ -3,16 +3,9 @@
 @section('titleNav', 'Kelola User')
 
 @section('content')
-    <a href="/user/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah User</a><br>
+
+    <a class="btn btn-sm btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#sama"><i class="fa fa-plus"></i> Tambah User</a><br>
     <br>
-    @if(session('pesan'))
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i> Success</h4>
-            {{ session('pesan') }}
-        </div>
-    @endif
-    
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -64,6 +57,64 @@
         </tbody>
     </table>
 
+    @include('v_adduser')
 @endsection
+
+@section('script')
+<!-- section script --> 
+    <script >
+        $(document).ready(function() {
+            $("#FormUser").validate({
+                rules: {
+                    name: {
+                        required:true,
+                    },
+                    email: {
+                        required:true,
+                        email: true
+                    },
+                    password: {
+                        required:true,
+                        minlength:8
+                    },
+                    password_confirmation: {
+                        required:true,
+                        minlength:8,
+                        equalTo:"#password1"
+                    },
+                    level_id:"required"
+                    
+                },
+                messages: {
+                    name: {
+                        required: "nama harus diisi"
+                    },
+                    email: {
+                        required: "email harus diisi",
+                    },
+                    password: {
+                        required: "password harus diisi",
+                        minlength: "password harus lebih dari 8 karakter",
+                    },
+                    password_confirmation: {
+                        required: "password harus diisi",
+                        minlength: "password harus lebih dari 8 karakter",
+                        equalTo: "password tidak sama"
+                    },
+                    level_id: {
+                        required: "level harus diisi"
+                    }
+                }
+            });
+        });
+
+    </script>
+@endsection
+
+
+
+
+
+
 
         

@@ -93,7 +93,7 @@
 
                    <div class="col-md-6">
                         <label class="form-label">Isi Ringkas</label>
-                        <textarea name="isi_ringkas" class="form-control" rows="3"  style="margin-bottom: 10px" required>{{ old('isi_ringkas') }}</textarea>
+                        <textarea name="isi_ringkas" class="form-control" rows="2"  style="margin-bottom: 10px; resize:none;" required>{{ old('isi_ringkas') }}</textarea>
                         <div class="text-danger">
                             @error('isi_ringkas')
                                 {{ $message }}
@@ -103,7 +103,7 @@
 
                     <div class="col-md-6">
                         <label class="form-label">Catatan Disposisi</label>
-                        <textarea name="isi_disposisi" class="form-control" rows="3" style="margin-bottom: 10px" required>{{ old('isi_disposisi') }}</textarea>
+                        <textarea name="isi_disposisi" class="form-control" rows="2" style="margin-bottom: 10px; resize:none;" required>{{ old('isi_disposisi') }}</textarea>
                         <div class="text-danger">
                             @error('isi_disposisi')
                                 {{ $message }}
@@ -122,16 +122,18 @@
 
                     <div class="col-md-6">
                         <label class="form-label">Upload File Surat</label>
-                        <input type="file" name="file_surat" class="form-control" value="{{ old('file_surat') }}" style="margin-bottom: 20px" required>
+                        <input type="file" name="file_surat" class="form-control" value="{{ old('file_surat') }}" style="margin-bottom: 10px" required>
                         <div class="text-danger">
                             @error('file_surat')
                                 {{ $message }}
                             @enderror
                         </div>
                     </div>
+                    <br>
+                    <br>
 
                     <div class="col-md-12">
-                        <button class="btn btn-primary btn-success" style="width: 100px">SIMPAN</button>
+                        <button class="btn  btn-success" style="width: 100px">SIMPAN</button>
                     </div>
                 </div>
             </div>
