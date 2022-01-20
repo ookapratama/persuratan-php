@@ -3,6 +3,16 @@
 @section('titleNav', 'Surat Disetujui')
 
 @section('content')
+
+    <?php 
+        $arrJenis = array(
+            "Surat Keterangan Tidak Mampu" => "sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "kehilangan",
+        );
+    ?>
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -28,7 +38,7 @@
                     <td>{{ $data->status_cetak=="Y"?"Sudah" : "Belum" }}</td>
                     <td>
                         <a href="" class="btn btn-sm btn-warning fa fa-eye"></a>
-                        <a target="_blank" href="generateSurat/sktm/index.php?data={{ base64_encode($data->id) }}" class="btn btn-sm btn-success fa fa-print"></a>
+                        <a target="_blank" href="generateSurat/{{ $arrJenis[$data->jenis_surat] ?? '' }}/index.php?data={{ base64_encode($data->id) }}" class="btn btn-sm btn-success fa fa-print"></a>
                     </td>             
                 </tr>
             @endforeach

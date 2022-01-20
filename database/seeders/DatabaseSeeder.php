@@ -22,23 +22,23 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12121212'),
         ]);
 
-        DB::table('users')->insert([
-            'name' =>'Ulla',
-            'email' =>'ulla@gmail.com',
-            'password' => Hash::make('13131313'),
-        ]);
+        // DB::table('users')->insert([
+        //     'name' =>'Ulla',
+        //     'email' =>'ulla@gmail.com',
+        //     'password' => Hash::make('13131313'),
+        // ]);
 
-        DB::table('users')->insert([
-            'name' =>'Rudi',
-            'email' =>'rudi@gmail.com',
-            'password' => Hash::make('11111111'),
-        ]);
+        // DB::table('users')->insert([
+        //     'name' =>'Rudi',
+        //     'email' =>'rudi@gmail.com',
+        //     'password' => Hash::make('11111111'),
+        // ]);
 
-        DB::table('users')->insert([
-            'name' =>'Aco',
-            'email' =>'aco@gmail.com',
-            'password' => Hash::make('12341234'),
-        ]);
+        // DB::table('users')->insert([
+        //     'name' =>'Aco',
+        //     'email' =>'aco@gmail.com',
+        //     'password' => Hash::make('12341234'),
+        // ]);
 
 
         //tebel ref surat

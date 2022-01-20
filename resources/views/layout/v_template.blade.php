@@ -109,17 +109,9 @@
         </div>
         <div class="pull-left info">
             <p>{{ Auth::user()->name }}</p>
-            <a href="#"><i class="fa fa-circle text-success"></i>
-            @if(auth()->user()->level_id == 3)
-                Super Admin
-            @elseif(auth()->user()->level_id == 4)
-                Admin
-            @elseif(auth()->user()->level_id == 2)
-                Kepala Desa
-            @elseif(auth()->user()->level_id == 1)
-                Kurir
-            @endif
-            </a>
+            <p style="font-size: 11px"><i class="fa fa-circle text-success"></i>
+              {{ Auth::user()->jabatan }}
+            </p>
         </div>
       </div>
       <!-- search form -->

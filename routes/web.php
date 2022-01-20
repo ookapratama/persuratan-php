@@ -11,6 +11,7 @@ use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\KelolaSuratController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PersetujuanController;
+use App\Http\Controllers\Surat\SuratKetHilangController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\Surat\SuratKetTidakMampuController;
 
@@ -63,18 +64,23 @@ Route::group(['middleware' => 'admin'], function() {
 
     Route::group(['prefix'=>'surat','namespace' => 'App\Http\Controllers\Surat'], function() {
       Route::group(['prefix'=>'sktm'], function() {
-        Route::get('index', [SuratKetTidakMampuController::class, 'index']);
+        // Route::get('index', [SuratKetTidakMampuController::class, 'index']);
         Route::get('create', [SuratKetTidakMampuController::class, 'create'])->name('create_sktm');
         Route::post('store', [SuratKetTidakMampuController::class, 'store'])->name('store_sktm');
         Route::get('edit', [SuratKetTidakMampuController::class, 'edit']);
+      });
+
+      Route::group(['prefix'=>'hilang'], function() {
+        Route::get('create', [SuratKetHilangController::class, 'create'])->name('create_hilang');
+        Route::post('store', [SuratKetHilangController::class, 'store'])->name('store_hilang');
       });
     });
 
     Route::group(['middleware' => 'superAdmin'], function() {
         Route::get('/user', [KelolaUserController::class, 'index'])->name('user');
-        Route::get('/user/add', [KelolaUserController::class, 'add'])->name('FormAddUser');
+        Route::get('/user/add', [KelolaUserController::class, 'add']);
         Route::post('/user/insert', [KelolaUserController::class, 'insert'])->name('user_insert');
-        Route::get('/user/edit/{id}', [KelolaUserController::class, 'edit']);
+        // Route::get('/user/edit/{id}', [KelolaUserController::class, 'edit'])->name('user_edit');
         Route::post('/user/update/{id}', [KelolaUserController::class, 'update'])->name('user_update');
         Route::get('/user/delete/{id}', [KelolaUserController::class,'delete'])->name('user_delete');
 

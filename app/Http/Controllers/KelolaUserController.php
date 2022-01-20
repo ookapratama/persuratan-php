@@ -14,7 +14,7 @@ class KelolaUserController extends Controller
     }
     
     public function index() {
-        $kelolaUser = User::all();
+        $kelolaUser = User::with('level')->get();
         $data = [
             'kelolauser' => $kelolaUser,
         ];
@@ -32,6 +32,7 @@ class KelolaUserController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required|min:8',
             'level_id' => 'required',
+            'jabatan' => 'required',
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -41,11 +42,8 @@ class KelolaUserController extends Controller
         return redirect()->route('user')->with('pesan', 'User berhasil ditambah !');
     }
 
-    public function edit($id) {
-        $data = [
-            'user' => User::findOrFail($id),
-        ];
-        return view('v_edituser', $data);
+    public function edit() {
+        
     }
 
     public function update(Request $request, $id) {
@@ -54,9 +52,10 @@ class KelolaUserController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email:dns',
+            'email' => 'required|unique:users,email,'.$id,
             'password' => 'required|min:8|confirmed',
             'level_id' => 'required',
+            'jabatan' => 'required',
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -65,6 +64,7 @@ class KelolaUserController extends Controller
         $data->email = $request->get('email');
         $data->password = $validatedData['password'];
         $data->level_id = $request->get('level_id');
+        $data->jabatan = $request->get('jabatan');
         $data->save();
 
         return redirect()->route('user')->with('pesan', 'User berhasil di-update !');

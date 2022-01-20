@@ -4,7 +4,8 @@
 
 @section('content')
     @if(auth()->user()->level_id == 3 or auth()->user()->level_id == 4)
-        <a href="/disposisi/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data</a><br>
+        {{-- <a href="/disposisi/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data</a><br> --}}
+        <a class="btn btn-sm btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#FormAddDisposisi"><i class="fa fa-plus"></i> Tambah Data</a><br>
         <br>
     @endif
     @if(session('pesan'))
@@ -74,4 +75,11 @@
         </div>
     @endforeach
 
+    @include('v_addDisposisi')
+    
+
+@endsection
+
+@section('script')
+    
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Surat;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Surat\SuratKetTidakMampu as Model;
 
 class SuratKetLahirController extends Controller
 {

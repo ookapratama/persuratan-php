@@ -1,20 +1,20 @@
 @extends('layout.v_template')
-@section('title', 'Add User')
-@section('titleNav', 'Kelola User > Tambah User')
+@section('title', 'Edit')
+@section('titleNav', 'Kelola User > Edit User')
 
 @section('content')
     <a href="/user" class="btn btn-sm btn-warning">Kembali</a>
     <br>
     <br>
 
-    <form action="/user/insert" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user_update', $user->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="content">
             <div class="row">
                 <div class="col-sm-4">
 
                     <div class="form-group has-feedback">
-                        <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}" autofocus required>
+                        <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $user->name }}" required>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         <div class="text-danger">
                             @error('name')
@@ -26,10 +26,22 @@
                     </div>
 
                     <div class="form-group has-feedback">
-                        <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required>
+                        <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $user->email }}" required>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         <div class="text-danger">
                             @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <input type="text" name="jabatan" class="form-control" placeholder="Jabatan" value="{{ $user->jabatan }}" required>
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        <div class="text-danger">
+                            @error('jabatan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -55,8 +67,8 @@
                     </div>
 
                     <div class="form-group has-feedback">
-                        <input name="level_id" class="form-control" placeholder="Level" value="{{ old('level_id') }}" required>
-                        <div class="form-text"><h6>Level : 1. Kurir | 2. Kepala Desa | 3. Super Admin | 4. Admin</h6></div>
+                        <input name="level_id" class="form-control" placeholder="Level" value="{{ $user->level_id }}" required>
+                        <div class="form-text">     Level : 1. Kurir | 2. Kepala Desa | 3. Super Admin | 4. Admin</div>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         <div class="text-danger">
                             @error('level_id')
@@ -66,11 +78,10 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-
 @endsection

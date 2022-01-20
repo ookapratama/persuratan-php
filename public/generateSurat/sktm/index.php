@@ -5,7 +5,7 @@
     include '../koneksi.php';
 
     $data = base64_decode($_REQUEST['data']);
-    $surat = mysqli_query($connect, "select surat_ket_tidak_mampus.id, no_surat, user_approve, users.name, nama_pemohon, tempat_lahir, tgl_lahir, nik, pekerjaan, alamat, tgl_surat from surat_ket_tidak_mampus join users on(users.id = surat_ket_tidak_mampus.user_approve) where surat_ket_tidak_mampus.id='$data'");
+    $surat = mysqli_query($connect, "SELECT surat_ket_tidak_mampus.id, no_surat, user_approve, UPPER(users.name) AS nama, users.jabatan, UPPER(nama_pemohon) AS nama_pemohon, tempat_lahir, tgl_lahir, nik, pekerjaan, alamat, tgl_surat FROM surat_ket_tidak_mampus JOIN users ON(users.id = surat_ket_tidak_mampus.user_approve) WHERE surat_ket_tidak_mampus.id='$data'");
     if($surat->num_rows == 0) {
         exit('data tidak ditemukan');
     }
@@ -42,9 +42,9 @@
             'Nomor : '.$row['no_surat'],
             'Yang bertanda tangan di bawah ini:',
             'Nama',
-            $row['name'],//5
+            $row['nama'],//5
             'Jabatan',
-            '  Kepala Desa Misalnya !',
+            $row['jabatan'],
             'Menerangkan bahwa:',
             'Nama',
             $row['nama_pemohon'],//10
@@ -59,8 +59,8 @@
             '         Yang bersangkutan diatas adalah benar warga '.$row['alamat'].' yang menurut pengamatan dan pengetahuan kami yang bersangkutan benar-benar Tidak Mampu dan Kurang Mampu.',
             '         Demikian Surat keterangan ini diberikan kepada yang bersangkutan untuk dipergunakan sebagaimana mestinya.',//20
             'Lampenai, '.$pdf->tgl_indo($row['tgl_surat']),
-            'Kepala Desa Lampenai',
-            'BAHARUDDIN KASIM',
+            $row['jabatan'],
+            $row['nama'],
             ':', ':', ':', ':', ':', ':', ':'
         );
     }
