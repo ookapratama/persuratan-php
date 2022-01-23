@@ -14,17 +14,34 @@ class KelolaUserController extends Controller
     }
     
     public function index() {
-        $kelolaUser = User::with('level')->get();
-        $data = [
-            'kelolauser' => $kelolaUser,
-        ];
-        return view('v_user', $data);
+        // $kelolaUser = User::with('level')->get();
+        // $data = [
+        //     'kelolauser' => $kelolaUser,
+        // ];
+        return view('v_user');
+    }
+
+    public function read() {
+        $data = User::with('level')->get();
+        return view('v_readuser')->with([
+            'readUser' => $data
+        ]);
+    }
+        
+    public function PanggilData($id) {
+        $edit = User::find($id);
+        
+        return response()->json([
+            'dataUser' => $edit,
+        ]);
     }
 
     public function add() {
         return view('v_adduser');
     }
-
+    // public function EditUser() {
+    //     return view('v_edituser');
+    // }
     public function insert(Request $request) {
 
         $validatedData = $request->validate([
@@ -77,3 +94,5 @@ class KelolaUserController extends Controller
         return redirect()->back()->with('pesan', 'User dihapus !');
     }
 }
+
+

@@ -8,6 +8,7 @@
         <a class="btn btn-sm btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#FormAddDisposisi"><i class="fa fa-plus"></i> Tambah Data</a><br>
         <br>
     @endif
+
     @if(session('pesan'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -15,6 +16,7 @@
             {{ session('pesan') }}
         </div>
     @endif
+    
     <table class="table table-bordered">
         <thead>
             <tr>

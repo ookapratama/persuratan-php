@@ -1,4 +1,34 @@
-<div class="modal fade" id="FormEditUser{{ $data->id }}">
+<div class="form-group has-feedback">
+    <input type="text" name="name" class="form-control" id="name" placeholder="Name" required>   
+</div>
+
+<div class="form-group has-feedback">
+    <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>                   
+</div>
+
+<div class="form-group has-feedback">
+    <input type="text" name="jabatan" class="form-control" id="jabatan" placeholder="Jabatan" required>                   
+</div>
+
+<div class="form-group has-feedback">
+    <input type="password" name="password" class="form-control" placeholder="Password" required>               
+</div>
+
+<div class="form-group has-feedback">
+    <input type="password" name="password_confirmation" class="form-control"  placeholder="Confirm Password" required>                    
+</div>
+
+<div class="form-group has-feedback">
+    <select name="level_id" class="form-control" id="level" >
+        <option>Pilih Level</option>
+        {{-- <option value="4" {{ $data->level_id == '4' ? 'selected' : '' }}>Admin</option> --}}
+        {{-- <option value="2" {{ $data->level_id == '2' ? 'selected' : '' }}>Pimpinan</option> --}}
+        {{-- <option value="1" {{ $data->level_id == '1' ? 'selected' : '' }}>Kurir</option> --}}
+    </select>              
+</div>  
+
+
+{{-- <div class="modal fade" id="FormEditUser{{ $data->id }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,7 +80,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 

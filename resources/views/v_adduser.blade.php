@@ -1,5 +1,45 @@
-<div class="modal fade" id="FormAddUser">
-    <div class="modal-dialog">
+<div class="p2" id="testReset">
+
+    {{-- <input type="hidden" id="userId" name="userId" class="form-control"> --}}
+
+    <div class="form-group">
+        <input type="text" name="name" id="name" class="form-control" placeholder="Name" autofocus>               
+    </div>
+    
+    <div class="form-group">
+        <input type="email" name="email" id="email" class="form-control" placeholder="Email">                   
+    </div>
+    
+    <div class="form-group">
+        <input type="text" name="jabatan" id="jabatan" class="form-control" placeholder="Jabatan">                   
+    </div>
+    
+    <div class="form-group">
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password">               
+    </div>
+    
+    <div class="form-group">
+        <input type="password" name="password_confirmation" class="form-control"  placeholder="Confirm Password">                    
+    </div>
+    
+    <div class="form-group">
+        <select name="level_id" class="form-control" id="level">
+            <option>Pilih Level</option>
+            <option value="4">Admin</option>
+            <option value="2">Pimpinan</option>
+            <option value="1">Kurir</option>
+        </select>              
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-success btn-sm pull-left" onclick="insert()">Simpan</button>
+    </div>  
+</div>
+
+        
+
+{{-- <div class="modal fade" id="FormAddUser">
+    <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -50,7 +90,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 
