@@ -18,24 +18,30 @@ class DisposisiController extends Controller
         $data = [
             'disposisi' => $disposisi,
         ];
-        return view('v_disposisi', $data);
+        return view('vDisposisi.index', $data);
     }
 
     public function show($id) {
-        $disposisi = Disposisi::findOrFail($id)->with('approve_by')->first();
+
+        $disposisi = Disposisi::where('id',$id)->first();
         $data = [
             'disposisi' => $disposisi,
         ];
-
-        return view('v_detailDisposisi', $data);
+        return view('vDisposisi.show', $data);
     }
 
     public function add() {
         $data = User::all()->where('level_id', 2);
-        return view('v_addDisposisi', ['user_approve'=>$data]);
+        return view('vDisposisi.create', ['user_approve'=>$data]);
     }
 
     public function insert(Request $request) {
+
+        $notif = array(
+            'pesan' => 'Surat berhasil ditambah !',
+            'alert' => 'success',
+        );
+
         $request->validate([
             'perihal' => 'required|max:100',
             'tgl_surat' => 'required',
@@ -69,19 +75,25 @@ class DisposisiController extends Controller
         
         $data->save();
         
-        return redirect()->route('disposisi')->with('pesan', 'Surat berhasil ditambah !');
+        return redirect()->route('disposisi')->with($notif);
     }
 
     public function edit($id) {
         $data = [
-            'disposisi' => Disposisi::findOrFail($id)->with('approve_by')->first(),
+            'disposisi' => Disposisi::where('id',$id)->first(),
         ];
 
         $data2 = User::all()->where('level_id', 2);
-        return view('v_editDisposisi', $data, ['user_approve'=>$data2]);
+        return view('vDisposisi.edit', $data, ['user_approve'=>$data2]);
     }
 
     public function update(Request $request, $id) {
+
+        $notif = array(
+            'pesan' => 'Surat berhasil diupdate !',
+            'alert' => 'success',
+        );
+
         $data = Disposisi::findOrFail($id);
 
         $request->validate([
@@ -112,14 +124,21 @@ class DisposisiController extends Controller
         $data->file_surat = $request->file('file_surat')->hashName();
         $data->save();
 
-        return redirect()->route('disposisi')->with('pesan', 'Surat berhasil di-update !');
+        return redirect()->route('disposisi')->with($notif);
         
     }
 
-    public function delete($id) {
+    public function delete(Request $request) {
+
+        $notif = array(
+            'pesan' => 'Surat dihapus !',
+            'alert' => 'error',
+        );
+
+        $id= $request->id;
         $data = Disposisi::find($id);
         $data->delete();
 
-        return redirect()->back()->with('pesan', 'Data dihapus !');
+        return redirect()->back()->with($notif);
     }
 }

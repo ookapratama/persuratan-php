@@ -9,8 +9,20 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" >
+
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{asset('template')}}/bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('template')}}/bower_components/jQueryDataTables/jquery.dataTables.css"> --}}
+    <link rel="stylesheet" href="{{asset('template')}}/bower_components/datatable/css/jquery.dataTables.css">
+
+    {{-- <link rel="stylesheet" href="{{asset('template')}}/bower_components/datatables.net-bs/css/dataTables.bootstrap.css"> --}}
+    {{-- <link rel="stylesheet" href="{{asset('template')}}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> --}}
+
+    {{-- <link rel="stylesheet" href="{{asset('template')}}/bower_components/sweetalert2/sweetalert2.min.css"> --}}
+
+    <link rel="stylesheet" href="{{asset('template')}}/bower_components/toastr/toastr.min.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('template')}}/bower_components/font-awesome/css/font-awesome.min.css">
@@ -152,7 +164,7 @@
       <!-- /.content-wrapper -->
 
       <footer class="main-footer">
-        <strong>Copyright &copy; 2021 <span style="color:#3C8DBC;">Desa Lampenai</span>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2022 <span style="color:#3C8DBC;">Desa Lampenai</span>.</strong> All rights reserved.
       </footer>
 
       <!-- Add the sidebar's background. This div must be placed
@@ -161,28 +173,32 @@
     </div>
     <!-- ./wrapper -->
 
-    {{-- <div class="modal fade" id="ShowModalSec" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
+    {{-- MODAL --}}
 
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-                  <h4 class="modal-title" id="ModalTitle"></h4>
-              </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
 
-              <div class="modal-body" id='SecBody'></div>
-
-              <div class="modal-footer">
-                <a type="button" class="btn btn-danger pull-right" data-dismiss="modal">Tutup</a>       
-             </div>
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="modalTitle"><strong></strong></h4>
           </div>
+
+          <div class="modal-body">
+            <div id="page" class="p-2"></div>
+          </div>
+
+        </div>
       </div>
-    </div> --}}
+    </div>
+  
+  {{-- END MODAL --}}
 
     <!-- jQuery 3 -->
     <script src="{{asset('template')}}/bower_components/jquery/dist/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
     
 
     <!-- jQuery validate 1.19.3 -->
@@ -190,6 +206,18 @@
 
     <!-- Bootstrap 3.3.7 -->
     <script src="{{asset('template')}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    {{-- <script type="text/javascript" charset="utf8" src="{{asset('template')}}/bower_components/jQueryDataTables/jquery.dataTables.js"></script> --}}
+
+    {{-- <script src="{{asset('template')}}/bower_components/datatables.net/js/jquery.dataTables.js"></script> --}}
+    {{-- <script src="{{asset('template')}}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script> --}}
+
+    {{-- <script src="{{asset('template')}}/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script> --}}
+    {{-- <script src="{{asset('template')}}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> --}}
+
+    {{-- <script src="{{asset('template')}}/bower_components/sweetalert2/sweetalert2.min.js"></script> --}}
+
+    <script src="{{asset('template')}}/bower_components/toastr/toastr.min.js"></script>
 
     <!-- SlimScroll -->
     <script src="{{asset('template')}}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -207,11 +235,12 @@
       $(document).ready(function () {
         $('.sidebar-menu').tree()
         
-      })
+      });
     </script>
 
-    @yield('script')
 
-  </body>
+@yield('script')
+</body>
+
 
 </html>

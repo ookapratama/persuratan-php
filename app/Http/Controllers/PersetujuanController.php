@@ -14,7 +14,7 @@ class PersetujuanController extends Controller
     public function index() {
         $surat = Surat::where("status_setuju", "N")->where("is_generate", "Y")->get();
 
-        return view('v_persetujuan', [
+        return view('vPersetujuan.index', [
             'surat'=>$surat,
         ]);
     }
@@ -33,7 +33,7 @@ class PersetujuanController extends Controller
     public function indexAdmin() {
         $surat = Surat::where("status_setuju", "Y")->get();
 
-        return view('v_persetujuanAdmin', [
+        return view('vPersetujuan.indexSetuju', [
             'surat'=>$surat,
         ]);
     }

@@ -40,6 +40,11 @@ class SuratKetTidakMampuController extends Controller
      */
     public function store(Request $request)
     {
+        $notif = array(
+            'pesan' => 'Surat berhasil ditambah !',
+            'alert' => 'success',
+        );
+
         $request->validate([
             'no_surat' => 'required|max:100',
             'user_approve' => 'required',
@@ -66,7 +71,7 @@ class SuratKetTidakMampuController extends Controller
         $data->jenis_surat = "Surat Keterangan Tidak Mampu";
         $data->save();
 
-        return redirect()->route('surat_index')->with('pesan', 'Surat berhasil dibuat !');
+        return redirect()->route('surat_index')->with($notif);
     }
 
     /**
@@ -77,7 +82,11 @@ class SuratKetTidakMampuController extends Controller
      */
     public function show($id)
     {
-        //
+        $surat = Model::findOrFail($id)->with('approve_by')->first();;
+        $data = [
+            'sktm' => $surat,
+        ];
+        return view('surat/surat_ket_tidak_mampu/v_show', $data);
     }
 
     /**

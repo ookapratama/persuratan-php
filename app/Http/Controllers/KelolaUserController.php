@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User as User;
-use Illuminate\Support\Facades\Hash;
+use Exception;
+// use Illuminate\Support\Facades\Hash;
 
 class KelolaUserController extends Controller
 {
@@ -12,87 +13,99 @@ class KelolaUserController extends Controller
         $this->User = new User();
         $this->middleware('auth');
     }
+
     
     public function index() {
-        // $kelolaUser = User::with('level')->get();
-        // $data = [
-        //     'kelolauser' => $kelolaUser,
-        // ];
-        return view('v_user');
-    }
-
-    public function read() {
-        $data = User::with('level')->get();
-        return view('v_readuser')->with([
-            'readUser' => $data
-        ]);
-    }
-        
-    public function PanggilData($id) {
-        $edit = User::find($id);
-        
-        return response()->json([
-            'dataUser' => $edit,
-        ]);
+        $kelolaUser = User::with('level')->get();
+        $data = [
+            'kelolauser' => $kelolaUser,
+        ];
+        return view('vUser.index', $data);
     }
 
     public function add() {
-        return view('v_adduser');
+        return view('vUser.create');
     }
-    // public function EditUser() {
-    //     return view('v_edituser');
-    // }
+
     public function insert(Request $request) {
+        dd($request->all());
+        $response = array();
 
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|unique:users',
-            'password' => 'required|min:8',
-            'level_id' => 'required',
-            'jabatan' => 'required',
-        ]);
+        try{
+            $user = new User();
+            $user->name = request()->name;
+            $user->email = request()->email;
+            $user->jabatan = request()->jabatan;
+            $user->password = bcrypt(request()->password);
+            $user->level_id = request()->level_id;
+            $user->save();
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
+            $response['status'] = '200';
+            $response['message'] = 'User berhasil ditambahkan !';
 
-        User::create($validatedData);
+        }catch(Exception $e) {
+            // $response['status'] = '500';
+            // $response['message'] = 'User gagal ditambahkan !';
 
-        return redirect()->route('user')->with('pesan', 'User berhasil ditambah !');
+            $response['status'] = '500';
+            $response['message'] = $e->getMessage();
+        }
+
+        echo json_encode($response);
+
+        // $validatedData = $request->validate([
+        //     'name' => 'required|max:255',
+        //     'email' => 'required|unique:users',
+        //     'password' => 'required|min:8',
+        //     'level_id' => 'required',
+        //     'jabatan' => 'required',
+        // ]);
+
+        // $validatedData['password'] = Hash::make($validatedData['password']);
+
+        // User::create($validatedData);
+
+        // return redirect()->route('user')->with('pesan', 'User berhasil ditambah !');
     }
 
-    public function edit() {
-        
-    }
+    // public function edit($id) {
+    //     $data = User::findOrFail($id);
+    //     return view('vUser.edit')->with([
+    //         'edit' => $data
+    //     ]);
+    // }
 
-    public function update(Request $request, $id) {
+    // public function update(Request $request, $id) {
 
-        $data = User::findOrFail($id);
+    //     $data = User::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|unique:users,email,'.$id,
-            'password' => 'required|min:8|confirmed',
-            'level_id' => 'required',
-            'jabatan' => 'required',
-        ]);
+    //     $validatedData = $request->validate([
+    //         'name' => 'required|max:255',
+    //         'email' => 'required|unique:users,email,'.$id,
+    //         'password' => 'required|min:8|confirmed',
+    //         'level_id' => 'required',
+    //         'jabatan' => 'required',
+    //     ]);
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
+    //     $validatedData['password'] = Hash::make($validatedData['password']);
 
-        $data->name = $request->get('name');
-        $data->email = $request->get('email');
-        $data->password = $validatedData['password'];
-        $data->level_id = $request->get('level_id');
-        $data->jabatan = $request->get('jabatan');
-        $data->save();
+    //     $data->name = $request->get('name');
+    //     $data->email = $request->get('email');
+    //     $data->password = $validatedData['password'];
+    //     $data->level_id = $request->get('level_id');
+    //     $data->jabatan = $request->get('jabatan');
+    //     $data->save();
+    //     // User::updateOrCreate($validatedData);
 
-        return redirect()->route('user')->with('pesan', 'User berhasil di-update !');
-    }
+    //     // return redirect()->route('user')->with('pesan', 'User berhasil di-update !');
+    // }
 
-    public function delete($id) {
-        $data = User::find($id);
-        $data->delete();
+    // public function delete($id) {
+    //     $data = User::findOrFail($id);
+    //     $data->delete();
 
-        return redirect()->back()->with('pesan', 'User dihapus !');
-    }
+    //     // return redirect()->back()->with('pesan', 'User dihapus !');
+    // }
 }
 
 

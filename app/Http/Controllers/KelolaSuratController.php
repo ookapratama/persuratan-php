@@ -14,9 +14,9 @@ class KelolaSuratController extends Controller
     public function index() {
         $surat = Surat::where("status_setuju", "N")->where("is_generate", "N")->get();
     
-            return view('v_surat', [
-                'surat'=>$surat,
-            ]);
+        return view('surat.index', [
+            'surat'=>$surat,
+        ]);
     }
 
     public function generate($id) {
