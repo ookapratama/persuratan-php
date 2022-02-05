@@ -4,29 +4,6 @@
 
 @section('content')
 
-    <?php 
-        $arrJenis = array(
-            "Surat Keterangan Tidak Mampu" => "sktm",
-            "Surat Keterangan Domisili" => "domisili",
-            "Surat Keterangan Kematian" => "kematian",
-            "Surat Keterangan Kehilangan" => "kehilangan",
-        );
-    ?>
-    <br>
-
-    <div class="col">
-        <div class="col">
-            <select class="form-control" id="selectSurat" style="width: 300px; float: left; margin-right: 20px;">
-                <option value="">Pilih Jenis Surat</option>
-                <option data-route="{{ route('create_sktm') }}">SURAT KETERANGAN TIDAK MAMPU</option>
-                <option data-route="{{ route('create_hilang') }}">SURAT KETERANGAN KEHILANGAN</option>
-            </select>
-        </div>
-        <div class="col">
-            <button class="btn btn-sm btn-primary" id="btnTambahSurat"><i class="fa fa-plus"></i> Tambah Data</button><br>
-        </div>
-    </div>
-
     <br>
     
     <table class="table table-bordered table-striped">
@@ -37,32 +14,24 @@
                 <th>Nama Pemohon</th>
                 <th>No Surat</th>
                 <th>TGL Surat</th>
-                <th>Stts Cetak</th>
-                <th>Stts Arsip</th>
-                <th colspan="2">Action</th>
+                <th>Stts Antar</th>
+                <th>Action</th>
             </tr>
         </thead>
 
         <tbody>
             <?php $no = 1; ?>
-            @foreach ($surat as $data)
+            @foreach ($antar as $data)
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $data->jenis_surat }}</td>
                     <td>{{ $data->nama_pemohon }}</td>
                     <td>{{ $data->no_surat }}</td>
                     <td>{{ $data->tgl_surat }}</td>
-                    <td>{{ $data->is_print=="Y"?"Dicetak" : "Belum" }}</td>
-                    <td></td>
+                    <td>{{ $data->status_antar=="Y"?"ter-Antar" : "Belum" }}</td>
                     <td>
-                        {{-- <a class="btn btn-sm btn-info fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a> --}}
                         <a data-route="{{ route('show_hilang', $data->id) }}" id="btnShow" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
-                        <a href="" class="btn btn-sm btn-warning fa fa-pencil" title="edit"></a>
-                        <button type="button" class="btn btn-sm btn-danger fa fa-trash" title="delete" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
-                        {{-- <form action="{{ route('surat_delete', $data->id) }}"></form> --}}
-                        {{-- <button class="btn btn-sm btn-danger fa fa-trash" title="delete" onclick="return confirm('anda yakin?')"></button> --}}
-                        <a href="generateSurat/{{ $arrJenis[$data->jenis_surat] ?? '' }}/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-primary fa fa-file-pdf-o" title="generate pdf"></a>
-                        {{-- <a class="btn btn-sm btn-success fa fa-file-archive-o" title="generate pdf" disabled></a> --}}
+                        <a href="{{ route('confirm_antar',$data->id) }}" class="btn btn-sm btn-success fa fa-check-square-o" title="konfirmasi"></a>
                     </td>             
                 </tr> 
                 

@@ -3,11 +3,7 @@
 @section('titleNav','Kelola Surat > Disposisi')
 
 @section('content')
-    @if(auth()->user()->level_id == 3 or auth()->user()->level_id == 4)
-        {{-- <a href="/disposisi/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data</a><br> --}}
-        <a class="btn btn-sm btn-primary" id="tambahDisposisi"><i class="fa fa-plus-square"></i> Tambah Data</a><br>
-        <br>
-    @endif
+<br>
     
     <table class="table table-bordered">
         <thead>
@@ -18,14 +14,15 @@
                 <th>No. Surat</th>
                 <th>Asal Surat</th>
                 <th>TGL. Terima</th>
-                <th>File Surat</th>
+                <th>Stts Arsip</th>
+                <th>File</th>
                 <th>Action</th>
             </tr>
         </thead>
 
         <tbody>
             <?php $no = 1; ?>
-            @foreach($disposisi as $data)
+            @foreach($surat as $data)
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $data->perihal }}</td>
@@ -33,19 +30,22 @@
                     <td>{{ $data->no_surat }}</td>
                     <td>{{ $data->asal_surat }}</td>
                     <td>{{ $data->tgl_terima }}</td>
-                    <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
+                    <td>{{ $data->status_arsip=="Y"?"ter-Arsip" : "Belum" }}</td>
                     <td>
-                        <a class="btn btn-sm btn-primary fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
-                        <a class="btn btn-sm btn-warning fa fa-pencil" onclick="edit({{ $data->id }})" title="edit"></a>
-                        <button type="button" class="btn btn-sm btn-danger fa fa-trash" title="delete" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
-                        <a href="{{ route('accept_disposisi', $data->id ) }}" class="btn btn-sm btn-success fa fa-check-square" title="disposisi"></a>
+                        <a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">Surat</a>
+                        <a href="#" class="btn btn-sm btn-info">Disposisi</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-warning fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
+                        <a href="#" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
+                        <a href="#" class="btn btn-sm btn-danger fa fa-trash" title="Hapus"></a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-    @foreach($disposisi as $data)
+    {{-- @foreach($disposisi as $data)
         <div class="modal modal-danger fade" id="delete{{ $data->id }}">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -67,7 +67,7 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-    @endforeach    
+    @endforeach     --}}
 
 
 @endsection
@@ -90,14 +90,6 @@
         function show(id) {
             $.get("{{ url('/disposisi/show') }}/"+id, {}, function(data) {
                 $("#modalTitle").html('DETAIL SURAT');
-                $("#page").html(data);
-                $("#myModal").modal('show');
-            });
-        }
-
-        function edit(id) {
-            $.get("{{ url('/disposisi/edit') }}/"+id, {}, function(data) {
-                $("#modalTitle").html('EDIT SURAT');
                 $("#page").html(data);
                 $("#myModal").modal('show');
             });

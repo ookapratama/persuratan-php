@@ -55,6 +55,7 @@ class SuratKetTidakMampuController extends Controller
             'nik' => 'required|max:16',
             'pekerjaan' => 'required',
             'alamat' => 'required',
+            'is_antar' => 'required',
         ]);
 
         $data = new Model();
@@ -68,6 +69,7 @@ class SuratKetTidakMampuController extends Controller
         $data->nik = $request->get('nik');
         $data->pekerjaan = $request->get('pekerjaan');
         $data->alamat = $request->get('alamat');
+        $data->is_antar = $request->get('is_antar');
         $data->jenis_surat = "Surat Keterangan Tidak Mampu";
         $data->save();
 
@@ -82,11 +84,14 @@ class SuratKetTidakMampuController extends Controller
      */
     public function show($id)
     {
-        $surat = Model::findOrFail($id)->with('approve_by')->first();;
+        // dd($id);
+        // $surat = Model::findOrFail($id)->with('approve_by')->first();;
+        $surat = Model::where('id',$id)->with('approve_by')->first();
+        // dd($surat);
         $data = [
-            'sktm' => $surat,
+            'sktmEdit' => $surat,
         ];
-        return view('surat/surat_ket_tidak_mampu/v_show', $data);
+        return view('surat.surat_ket_tidak_mampu.v_show', $data);
     }
 
     /**

@@ -62,13 +62,16 @@
                             <option value="{{ $user->id }}" {{ $disposisi->user_approve == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
                         @endforeach
                     </select>
-                </div>                    
+                </div>        
+                
+                <input type="hidden" name="oldFile" value="{{ $disposisi->file_surat }}">
 
                 <div class="col-md-6">
                     <label class="form-label">Upload File Surat</label>
-                    <input type="file" name="file_surat" class="form-control" value="{{ $disposisi->file_surat }}" style="margin-bottom: 10px" required>
+                    <input type="file" name="file_surat" class="form-control" style="margin-bottom: 10px">
+                    <span><strong>Current File : </strong>{{ $disposisi->file_surat }}</span>
                 </div>
-
+                
                 <div class="col-md-12">
                     <h4>&emsp;</h4>
                 </div>

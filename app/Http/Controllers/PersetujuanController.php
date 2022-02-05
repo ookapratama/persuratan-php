@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Surat\SuratKetTidakMampu as Surat;
+use App\Models\Disposisi as Surat;
 
 use Illuminate\Http\Request;
 
@@ -12,10 +12,10 @@ class PersetujuanController extends Controller
     }
     
     public function index() {
-        $surat = Surat::where("status_setuju", "N")->where("is_generate", "Y")->get();
+        $surat = Surat::where("status_setuju", "N")->where("status_disposisi", "Y")->get();
 
         return view('vPersetujuan.index', [
-            'surat'=>$surat,
+            'disposisi' => $surat,
         ]);
     }
 
@@ -30,12 +30,23 @@ class PersetujuanController extends Controller
         return redirect()->route('index_setuju');
     }
 
-    public function indexAdmin() {
-        $surat = Surat::where("status_setuju", "Y")->get();
+    public function indexSetuju() {
+        $surat = Surat::where("status_setuju", "Y")->where("status_arsip", "N")->get();
 
         return view('vPersetujuan.indexSetuju', [
             'surat'=>$surat,
         ]);
+    }
+
+    public function arsip($id) {
+        //cari suratnya 
+        $surat = Surat::find($id);
+        //ubah status
+        $surat->status_arsip = 'Y';
+        //save
+        $surat->save();
+        //redirect ke daftr yang telah di setujui
+        return redirect()->route('index_setujuSurat');
     }
 
     public function delete($id){

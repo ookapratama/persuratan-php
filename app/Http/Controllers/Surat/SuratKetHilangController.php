@@ -34,7 +34,8 @@ class SuratKetHilangController extends Controller
             'alamat' => 'required|max:100',
             'benda_hilang' => 'required|max:100',
             'tgl_surat' => 'required',
-            'user_approve' => 'required'
+            'user_approve' => 'required',
+            'is_antar' => 'required'
         ]);
 
         $data = new Model();
@@ -54,9 +55,20 @@ class SuratKetHilangController extends Controller
         $data->benda_hilang = $request->get('benda_hilang');
         $data->tgl_surat = $request->get('tgl_surat');
         $data->user_approve = $request->get('user_approve');
+        $data->is_antar = $request->get('is_antar');
         $data->jenis_surat = "Surat Keterangan Kehilangan";
         $data->save();
 
         return redirect()->route('surat_index')->with('pesan', 'Surat berhasil dibuat !');
+    }
+
+    public function show($id)
+    {
+        
+        $surat = Model::where('id',$id)->with('approve_by')->first();
+        $data = [
+            'hilangShow' => $surat,
+        ];
+        return view('surat.surat_ket_hilang.v_show', $data);
     }
 }

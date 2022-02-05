@@ -35,8 +35,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ request()->is('smasuk') ? 'active' : '' }}"><a href="/smasuk"><i class="fa  fa-sign-in"></i> Surat Masuk</a></li>
-                    <li class="{{ request()->is('skeluar') ? 'active' : '' }}"><a href="/skeluar"><i class="fa fa-sign-out"></i> Surat Keluar</a></li>
+                    <li class="{{ request()->is('arsip_masuk') ? 'active' : '' }}"><a href="{{ route('arsip_masuk') }}"><i class="fa  fa-sign-in"></i> Surat Masuk</a></li>
+                    <li class="{{ request()->is('arsip_keluar') ? 'active' : '' }}"><a href="{{ route('arsip_keluar') }}"><i class="fa fa-sign-out"></i> Surat Keluar</a></li>
                 </ul>
             </li>
         @endif

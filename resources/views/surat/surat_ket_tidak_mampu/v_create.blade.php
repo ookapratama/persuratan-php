@@ -14,15 +14,14 @@
                     </div>
                 </div>
 
-                    <div class="col-md-4">
+                <div class="col-md-4">
                     <label class="form-label">Yang Menyetujui</label>                      
                     <select name="user_approve" class="form-control" style="margin-bottom: 10px">
                         <option value="default">Pilih..</option>
                         @foreach ($user_approve as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
-                    </select>
-                    
+                    </select>    
                 </div>
 
                 <div class="col-md-4">
@@ -88,6 +87,20 @@
                 <div class="col-md-4">
                     <label class="form-label">Alamat</label>
                     <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}" style="margin-bottom: 10px" required>
+                    <div class="text-danger">
+                        @error('alamat')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Pengantaran</label>
+                    <select name="is_antar" class="form-control" style="margin-bottom: 10px">
+                        <option value="default">Pilih..</option>
+                        <option value="Y">Ya</option>
+                        <option value="N">Tidak</option>
+                    </select>
                     <div class="text-danger">
                         @error('alamat')
                             {{ $message }}

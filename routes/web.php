@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\AntarSuratController;
+use App\Http\Controllers\ArsipKeluarController;
+use App\Http\Controllers\ArsipMasukController;
 use App\Http\Controllers\KelolaUserController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\KelolaSuratController;
@@ -39,6 +41,7 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('/skeluar', [SuratKeluarController::class, 'index']);
 
     Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
+    Route::get('/disposisi/accept/{id}', [DisposisiController::class, 'disposisi'])->name('accept_disposisi');
     Route::get('/disposisi/show/{id}', [DisposisiController::class, 'show'])->name('show_disposisi');
     Route::get('/disposisi/add', [DisposisiController::class, 'add'])->name('add_disposisi');
     Route::post('/disposisi/insert', [DisposisiController::class, 'insert'])->name('insert_disposisi');
@@ -49,18 +52,23 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('/surat', [KelolaSuratController::class, 'index'])->name('surat_index');
     Route::get('/surat/generate/{id}', [KelolaSuratController::class, 'generate'])->name('surat_generate');
 
-    Route::get('/smasuk', [SuratMasukController::class, 'index'])->name('smasuk');
+    Route::get('/arsipKeluar', [ArsipKeluarController::class, 'index'])->name('arsip_keluar');
+
+    Route::get('/arsipMasuk', [ArsipMasukController::class, 'index'])->name('arsip_masuk');
+    // Route::get('/arsipKeluar', [ArsipKeluarController::class, 'edit'])->name('arsip_editKeluar');
     Route::get('/smasuk/detail/{id_suratmasuk}', [SuratMasukController::class, 'detail']);
 
     Route::get('/setuju', [PersetujuanController::class, 'index'])->name('index_setuju');
-    Route::get('/setujuAdmin', [PersetujuanController::class, 'indexAdmin'])->name('index_setujuAdmin');
     Route::get('/setuju/{id}', [PersetujuanController::class, 'accepted'])->name('surat_setuju');
+    Route::get('/setujuAdmin', [PersetujuanController::class, 'indexSetuju'])->name('index_setujuSurat');
+    Route::get('/setujuAdmin/arsip/{id}', [PersetujuanController::class, 'arsip'])->name('surat_arsip');
     Route::get('/setuju/delete/{id}', [PersetujuanController::class, 'delete'])->name('surat_delete');
 
     // Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
     
 
-    Route::get('/antar', [AntarSuratController::class, 'index']);
+    Route::get('/antar', [AntarSuratController::class, 'index'])->name('index_antar');
+    Route::get('/antar/confirm/{id}', [AntarSuratController::class, 'antar'])->name('confirm_antar');
 
     Route::group(['prefix'=>'surat','namespace' => 'App\Http\Controllers\Surat'], function() {
       Route::group(['prefix'=>'sktm'], function() {
@@ -74,6 +82,7 @@ Route::group(['middleware' => 'admin'], function() {
       Route::group(['prefix'=>'hilang'], function() {
         Route::get('create', [SuratKetHilangController::class, 'create'])->name('create_hilang');
         Route::post('store', [SuratKetHilangController::class, 'store'])->name('store_hilang');
+        Route::get('show/{id}', [SuratKetHilangController::class, 'show'])->name('show_hilang');
       });
     });
 

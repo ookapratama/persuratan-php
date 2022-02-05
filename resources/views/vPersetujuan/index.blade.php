@@ -1,92 +1,104 @@
 @extends('layout.v_template')
-@section('title', 'Persetujuan')
-@section('titleNav','Persetujuan')
+@section('title', 'Disposisi')
+@section('titleNav','Kelola Surat > Disposisi')
 
 @section('content')
-
-    @if(session('pesan'))
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4><i class="icon fa fa-check"></i> Success</h4>
-        {{ session('pesan') }}
-    </div>
-    @endif
+<br>
     
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Jenis Surat</th>
-                <th>Nama Pemohon</th>
-                <th>No Surat</th>
-                <th>TGL Surat</th>
-                <th>Status Surat</th>
+                <th>Perihal</th>
+                <th>TGL. Surat</th>
+                <th>No. Surat</th>
+                <th>Asal Surat</th>
+                <th>TGL. Terima</th>
+                <th>Stts Setuju</th>
+                <th>File Surat</th>
                 <th>Action</th>
             </tr>
         </thead>
 
         <tbody>
             <?php $no = 1; ?>
-            @foreach ($surat as $data)
+            @foreach($disposisi as $data)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $data->jenis_surat }}</td>
-                    <td>{{ $data->nama_pemohon }}</td>
-                    <td>{{ $data->no_surat }}</td>
+                    <td>{{ $data->perihal }}</td>
                     <td>{{ $data->tgl_surat }}</td>
-                    <td>{{ $data->status_setuju=="Y"?"Disetujui" : "Belum Disetujui" }}</td>
+                    <td>{{ $data->no_surat }}</td>
+                    <td>{{ $data->asal_surat }}</td>
+                    <td>{{ $data->tgl_terima }}</td>
+                    <td>{{ $data->status_setuju=="Y"?"Disetujui" : "Belum" }}</td>
+                    <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
                     <td>
-                        <a href="" class="btn btn-sm btn-warning fa fa-eye"></a>
-                        <a class="btn btn-sm btn-success fa fa-check" data-toggle="modal" data-target="#setuju{{ $data->id }}"></a>
-                        <button type="button" class="btn btn-sm btn-danger fa fa-times" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
-                    </td>             
-                </tr> 
-                
-                <div class="modal fade" id="setuju{{ $data->id }}">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Persetujuan Surat</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin menyetujui surat permohonan?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Batal</button>
-                                <a href="{{ route("surat_setuju", $data->id) }}" class="btn btn-success">Ya</a>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-
-                <div class="modal modal-danger fade" id="delete{{ $data->id }}">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Tolak Permohonan</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin ingin menolak surat permohonan ini?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
-                                <a href="{{ route('surat_delete', $data->id) }}" class="btn btn-outline">Ya</a>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
+                        <a class="btn btn-sm btn-primary fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
+                        <button type="button" class="btn btn-sm btn-danger fa fa-times" title="tolak" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
+                        <a href="{{ route('surat_setuju', $data->id) }}" class="btn btn-sm btn-success fa fa-check-square-o" title="setuju"></a>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
+
+    @foreach($disposisi as $data)
+        <div class="modal modal-danger fade" id="delete{{ $data->id }}">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Hapus Data Surat</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin ingin menghapus surat ini?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+                        <a href="/disposisi/delete/{{ $data->id }}" class="btn btn-outline">Ya</a>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    @endforeach    
+
+
+@endsection
+
+@section('script')
+
+    <script>
+        $(document).ready(function(){
+
+            //modal add
+            $('#tambahDisposisi').on('click', function() {
+                $.get("{{ route('add_disposisi') }}", function(data){
+                    $("#modalTitle").html('TAMBAH SURAT');
+                    $("#page").html(data);
+                    $('#myModal').modal('show');
+                });
+            });
+        });
+
+        function show(id) {
+            $.get("{{ url('/disposisi/show') }}/"+id, {}, function(data) {
+                $("#modalTitle").html('DETAIL SURAT');
+                $("#page").html(data);
+                $("#myModal").modal('show');
+            });
+        }
+
+    </script>
+
+    @if (Session::has('pesan'))
+    <script>
+        // toastr.warning("{!! Session::get('pesan') !!}");
+        toastr.{{ Session::get('alert') }}("{{ Session::get('pesan') }}");
+    </script>
+    @endif
 
 @endsection

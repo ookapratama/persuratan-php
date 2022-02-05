@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Disposisi as Disposisi;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 
 class DisposisiController extends Controller
@@ -12,9 +13,21 @@ class DisposisiController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
+
+    public function disposisi($id) {
+        //cari suratnya 
+        $surat = Disposisi::find($id);
+        //ubah status
+        $surat->status_disposisi = 'Y';
+        //save
+        $surat->save();
+        //redirect ke daftr yang telah di setujui
+        return redirect()->route('disposisi');
+    }
     
     public function index() {
-        $disposisi = Disposisi::all();
+        // $disposisi = Disposisi::all();
+        $disposisi = Disposisi::where("status_setuju", "N")->where("status_disposisi", "N")->get();
         $data = [
             'disposisi' => $disposisi,
         ];
@@ -37,6 +50,8 @@ class DisposisiController extends Controller
 
     public function insert(Request $request) {
 
+        // ddd($request);
+
         $notif = array(
             'pesan' => 'Surat berhasil ditambah !',
             'alert' => 'success',
@@ -53,10 +68,11 @@ class DisposisiController extends Controller
             'tgl_disposisi' => 'required',
             'isi_disposisi' => 'required',
             'isi_ringkas' => 'required|max:255',
-            'file_surat' => 'required|mimes:pdf|max:2048',
+            'file_surat' => 'required|mimes:pdf|file|max:2048',
         ]);
 
-        $request->file('file_surat')->store('public');
+        // $request->file('file_surat')->store('public');
+        $request->file('file_surat')->store('file-suratMasuk');
 
         $data = new Disposisi();
 
@@ -72,7 +88,6 @@ class DisposisiController extends Controller
         $data->isi_disposisi = $request->get('isi_disposisi');
         $data->isi_ringkas = $request->get('isi_ringkas');
         $data->file_surat = $request->file('file_surat')->hashName(); 
-        
         $data->save();
         
         return redirect()->route('disposisi')->with($notif);
@@ -88,6 +103,8 @@ class DisposisiController extends Controller
     }
 
     public function update(Request $request, $id) {
+
+        // ddd($request);
 
         $notif = array(
             'pesan' => 'Surat berhasil diupdate !',
@@ -107,8 +124,17 @@ class DisposisiController extends Controller
             'tgl_disposisi' => 'required',
             'isi_disposisi' => 'required',
             'isi_ringkas' => 'required|max:255',
-            'file_surat' => 'required|mimes:pdf|max:2048',
+            'file_surat' => 'mimes:pdf|file|max:2048',
         ]);
+
+        if($request->file('file_surat')) {
+            if($request->oldFile) {
+                Storage::delete($request->oldFile);
+            }
+            $request->file('file_surat')->store('file-suratMasuk');
+        }
+
+        $request->file('file_surat')->store('file-suratMasuk');
 
         $data->user_approve = $request->get('user_approve');
         $data->perihal = $request->get('perihal');

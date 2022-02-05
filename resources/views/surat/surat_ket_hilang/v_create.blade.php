@@ -155,6 +155,15 @@
                     </div>
                 </div>
 
+                <div class="col-md-4">
+                    <label class="form-label">Pengantaran</label>
+                    <select name="is_antar" class="form-control" style="margin-bottom: 10px">
+                        <option value="default">Pilih..</option>
+                        <option value="Y">Ya</option>
+                        <option value="N">Tidak</option>
+                    </select>
+                </div>
+
                 <div class="col-md-12">
                     <h4>&emsp;</h4>
                 </div>
