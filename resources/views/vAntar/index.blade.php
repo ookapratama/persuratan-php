@@ -1,6 +1,6 @@
 @extends('layout.v_template')
-@section('title', 'Surat Keluar')
-@section('titleNav','Kelola Surat > Surat Keluar')
+@section('title', 'Pengantaran')
+@section('titleNav','Pengantaran Surat')
 
 @section('content')
 

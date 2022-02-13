@@ -15,6 +15,12 @@ class DisposisiController extends Controller
     }
 
     public function disposisi($id) {
+
+        $notif = array(
+            'pesan' => 'Data surat sudah masuk ke halaman Persetujuan !',
+            'alert' => 'info',
+        );
+
         //cari suratnya 
         $surat = Disposisi::find($id);
         //ubah status
@@ -22,7 +28,7 @@ class DisposisiController extends Controller
         //save
         $surat->save();
         //redirect ke daftr yang telah di setujui
-        return redirect()->route('disposisi');
+        return redirect()->route('disposisi')->with($notif);
     }
     
     public function index() {
@@ -104,7 +110,6 @@ class DisposisiController extends Controller
 
     public function update(Request $request, $id) {
 
-        // ddd($request);
 
         $notif = array(
             'pesan' => 'Surat berhasil diupdate !',
@@ -127,14 +132,18 @@ class DisposisiController extends Controller
             'file_surat' => 'mimes:pdf|file|max:2048',
         ]);
 
+
         if($request->file('file_surat')) {
             if($request->oldFile) {
-                Storage::delete($request->oldFile);
+                Storage::delete("file-suratMasuk/".$request->oldFile);
             }
             $request->file('file_surat')->store('file-suratMasuk');
+            
+            $file = $request->file('file_surat')->hashName();
+            $data->file_surat = $file;
         }
 
-        $request->file('file_surat')->store('file-suratMasuk');
+        // $request->file('file_surat')->store('file-suratMasuk');
 
         $data->user_approve = $request->get('user_approve');
         $data->perihal = $request->get('perihal');
@@ -147,7 +156,6 @@ class DisposisiController extends Controller
         $data->tgl_disposisi = $request->get('tgl_disposisi');
         $data->isi_disposisi = $request->get('isi_disposisi');
         $data->isi_ringkas = $request->get('isi_ringkas');
-        $data->file_surat = $request->file('file_surat')->hashName();
         $data->save();
 
         return redirect()->route('disposisi')->with($notif);
@@ -160,11 +168,49 @@ class DisposisiController extends Controller
             'pesan' => 'Surat dihapus !',
             'alert' => 'error',
         );
-
+        
         $id= $request->id;
         $data = Disposisi::find($id);
+        if($data->file_surat) {
+            Storage::delete("file-suratMasuk/".$data->file_surat);
+        }
         $data->delete();
 
         return redirect()->back()->with($notif);
+    }
+
+    public function viewUpload($id) {
+        $data = [
+            'disposisi' => Disposisi::find($id),
+        ];
+        return view('vArsip.masuk.uploadfile', $data);
+    }
+
+    public function uploadFile(Request $request, $id) {
+
+        $notif = array(
+            'pesan' => 'File berhasil ditambah !',
+            'alert' => 'success',
+        );
+
+        $data = Disposisi::findOrFail($id);
+
+        $request->validate([
+    
+            'file_disposisi' => 'mimes:pdf|file|max:2048',
+        ]);
+
+        if($request->file('file_disposisi')) {
+            if($request->oldFile) {
+                Storage::delete("file-suratDisposisi/".$request->oldFile);
+            }
+            $request->file('file_disposisi')->store('file-suratDisposisi');
+        }
+
+        $data->file_disposisi = $request->file('file_disposisi')->hashName();
+        $data->save();
+
+        return redirect()->route('arsip_masuk')->with($notif);
+        
     }
 }

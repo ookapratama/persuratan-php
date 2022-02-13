@@ -3,78 +3,78 @@
         <div class="row g-3">
 
             <div class="col-md-3">
-                <label class="form-label">Yang Menyetujui</label>                      
-                <input class="form-control" value="{{ $hilangShow->approve_by->name }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">Yang Menyetujui</label>                      
+                <input class="form-control" value="{{ $hilangShow->approve_by->name }}" readonly>
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">No Surat</label>
-                <input class="form-control" value="{{ $hilangShow->no_surat }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">No Surat</label>
+                <input class="form-control" value="{{ $hilangShow->no_surat }}" readonly>
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">Perihal</label>
-                <input class="form-control" value="{{ $hilangShow->perihal }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">Perihal</label>
+                <input class="form-control" value="{{ $hilangShow->perihal }}" readonly>
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">Lampiran</label>
-                <input class="form-control" value="{{ $hilangShow->lampiran }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">Lampiran</label>
+                <input class="form-control" value="{{ $hilangShow->lampiran }}" readonly>
             </div>
             
             <div class="col-md-3">
-                <label class="form-label">Tanggal Surat</label>
-                <input class="form-control" value="{{ $hilangShow->tgl_surat }}" style="margin-bottom: 10px" readonly>                       
+                <label class="form-label" style="margin-top: 10px">Tanggal Surat</label>
+                <input class="form-control" value="{{ $hilangShow->tgl_surat }}" readonly>                       
             </div>
 
             <div class="col-md-4">
-                <label class="form-label">Nama Pemohon</label>
-                <input class="form-control" value="{{ $hilangShow->nama_pemohon }}" style="margin-bottom: 10px" readonly>                        
+                <label class="form-label" style="margin-top: 10px">Nama Pemohon</label>
+                <input class="form-control" value="{{ $hilangShow->nama_pemohon }}" readonly>                        
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">Jenis Kelamin</label>
-                <input class="form-control" value="{{ $hilangShow->jenis_kelamin }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">Jenis Kelamin</label>
+                <input class="form-control" value="{{ $hilangShow->jenis_kelamin }}" readonly>
             </div>
 
             <div class="col-md-2">
-                <label class="form-label">Tempat Lahir</label>
-                <input class="form-control" value="{{ $hilangShow->tempat_lahir }}" style="margin-bottom: 10px" readonly>                       
+                <label class="form-label" style="margin-top: 10px">Tempat Lahir</label>
+                <input class="form-control" value="{{ $hilangShow->tempat_lahir }}" readonly>                       
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">Tanggal Lahir</label>
-                <input class="form-control" value="{{ $hilangShow->tgl_lahir }}" style="margin-bottom: 10px" readonly>                      
+                <label class="form-label" style="margin-top: 10px">Tanggal Lahir</label>
+                <input class="form-control" value="{{ $hilangShow->tgl_lahir }}" readonly>                      
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">NIK</label>
-                <input class="form-control" value="{{ $hilangShow->nik }}" style="margin-bottom: 10px" readonly>                       
+                <label class="form-label" style="margin-top: 10px">NIK</label>
+                <input class="form-control" value="{{ $hilangShow->nik }}" readonly>                       
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">Status Perkawinan</label>
-                <input class="form-control" value="{{ $hilangShow->status_kawin }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">Status Perkawinan</label>
+                <input class="form-control" value="{{ $hilangShow->status_kawin }}" readonly>
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">Agama</label>
-                <input class="form-control" value="{{ $hilangShow->agama }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">Agama</label>
+                <input class="form-control" value="{{ $hilangShow->agama }}" readonly>
             </div>
 
             <div class="col-md-4">
-                <label class="form-label">Pekerjaan</label>
-                <input class="form-control" value="{{ $hilangShow->pekerjaan }}" style="margin-bottom: 10px" readonly>                        
+                <label class="form-label" style="margin-top: 10px">Pekerjaan</label>
+                <input class="form-control" value="{{ $hilangShow->pekerjaan }}" readonly>                        
             </div>
 
             <div class="col-md-4">
-                <label class="form-label">Alamat</label>
-                <input class="form-control" value="{{ $hilangShow->alamat }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">Alamat</label>
+                <input class="form-control" value="{{ $hilangShow->alamat }}" readonly>
             </div>
 
             <div class="col-md-4">
-                <label class="form-label">Benda Hilang</label>
-                <input class="form-control" value="{{ $hilangShow->benda_hilang }}" style="margin-bottom: 10px" readonly>
+                <label class="form-label" style="margin-top: 10px">Benda Hilang</label>
+                <input class="form-control" value="{{ $hilangShow->benda_hilang }}" readonly>
             </div>
 
             <div class="col-md-12">

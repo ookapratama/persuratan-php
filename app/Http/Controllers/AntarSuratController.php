@@ -13,7 +13,7 @@ class AntarSuratController extends Controller
 
     public function index() {
         
-        $surat = Surat::where("is_antar", "Y")->get();
+        $surat = Surat::where("is_antar", "Y")->where("status_antar", "N")->get();
 
         return view('vAntar.index', [
             'antar' => $surat,

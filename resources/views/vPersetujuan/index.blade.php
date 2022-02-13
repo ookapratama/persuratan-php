@@ -1,11 +1,11 @@
 @extends('layout.v_template')
-@section('title', 'Disposisi')
-@section('titleNav','Kelola Surat > Disposisi')
+@section('title', 'Persetujuan')
+@section('titleNav','Persetujuan')
 
 @section('content')
 <br>
     
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>No</th>

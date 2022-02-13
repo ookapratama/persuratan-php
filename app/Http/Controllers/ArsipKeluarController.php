@@ -12,7 +12,7 @@ class ArsipKeluarController extends Controller
     }
 
     public function index() {
-        $surat = Surat::where("is_print", "Y")->get();
+        $surat = Surat::where("status_arsip", "Y")->get();
 
         return view('vArsip.keluar.index', [
             'arsip'=>$surat,

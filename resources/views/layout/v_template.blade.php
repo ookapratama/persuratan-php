@@ -14,14 +14,6 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{asset('template')}}/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('template')}}/bower_components/jQueryDataTables/jquery.dataTables.css"> --}}
-    <link rel="stylesheet" href="{{asset('template')}}/bower_components/datatable/css/jquery.dataTables.css">
-
-    {{-- <link rel="stylesheet" href="{{asset('template')}}/bower_components/datatables.net-bs/css/dataTables.bootstrap.css"> --}}
-    {{-- <link rel="stylesheet" href="{{asset('template')}}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> --}}
-
-    {{-- <link rel="stylesheet" href="{{asset('template')}}/bower_components/sweetalert2/sweetalert2.min.css"> --}}
-
     <link rel="stylesheet" href="{{asset('template')}}/bower_components/toastr/toastr.min.css">
 
     <!-- Font Awesome -->
@@ -173,10 +165,10 @@
     </div>
     <!-- ./wrapper -->
 
-    {{-- MODAL --}}
+    {{-- GENERAL MODAL --}}
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-lg" id="typeModal" role="document">
         <div class="modal-content">
 
           <div class="modal-header">
@@ -194,7 +186,51 @@
       </div>
     </div>
   
-  {{-- END MODAL --}}
+  {{-- END  GENERAL MODAL --}}
+
+  {{-- ACCEPT MODAL --}}
+
+  <div class="modal fade" id="modalAccept">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="titleAccept"></h4>
+          </div>
+          <div class="modal-body" align="center"><h4 id="bodyAccept"></h4></div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary pull-left" type="button" data-dismiss="modal">Batal</button>
+            <a class="btn btn-success" id="actionAccept">Ya</a>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  {{-- END ACCEPT MODAL --}}
+
+  {{-- MODAL DELETE --}}
+
+  <div class="modal modal-danger fade" id="modalDelete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span style="color: white" aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="titleDelete"></h4>
+          </div>
+          <div class="modal-body" align="center"><h4 id="bodyDelete"></h4></div>
+          <div class="modal-footer">
+            <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Batal</button>
+            <a class="btn btn-outline" id="actionDelete">Ya</a>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  {{-- END MODAL DELETE --}}
 
     <!-- jQuery 3 -->
     <script src="{{asset('template')}}/bower_components/jquery/dist/jquery.min.js"></script>
@@ -203,19 +239,10 @@
 
     <!-- jQuery validate 1.19.3 -->
     <script src="{{asset('template')}}/bower_components/jquery-validation-1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="{{asset('template')}}/bower_components/jquery-validation-1.19.3/dist/additional-methods.js"></script>
 
     <!-- Bootstrap 3.3.7 -->
     <script src="{{asset('template')}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    {{-- <script type="text/javascript" charset="utf8" src="{{asset('template')}}/bower_components/jQueryDataTables/jquery.dataTables.js"></script> --}}
-
-    {{-- <script src="{{asset('template')}}/bower_components/datatables.net/js/jquery.dataTables.js"></script> --}}
-    {{-- <script src="{{asset('template')}}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script> --}}
-
-    {{-- <script src="{{asset('template')}}/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script> --}}
-    {{-- <script src="{{asset('template')}}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> --}}
-
-    {{-- <script src="{{asset('template')}}/bower_components/sweetalert2/sweetalert2.min.js"></script> --}}
 
     <script src="{{asset('template')}}/bower_components/toastr/toastr.min.js"></script>
 

@@ -1,11 +1,11 @@
 @extends('layout.v_template')
-@section('title', 'Disposisi')
-@section('titleNav','Kelola Surat > Disposisi')
+@section('title', 'Surat Setuju')
+@section('titleNav','Surat Disetujui')
 
 @section('content')
 <br>
     
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>No</th>
@@ -34,7 +34,7 @@
                     <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
                     <td>
                         <a class="btn btn-sm btn-warning fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
-                        <a href="#" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
+                        <a href="generateSurat/disposisi/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
                         <a href="{{ route('surat_arsip',$data->id) }}" class="btn btn-sm btn-success fa fa-archive" title="Arsip"></a>
                     </td>
                 </tr>

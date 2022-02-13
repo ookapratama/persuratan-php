@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User as User;
-use Exception;
-// use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 
 class KelolaUserController extends Controller
 {
@@ -28,84 +27,80 @@ class KelolaUserController extends Controller
     }
 
     public function insert(Request $request) {
-        dd($request->all());
-        $response = array();
+        
+        $notif = array(
+            'pesan' => 'User berhasil ditambah !',
+            'alert' => 'success',
+        );
 
-        try{
-            $user = new User();
-            $user->name = request()->name;
-            $user->email = request()->email;
-            $user->jabatan = request()->jabatan;
-            $user->password = bcrypt(request()->password);
-            $user->level_id = request()->level_id;
-            $user->save();
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:6',
+            'level_id' => 'required',
+            'jabatan' => 'required',
+        ]);
+       
+        $user = new User();
 
-            $response['status'] = '200';
-            $response['message'] = 'User berhasil ditambahkan !';
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->jabatan = $request->get('jabatan');
+        $user->password = bcrypt($request->get('password'));
+        $user->level_id = $request->get('level_id');
+        $user->save();
 
-        }catch(Exception $e) {
-            // $response['status'] = '500';
-            // $response['message'] = 'User gagal ditambahkan !';
-
-            $response['status'] = '500';
-            $response['message'] = $e->getMessage();
-        }
-
-        echo json_encode($response);
-
-        // $validatedData = $request->validate([
-        //     'name' => 'required|max:255',
-        //     'email' => 'required|unique:users',
-        //     'password' => 'required|min:8',
-        //     'level_id' => 'required',
-        //     'jabatan' => 'required',
-        // ]);
-
-        // $validatedData['password'] = Hash::make($validatedData['password']);
-
-        // User::create($validatedData);
-
-        // return redirect()->route('user')->with('pesan', 'User berhasil ditambah !');
+        return redirect()->route('user')->with($notif);
     }
 
-    // public function edit($id) {
-    //     $data = User::findOrFail($id);
-    //     return view('vUser.edit')->with([
-    //         'edit' => $data
-    //     ]);
-    // }
+    public function edit($id) {
+        $data = User::findOrFail($id);
+        return view('vUser.edit')->with([
+            'edit' => $data
+        ]);
+    }
 
-    // public function update(Request $request, $id) {
+    public function update(Request $request, $id) {
 
-    //     $data = User::findOrFail($id);
+        $notif = array(
+            'pesan' => 'User berhasil di-Update !',
+            'alert' => 'success',
+        );
 
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|max:255',
-    //         'email' => 'required|unique:users,email,'.$id,
-    //         'password' => 'required|min:8|confirmed',
-    //         'level_id' => 'required',
-    //         'jabatan' => 'required',
-    //     ]);
+        $data = User::findOrFail($id);
 
-    //     $validatedData['password'] = Hash::make($validatedData['password']);
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users,email,'.$id,
+            'password' => 'required|min:6|confirmed',
+            'level_id' => 'required',
+            'jabatan' => 'required',
+        ]);
 
-    //     $data->name = $request->get('name');
-    //     $data->email = $request->get('email');
-    //     $data->password = $validatedData['password'];
-    //     $data->level_id = $request->get('level_id');
-    //     $data->jabatan = $request->get('jabatan');
-    //     $data->save();
-    //     // User::updateOrCreate($validatedData);
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
-    //     // return redirect()->route('user')->with('pesan', 'User berhasil di-update !');
-    // }
+        $data->name = $request->get('name');
+        $data->email = $request->get('email');
+        $data->password = $validatedData['password'];
+        $data->level_id = $request->get('level_id');
+        $data->jabatan = $request->get('jabatan');
+        $data->save();
 
-    // public function delete($id) {
-    //     $data = User::findOrFail($id);
-    //     $data->delete();
+        return redirect()->route('user')->with($notif);
+    }
 
-    //     // return redirect()->back()->with('pesan', 'User dihapus !');
-    // }
+    public function delete($id) {
+
+        $notif = array(
+            'pesan' => 'User berhasil di-Hapus !',
+            'alert' => 'success',
+        );
+
+        $data = User::findOrFail($id);
+        $data->delete();
+
+        return redirect()->back()->with($notif);
+    }
 }
 
 

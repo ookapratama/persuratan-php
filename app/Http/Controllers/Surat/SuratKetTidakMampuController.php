@@ -52,7 +52,7 @@ class SuratKetTidakMampuController extends Controller
             'nama_pemohon' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
-            'nik' => 'required|max:16',
+            'nik' => 'required',
             'pekerjaan' => 'required',
             'alamat' => 'required',
             'is_antar' => 'required',
@@ -84,12 +84,9 @@ class SuratKetTidakMampuController extends Controller
      */
     public function show($id)
     {
-        // dd($id);
-        // $surat = Model::findOrFail($id)->with('approve_by')->first();;
         $surat = Model::where('id',$id)->with('approve_by')->first();
-        // dd($surat);
         $data = [
-            'sktmEdit' => $surat,
+            'sktmShow' => $surat,
         ];
         return view('surat.surat_ket_tidak_mampu.v_show', $data);
     }
@@ -102,7 +99,12 @@ class SuratKetTidakMampuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $surat = Model::where('id',$id)->with('approve_by')->first();
+        $data = [
+            'sktmEdit' => $surat,
+        ];
+        $data2 = User::all()->where('level_id', 2);
+        return view('surat.surat_ket_tidak_mampu.v_edit', $data, ['user_approve'=>$data2]);
     }
 
     /**
@@ -114,7 +116,41 @@ class SuratKetTidakMampuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $notif = array(
+            'pesan' => 'Surat berhasil diupdate !',
+            'alert' => 'success',
+        );
+
+        $data = Model::findOrFail($id);
+
+        $request->validate([
+            'no_surat' => 'required|max:100',
+            'user_approve' => 'required',
+            'tgl_surat' => 'required',
+            'nama_pemohon' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'nik' => 'required',
+            'pekerjaan' => 'required',
+            'alamat' => 'required',
+            'is_antar' => 'required',
+        ]);
+
+        $data->no_surat = $request->get('no_surat');
+        $data->user_approve = $request->get('user_approve');
+        $data->tgl_surat = $request->get('tgl_surat');
+        $data->nama_pemohon = $request->get('nama_pemohon');
+        $data->tempat_lahir = $request->get('tempat_lahir');
+        $data->tgl_lahir = $request->get('tgl_lahir');
+        $data->nik = $request->get('nik');
+        $data->pekerjaan = $request->get('pekerjaan');
+        $data->alamat = $request->get('alamat');
+        $data->is_antar = $request->get('is_antar');
+        $data->save();
+
+        return redirect()->route('surat_index')->with($notif);
+
+
     }
 
     /**
@@ -125,6 +161,14 @@ class SuratKetTidakMampuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $notif = array(
+            'pesan' => 'Surat dihapus !',
+            'alert' => 'error',
+        );
+
+        $data = Model::find($id);
+        $data->delete();
+
+        return redirect()->back()->with($notif);
     }
 }

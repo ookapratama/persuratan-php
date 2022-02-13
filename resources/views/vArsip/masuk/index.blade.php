@@ -1,11 +1,11 @@
 @extends('layout.v_template')
-@section('title', 'Disposisi')
-@section('titleNav','Kelola Surat > Disposisi')
+@section('title', 'Arsip Masuk')
+@section('titleNav','Arsip > Surat Masuk')
 
 @section('content')
 <br>
     
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>No</th>
@@ -30,14 +30,21 @@
                     <td>{{ $data->no_surat }}</td>
                     <td>{{ $data->asal_surat }}</td>
                     <td>{{ $data->tgl_terima }}</td>
-                    <td>{{ $data->status_arsip=="Y"?"ter-Arsip" : "Belum" }}</td>
+                    <td>{{ $data->status_arsip=="Y"?"Arsip" : "Belum" }}</td>
                     <td>
-                        <a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">Surat</a>
-                        <a href="#" class="btn btn-sm btn-info">Disposisi</a>
+                        @if($data->file_surat)
+                            <a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">Surat</a>
+                        @endif
+                        @if ($data->file_disposisi)
+                            <a href="{{ asset('storage/file-suratDisposisi/'.$data->file_disposisi) }}" class="btn btn-sm btn-info" target="_blank">Disposisi</a>
+                        @else
+                            <a class="btn btn-sm btn-default" disabled>Disposisi</a>
+                        @endif
                     </td>
                     <td>
+                        <a class="btn btn-sm btn-primary fa fa-upload" onclick="upload({{ $data->id }})" title="detail"></a>
                         <a class="btn btn-sm btn-warning fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
-                        <a href="#" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
+                        <a href="#" class="btn btn-sm btn-success fa fa-print" title="cetak"></a>
                         <a href="#" class="btn btn-sm btn-danger fa fa-trash" title="Hapus"></a>
                     </td>
                 </tr>
@@ -95,11 +102,20 @@
             });
         }
 
+        function upload(id) {
+            console.log(id);
+            $.get("{{ url('/arsip/viewUpload') }}/"+id, {}, function(data) {
+                $('#typeModal').attr("class", "modal-dialog")
+                $("#modalTitle").html('UPLOAD FILE DISPOSISI');
+                $("#page").html(data);
+                $("#myModal").modal('show');
+            });
+        }
+
     </script>
 
     @if (Session::has('pesan'))
     <script>
-        // toastr.warning("{!! Session::get('pesan') !!}");
         toastr.{{ Session::get('alert') }}("{{ Session::get('pesan') }}");
     </script>
     @endif

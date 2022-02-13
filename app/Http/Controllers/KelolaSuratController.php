@@ -12,33 +12,31 @@ class KelolaSuratController extends Controller
     }
     
     public function index() {
-        $surat = Surat::where("status_setuju", "N")->where("is_print", "N")->get();
+        $surat = Surat::where("status_arsip", "N")->get();
     
         return view('surat.index', [
             'surat'=>$surat,
         ]);
     }
 
-    // public function edit($id) {
-
-    //     $surat = Surat::where('id',$id)->first();
-        
-    
-    //     return view('surat.index', [
-    //         'surat'=>$surat,
-    //     ]);
-    // }
-
-
-
     public function generate($id) {
-        //cari suratnya 
+
         $surat = Surat::find($id);
-        //ubah status
-        $surat->is_print = 'Y';
-        //save
+        $surat->is_generate = 'Y';
         $surat->save();
-        //redirect ke daftr yang telah di setujui
         return redirect()->route('surat_index');
+    }
+
+    public function arsip($id) {
+        
+        $notif = array(
+            'pesan' => 'Surat diarsipkan !',
+            'alert' => 'success',
+        );
+
+        $surat = Surat::find($id);
+        $surat->status_arsip = 'Y';
+        $surat->save();
+        return redirect()->route('surat_index')->with($notif);
     }
 }

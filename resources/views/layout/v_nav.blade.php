@@ -44,10 +44,6 @@
         @if(auth()->user()->level_id == 3)
             <li class="{{ request()->is('user') ? 'active' : '' }}"><a href="/user"><i class="fa fa-users"></i> <span>Kelola User</span></a></li>
         @endif
-
-        @if(auth()->user()->level_id == 3)
-            <li class="{{ request()->is('user') ? 'active' : '' }}"><a href="/generate-pdf"><i class="fa fa-users"></i> <span>Tess PDF</span></a></li>
-        @endif
     @endif 
 
 </ul>

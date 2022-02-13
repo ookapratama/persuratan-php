@@ -11,7 +11,6 @@ use App\Http\Controllers\ArsipMasukController;
 use App\Http\Controllers\KelolaUserController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\KelolaSuratController;
-use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PersetujuanController;
 use App\Http\Controllers\Surat\SuratKetHilangController;
 use App\Http\Controllers\SuratKeluarController;
@@ -34,8 +33,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
-
 //hak akses
 Route::group(['middleware' => 'admin'], function() {
     Route::get('/skeluar', [SuratKeluarController::class, 'index']);
@@ -48,9 +45,12 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('/disposisi/edit/{id}', [DisposisiController::class, 'edit'])->name('edit_disposisi');
     Route::post('/disposisi/update/{id}', [DisposisiController::class, 'update'])->name('update_disposisi');
     Route::get('/disposisi/delete/{id}', [DisposisiController::class, 'delete'])->name('delete_disposisi');
+    Route::post('/arsip/upload/{id}', [DisposisiController::class, 'uploadFile'])->name('upload_arsip');
+    Route::get('/arsip/viewUpload/{id}', [DisposisiController::class, 'viewUpload'])->name('viewUpload_arsip');
 
     Route::get('/surat', [KelolaSuratController::class, 'index'])->name('surat_index');
     Route::get('/surat/generate/{id}', [KelolaSuratController::class, 'generate'])->name('surat_generate');
+    Route::get('/surat/arsip/{id}', [KelolaSuratController::class, 'arsip'])->name('suratKeluar_arsip');
 
     Route::get('/arsipKeluar', [ArsipKeluarController::class, 'index'])->name('arsip_keluar');
 
@@ -76,13 +76,18 @@ Route::group(['middleware' => 'admin'], function() {
         Route::get('create', [SuratKetTidakMampuController::class, 'create'])->name('create_sktm');
         Route::post('store', [SuratKetTidakMampuController::class, 'store'])->name('store_sktm');
         Route::get('show/{id}', [SuratKetTidakMampuController::class, 'show'])->name('show_sktm');
-        Route::get('edit', [SuratKetTidakMampuController::class, 'edit']);
+        Route::get('edit/{id}', [SuratKetTidakMampuController::class, 'edit'])->name('edit_sktm');
+        Route::post('update/{id}', [SuratKetTidakMampuController::class, 'update'])->name('update_sktm');
+        Route::get('delete/{id}', [SuratKetTidakMampuController::class, 'destroy'])->name('destroy_sktm');
       });
 
       Route::group(['prefix'=>'hilang'], function() {
         Route::get('create', [SuratKetHilangController::class, 'create'])->name('create_hilang');
         Route::post('store', [SuratKetHilangController::class, 'store'])->name('store_hilang');
         Route::get('show/{id}', [SuratKetHilangController::class, 'show'])->name('show_hilang');
+        Route::get('edit/{id}', [SuratKetHilangController::class, 'edit'])->name('edit_hilang');
+        Route::post('update/{id}', [SuratKetHilangController::class, 'update'])->name('update_hilang');
+        Route::get('delete/{id}', [SuratKetHilangController::class, 'delete'])->name('delete_hilang');
       });
     });
 

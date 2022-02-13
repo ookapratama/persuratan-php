@@ -1,5 +1,5 @@
 @extends('layout.v_template')
-@section('title', 'Arsip')
+@section('title', 'Arsip Keluar')
 @section('titleNav','Arsip > Surat Keluar')
 
 @section('content')
@@ -13,6 +13,7 @@
             <th>Nama Pemohon</th>
             <th>No Surat</th>
             <th>TGL Surat</th>
+            <th>Stts Arsip</th>
             <th>File Surat</th>
             <th>Action</th>
         </tr>
@@ -27,10 +28,18 @@
                 <td>{{ $data->nama_pemohon }}</td>
                 <td>{{ $data->no_surat }}</td>
                 <td>{{ $data->tgl_surat }}</td>
-                <td><a href="#" class="btn btn-sm btn-info">Surat</a></td>
+                <td>{{ $data->status_arsip=='Y' ? 'Arsip' : 'Belum' }}</td>
+                <td>
+                    @if($data->file_surat)
+                        <a href="#" class="btn btn-sm btn-info">Surat</a>
+                    @else
+                        <a class="btn btn-sm btn-default" disabled>Surat</a>
+                    @endif
+                </td>
                 <td> 
-                    <a class="btn btn-sm btn-success fa fa-plus" title="tambah file"></a>
-                    <a class="btn btn-sm btn-warning fa fa-pencil" title="edit file" onclick="edit()"></a>
+                    <a class="btn btn-sm btn-success fa fa-upload" onclick="" title="detail"></a>
+                    <a class="btn btn-sm btn-warning fa fa-eye" title="edit file" onclick=""></a>
+                    <a href="#" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
                     <button type="button" class="btn btn-sm btn-danger fa fa-trash" title="delete" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
                 </td>             
             </tr> 

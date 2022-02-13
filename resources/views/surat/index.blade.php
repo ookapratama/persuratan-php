@@ -5,11 +5,39 @@
 @section('content')
 
     <?php 
-        $arrJenis = array(
+        $jenisSuratGen = array(
             "Surat Keterangan Tidak Mampu" => "sktm",
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "kehilangan",
+        );
+
+        $jenisSuratShow = array(
+            "Surat Keterangan Tidak Mampu" => "show_sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "show_hilang",
+        );
+
+        $jenisSuratEdit = array(
+            "Surat Keterangan Tidak Mampu" => "edit_sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "edit_hilang",
+        );
+
+        $jenisSuratHapus = array(
+            "Surat Keterangan Tidak Mampu" => "destroy_sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "delete_hilang",
+        );
+
+        $jenisSuratArsip = array(
+            "Surat Keterangan Tidak Mampu" => "destroy_sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "delete_hilang",
         );
     ?>
     <br>
@@ -37,9 +65,8 @@
                 <th>Nama Pemohon</th>
                 <th>No Surat</th>
                 <th>TGL Surat</th>
-                <th>Stts Cetak</th>
                 <th>Stts Arsip</th>
-                <th colspan="2">Action</th>
+                <th>Action</th>
             </tr>
         </thead>
 
@@ -52,17 +79,13 @@
                     <td>{{ $data->nama_pemohon }}</td>
                     <td>{{ $data->no_surat }}</td>
                     <td>{{ $data->tgl_surat }}</td>
-                    <td>{{ $data->is_print=="Y"?"Dicetak" : "Belum" }}</td>
-                    <td></td>
+                    <td>{{ $data->status_arsip=="Y"?"Arsip" : "Belum" }}</td>
                     <td>
-                        {{-- <a class="btn btn-sm btn-info fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a> --}}
-                        <a data-route="{{ route('show_hilang', $data->id) }}" id="btnShow" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
-                        <a href="" class="btn btn-sm btn-warning fa fa-pencil" title="edit"></a>
-                        <button type="button" class="btn btn-sm btn-danger fa fa-trash" title="delete" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
-                        {{-- <form action="{{ route('surat_delete', $data->id) }}"></form> --}}
-                        {{-- <button class="btn btn-sm btn-danger fa fa-trash" title="delete" onclick="return confirm('anda yakin?')"></button> --}}
-                        <a href="generateSurat/{{ $arrJenis[$data->jenis_surat] ?? '' }}/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-primary fa fa-file-pdf-o" title="generate pdf"></a>
-                        {{-- <a class="btn btn-sm btn-success fa fa-file-archive-o" title="generate pdf" disabled></a> --}}
+                        <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
+                        <a onclick="edit('{{ route($jenisSuratEdit[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-warning fa fa-pencil" title="edit"></a>
+                        <a onclick="hapus('{{ route($jenisSuratHapus[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-danger fa fa-trash" title="delete"></a>
+                        <a href="generateSurat/{{ $jenisSuratGen[$data->jenis_surat] ?? '' }}/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-success fa fa-file-pdf-o" title="generate pdf"></a>
+                        <a onclick="arsip(`{{ route('suratKeluar_arsip', $data->id) }}`)" class="btn btn-sm btn-primary fa fa-archive" title="arsip surat"></a>
                     </td>             
                 </tr> 
                 
@@ -134,82 +157,187 @@
                 });
             });
 
-            $('#btnShow').on('click', function(id) {
-                let route = data('route');
-
-                $.get(route+id, function(data){
-                    $("#modalTitle").html('Detail '+ title);
-                    $("#page").html(data);
-                    $('#myModal').modal('show');
+            $(document).on('click', '#btnCreateSktm', function() {
+                $.validator.addMethod('valueNotEquals', function(value, element, arg) {
+                    return arg !== value;
                 });
-            })
 
-            // $('#formInput').validate({
-            //     rules: {
-            //         name: {
-            //             required:true,
-            //         },
-            //         email: {
-            //             required:true,
-            //             email: true
-            //         },
-            //         jabatan: {
-            //             required:true,
-            //         },
-            //         password: {
-            //             required:true,
-            //             minlength:8
-            //         },
-            //         password_confirmation: {
-            //             required:true,
-            //             equalTo:"#password"
-            //         },
-            //         level_id: {
-            //             valueNotEquals: "default",
-            //         },                        
-            //     },
-
-            //     messages: {
-            //         name : "Nama harus diisi.",
-            //         email : {
-            //             required: "Alamat email harus diisi.",
-            //             email : "Masukkan format email yang valid",
-            //         },
-            //         jabatan : "Jabatan harus diisi.",
-            //         password : {
-            //             required: "Password harus diisi.",
-            //             minlength : "Panjang password min 8",
-            //         },
-            //         password_confirmation : {
-            //             required: "Password Confirmation harus diisi.",
-            //             equalTo : "Password tidak sama",
-            //         },
-            //         level_id: {
-            //             valueNotEquals: "Pilih salah satu",
-            //         }
-            //     },
-
-            // });
-
-            // function show(id) {
-            //     $.get("{{ url('/surat/sktm/show') }}/"+id, {}, function(data) {
-            //         $("#modalTitle").html('EDIT SURAT');
-            //         $("#page").html(data);
-            //         $("#myModal").modal('show');
-            //     });
-            // }
-
+                $('#formCreateSktm').validate({
+                    rules: {
+                        no_surat: {
+                            required: true
+                        },
+                        user_approve: {
+                            valueNotEquals: "default"
+                        },
+                        tgl_surat: {
+                            required: true
+                        },
+                        nama_pemohon: {
+                            required: true
+                        },
+                        tempat_lahir: {
+                            required: true
+                        },
+                        tgl_lahir: {
+                            required: true
+                        },
+                        nik: {
+                            required: true
+                        },
+                        pekerjaan: {
+                            required: true
+                        },
+                        alamat: {
+                            required: true
+                        },
+                        is_antar: {
+                            valueNotEquals: "default"
+                        },
+                    },
+                    messages: {
+                        no_surat : "No surat harus diisi",
+                        user_approve: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        tgl_surat : "Tgl surat harus diisi",
+                        nama_pemohon : "Nama pemohon harus diisi",
+                        tempat_lahir : "Tempat lahir harus diisi",
+                        tgl_lahir : "Tgl lahir harus diisi",
+                        nik : "NIK harus diisi",
+                        pekerjaan : "Pekerjaan harus diisi",
+                        alamat : "Alamat harus diisi",
+                        is_antar: {
+                            valueNotEquals: "Pilih salah satu"
+                        }
+                    }
+                });
+            });
             
+            $(document).on('click', '#btnCreateHilang', function() {
+                $.validator.addMethod('valueNotEquals', function(value, element, arg) {
+                    return arg !== value;
+                });
 
-            
+                $('#formCreateHilang').validate({
+                    rules: {
+                        user_approve: {
+                            valueNotEquals: "default"
+                        },
+                        no_surat: {
+                            required: true
+                        },
+                        perihal: {
+                            required: true
+                        },
+                        lampiran: {
+                            required: true
+                        },
+                        tgl_surat: {
+                            required: true
+                        },
+                        nama_pemohon: {
+                            required: true
+                        },
+                        jenis_kelamin: {
+                            valueNotEquals: "default"
+                        },
+                        tempat_lahir: {
+                            required: true
+                        },
+                        tgl_lahir: {
+                            required: true
+                        },
+                        nik: {
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
+                        },
+                        status_kawin: {
+                            valueNotEquals: "default"
+                        },
+                        agama: {
+                            valueNotEquals: "default"
+                        },
+                        pekerjaan: {
+                            required: true
+                        },
+                        alamat: {
+                            required: true
+                        },
+                        benda_hilang: {
+                            required: true
+                        },
+                        is_antar: {
+                            valueNotEquals: "default"
+                        },
+                    },
+                    messages: {
+                        user_approve: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        no_surat : "No surat harus diisi",
+                        perihal : "Perihal harus diisi",
+                        lampiran : "Lampiran harus diisi",
+                        tgl_surat : "Tgl surat harus diisi",
+                        nama_pemohon : "Nama pemohon harus diisi",
+                        jenis_kelamin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        tempat_lahir : "Tempat lahir harus diisi",
+                        tgl_lahir : "Tgl lahir harus diisi",
+                        nik : {
+                            required: "NIK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
+                        status_kawin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        agama: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        pekerjaan : "Pekerjaan harus diisi",
+                        alamat : "Alamat harus diisi",
+                        benda_hilang : "Benda hilang harus diisi",
+                        is_antar: {
+                            valueNotEquals: "Pilih salah satu"
+                        }
+                    }
+                });
+            });
         });
 
-        function show(id) {
-            $.get("{{ url('/surat/sktm/show') }}/"+id, {}, function(data) {
+        function show(route) {
+            console.log(route);
+            $.get(route, function(data){
                 $("#modalTitle").html('DETAIL SURAT');
                 $("#page").html(data);
-                $("#myModal").modal('show');
+                $('#myModal').modal('show');
             });
+        }
+
+        function edit(route) {
+            console.log(route);
+            $.get(route, function(data){
+                $("#modalTitle").html('EDIT SURAT');
+                $("#page").html(data);
+                $('#myModal').modal('show');
+            });
+        }
+
+        function hapus(route) {
+            $("#titleDelete").html('HAPUS SURAT');
+            $("#bodyDelete").html("Apakah anda yakin ingin menghapus surat ini ?");
+            $("#actionDelete").attr("href",route);
+            $("#modalDelete").modal('show'); 
+        }
+
+        function arsip(route) {
+            $("#titleAccept").html('ARSIP SURAT');
+            $("#bodyAccept").html("Pastikan data surat sudah benar !");
+            $("#actionAccept").attr("href",route);
+            $("#modalAccept").modal('show');
         }
 
     </script>

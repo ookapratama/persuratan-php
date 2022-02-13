@@ -1,22 +1,17 @@
-<form action="{{ route('store_sktm') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('store_sktm') }}" method="POST" id="formCreateSktm" enctype="multipart/form-data">
     @csrf
     <div class="content">
         <div class="row">
             <div class="row g-3">
 
                 <div class="col-md-4">
-                    <label class="form-label">No Surat</label>
-                    <input type="text" name="no_surat" class="form-control" value="{{ old('no_surat') }}" style="margin-bottom: 10px" autofocus required>
-                    <div class="text-danger">
-                        @error('no_surat')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                    <label class="form-label" style="margin-top: 10px">No Surat</label>
+                    <input type="text" name="no_surat" id="no_surat" class="form-control">
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Yang Menyetujui</label>                      
-                    <select name="user_approve" class="form-control" style="margin-bottom: 10px">
+                    <label class="form-label" style="margin-top: 10px">Yang Menyetujui</label>                      
+                    <select name="user_approve" id="user_approve" class="form-control">
                         <option value="default">Pilih..</option>
                         @foreach ($user_approve as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -25,98 +20,56 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Tanggal Surat</label>
-                    <input type="date" name="tgl_surat" class="form-control" value="{{ old('tgl_surat') }}" style="margin-bottom: 10px" required>                       
-                    <div class="text-danger">
-                        @error('tgl_surat')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                    <label class="form-label" style="margin-top: 10px">Tanggal Surat</label>
+                    <input type="date" name="tgl_surat" id="tgl_surat" class="form-control">                       
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Nama Pemohon</label>
-                    <input type="text" name="nama_pemohon" class="form-control" value="{{ old('nama_pemohon') }}" style="margin-bottom: 10px" required>                        
-                    <div class="text-danger">
-                        @error('nama_pemohon')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                    <label class="form-label" style="margin-top: 10px">Nama Pemohon</label>
+                    <input type="text" name="nama_pemohon" id="nama_pemohon" class="form-control">                        
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Tempat Lahir</label>
-                    <input type="text" name="tempat_lahir" class="form-control" value="{{ old('tempat_lahir') }}" style="margin-bottom: 10px" required>                       
-                    <div class="text-danger">
-                        @error('tempat_lahir')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                    <label class="form-label" style="margin-top: 10px">Tempat Lahir</label>
+                    <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control">                       
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Tanggal Lahir</label>
-                    <input type="date" name="tgl_lahir" class="form-control" value="{{ old('tgl_lahir') }}" style="margin-bottom: 10px" required>                      
-                    <div class="text-danger">
-                        @error('tgl_lahir')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                    <label class="form-label" style="margin-top: 10px">Tanggal Lahir</label>
+                    <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control">                      
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">NIK</label>
-                    <input type="number" name="nik" class="form-control" value="{{ old('nik') }}" style="margin-bottom: 10px" required>                       
-                    <div class="text-danger">
-                        @error('nik')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                    <label class="form-label" style="margin-top: 10px">NIK</label>
+                    <input type="number" name="nik" id="nik" class="form-control">                       
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Pekerjaan</label>
-                    <input type="text" name="pekerjaan" class="form-control" value="{{ old('pekerjaan') }}" style="margin-bottom: 10px" required>                        
-                    <div class="text-danger">
-                        @error('pekerjaan')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                    <label class="form-label" style="margin-top: 10px">Pekerjaan</label>
+                    <input type="text" name="pekerjaan" id="pekerjaan" class="form-control">                        
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Alamat</label>
-                    <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}" style="margin-bottom: 10px" required>
-                    <div class="text-danger">
-                        @error('alamat')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                    <label class="form-label" style="margin-top: 10px">Alamat</label>
+                    <input type="text" name="alamat" id="alamat" class="form-control">
                 </div>
 
                 <div class="col-md-4">
-                    <label class="form-label">Pengantaran</label>
-                    <select name="is_antar" class="form-control" style="margin-bottom: 10px">
+                    <label class="form-label" style="margin-top: 10px">Pengantaran</label>
+                    <select name="is_antar" id="is_antar" class="form-control">
                         <option value="default">Pilih..</option>
                         <option value="Y">Ya</option>
                         <option value="N">Tidak</option>
                     </select>
-                    <div class="text-danger">
-                        @error('alamat')
-                            {{ $message }}
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <h4>&emsp;</h4>
-                </div>
-
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Tutup</button>
-                </div>
+                </div>        
             </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a type="button" class="btn btn-danger pull-right" data-dismiss="modal">Tutup</a>
+        <div class="form-group">
+            <button type="submit" id="btnCreateSktm" class="btn btn-success pull-left">Simpan</button>
         </div>
     </div>
 </form>
