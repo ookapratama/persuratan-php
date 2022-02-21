@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Selamat Datang {{ Auth::user()->name }} !</h1>
-    <h3>Aplikasi Manajemen Persuratan Desa Lampenai, Kecamatan Wotu, Kabupaten Luwu Timur</h3>
+    <h3>Aplikasi Manajemen Persuratan Desa Lampenai, Kecamatan Wotu, Kabupaten Luwu Timurrrrrrrrrrrrrrrrrr</h3>
 
 
     
