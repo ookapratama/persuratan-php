@@ -3,45 +3,51 @@
 @section('titleNav','Persetujuan')
 
 @section('content')
-<br>
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Perihal</th>
+                        <th>TGL. Surat</th>
+                        <th>No. Surat</th>
+                        <th>Asal Surat</th>
+                        <th>TGL. Terima</th>
+                        <th>Stts Setuju</th>
+                        <th>File Surat</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <?php $no = 1; ?>
+                    @foreach($disposisi as $data)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $data->perihal }}</td>
+                            <td>{{ $data->tgl_surat }}</td>
+                            <td>{{ $data->no_surat }}</td>
+                            <td>{{ $data->asal_surat }}</td>
+                            <td>{{ $data->tgl_terima }}</td>
+                            <td>{{ $data->status_setuju=="Y"?"Disetujui" : "Belum" }}</td>
+                            <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
+                            <td>
+                                <a class="btn btn-sm btn-primary fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
+                                <button type="button" class="btn btn-sm btn-danger fa fa-times" title="tolak" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
+                                <a href="{{ route('surat_setuju', $data->id) }}" class="btn btn-sm btn-success fa fa-check-square-o" title="setuju"></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
     
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Perihal</th>
-                <th>TGL. Surat</th>
-                <th>No. Surat</th>
-                <th>Asal Surat</th>
-                <th>TGL. Terima</th>
-                <th>Stts Setuju</th>
-                <th>File Surat</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php $no = 1; ?>
-            @foreach($disposisi as $data)
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $data->perihal }}</td>
-                    <td>{{ $data->tgl_surat }}</td>
-                    <td>{{ $data->no_surat }}</td>
-                    <td>{{ $data->asal_surat }}</td>
-                    <td>{{ $data->tgl_terima }}</td>
-                    <td>{{ $data->status_setuju=="Y"?"Disetujui" : "Belum" }}</td>
-                    <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
-                    <td>
-                        <a class="btn btn-sm btn-primary fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
-                        <button type="button" class="btn btn-sm btn-danger fa fa-times" title="tolak" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
-                        <a href="{{ route('surat_setuju', $data->id) }}" class="btn btn-sm btn-success fa fa-check-square-o" title="setuju"></a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
     @foreach($disposisi as $data)
         <div class="modal modal-danger fade" id="delete{{ $data->id }}">
             <div class="modal-dialog modal-sm">

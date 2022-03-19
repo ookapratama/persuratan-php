@@ -40,102 +40,58 @@
             "Surat Keterangan Kehilangan" => "delete_hilang",
         );
     ?>
-    <br>
-
-    <div class="col">
-        <div class="col">
-            <select class="form-control" id="selectSurat" style="width: 300px; float: left; margin-right: 20px;">
-                <option value="">Pilih Jenis Surat</option>
-                <option data-route="{{ route('create_sktm') }}">SURAT KETERANGAN TIDAK MAMPU</option>
-                <option data-route="{{ route('create_hilang') }}">SURAT KETERANGAN KEHILANGAN</option>
-            </select>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <div class="col">
+                <div class="col">
+                    <select class="form-control" id="selectSurat" style="width: 300px; float: left; margin-right: 20px;">
+                        <option value="">Pilih Jenis Surat</option>
+                        <option data-route="{{ route('create_sktm') }}">SURAT KETERANGAN TIDAK MAMPU</option>
+                        <option data-route="{{ route('create_hilang') }}">SURAT KETERANGAN KEHILANGAN</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <button class="btn btn-sm btn-primary" id="btnTambahSurat"><i class="fa fa-plus-square"></i> Tambah Data</button><br>
+                </div>
+            </div>
         </div>
-        <div class="col">
-            <button class="btn btn-sm btn-primary" id="btnTambahSurat"><i class="fa fa-plus"></i> Tambah Data</button><br>
+        <div class="box-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Jenis Surat</th>
+                        <th>Nama Pemohon</th>
+                        <th>No Surat</th>
+                        <th>TGL Surat</th>
+                        <th>Stts Arsip</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <?php $no = 1; ?>
+                    @foreach ($surat as $data)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $data->jenis_surat }}</td>
+                            <td>{{ $data->nama_pemohon }}</td>
+                            <td>{{ $data->no_surat }}</td>
+                            <td>{{ $data->tgl_surat }}</td>
+                            <td>{{ $data->status_arsip=="Y"?"Arsip" : "Belum" }}</td>
+                            <td>
+                                <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
+                                <a onclick="edit('{{ route($jenisSuratEdit[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-warning fa fa-pencil" title="edit"></a>
+                                <a onclick="hapus('{{ route($jenisSuratHapus[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-danger fa fa-trash" title="delete"></a>
+                                <a href="generateSurat/{{ $jenisSuratGen[$data->jenis_surat] ?? '' }}/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-success fa fa-file-pdf-o" title="generate pdf"></a>
+                                <a onclick="arsip(`{{ route('suratKeluar_arsip', $data->id) }}`)" class="btn btn-sm btn-primary fa fa-archive" title="arsip surat"></a>
+                            </td>             
+                        </tr> 
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-
-    <br>
-    
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Jenis Surat</th>
-                <th>Nama Pemohon</th>
-                <th>No Surat</th>
-                <th>TGL Surat</th>
-                <th>Stts Arsip</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php $no = 1; ?>
-            @foreach ($surat as $data)
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $data->jenis_surat }}</td>
-                    <td>{{ $data->nama_pemohon }}</td>
-                    <td>{{ $data->no_surat }}</td>
-                    <td>{{ $data->tgl_surat }}</td>
-                    <td>{{ $data->status_arsip=="Y"?"Arsip" : "Belum" }}</td>
-                    <td>
-                        <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
-                        <a onclick="edit('{{ route($jenisSuratEdit[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-warning fa fa-pencil" title="edit"></a>
-                        <a onclick="hapus('{{ route($jenisSuratHapus[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-danger fa fa-trash" title="delete"></a>
-                        <a href="generateSurat/{{ $jenisSuratGen[$data->jenis_surat] ?? '' }}/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-success fa fa-file-pdf-o" title="generate pdf"></a>
-                        <a onclick="arsip(`{{ route('suratKeluar_arsip', $data->id) }}`)" class="btn btn-sm btn-primary fa fa-archive" title="arsip surat"></a>
-                    </td>             
-                </tr> 
-                
-                <div class="modal fade" id="setuju{{ $data->id }}">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Generate Surat</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin generate surat permohonan?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Batal</button>
-                                <a href="{{ route("surat_generate", $data->id) }}" class="btn btn-success">Ya</a>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-
-                <div class="modal modal-danger fade" id="delete{{ $data->id }}">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Tolak Permohonan</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin ingin menolak surat permohonan ini?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
-                                <a href="{{ route('surat_delete', $data->id) }}" class="btn btn-outline">Ya</a>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-            @endforeach
-        </tbody>
-    </table>
-
 @endsection
 
 @section('script')

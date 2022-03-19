@@ -4,43 +4,42 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-lg-8">
-            <a class="btn btn-sm btn-primary" id="tambahUser"><i class="fa fa-plus"></i> Tambah User</a>
-        </div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <a class="btn btn-sm btn-primary" id="tambahUser"><i class="fa fa-plus"></i> Tambah User</a>
     </div>
-
-    <br>
-
-    <table class="table table-striped table-bordered ">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Jabatan</th>
-                <th>Level</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-    
-        <tbody>
-            <?php $no = 1; ?>
-            @foreach ($kelolauser as $data)
+    <div class="box-body">
+        <table class="table table-striped table-bordered ">
+            <thead>
                 <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $data->name }}</td>
-                    <td>{{ $data->email }}</td>
-                    <td>{{ $data->jabatan }}</td>
-                    <td>{{ $data->level->level_name }}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning fa fa-pencil" onclick="edit({{ $data->id }})" title="edit"></button>
-                        <button class="btn btn-sm btn-danger fa fa-trash" onclick="hapus(`{{ route('user_delete', $data->id) }}`)" title="delete"></button>
-                    </td>                   
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Jabatan</th>
+                    <th>Level</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+        
+            <tbody>
+                <?php $no = 1; ?>
+                @foreach ($kelolauser as $data)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->email }}</td>
+                        <td>{{ $data->jabatan }}</td>
+                        <td>{{ $data->level->level_name }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning fa fa-pencil" onclick="edit({{ $data->id }})" title="edit"></button>
+                            <button class="btn btn-sm btn-danger fa fa-trash" onclick="hapus(`{{ route('user_delete', $data->id) }}`)" title="delete"></button>
+                        </td>                   
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>    
     
 @endsection
 

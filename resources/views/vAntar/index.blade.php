@@ -4,83 +4,44 @@
 
 @section('content')
 
-    <br>
-    
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Jenis Surat</th>
-                <th>Nama Pemohon</th>
-                <th>No Surat</th>
-                <th>TGL Surat</th>
-                <th>Stts Antar</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php $no = 1; ?>
-            @foreach ($antar as $data)
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $data->jenis_surat }}</td>
-                    <td>{{ $data->nama_pemohon }}</td>
-                    <td>{{ $data->no_surat }}</td>
-                    <td>{{ $data->tgl_surat }}</td>
-                    <td>{{ $data->status_antar=="Y"?"ter-Antar" : "Belum" }}</td>
-                    <td>
-                        <a data-route="{{ route('show_hilang', $data->id) }}" id="btnShow" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
-                        <a href="{{ route('confirm_antar',$data->id) }}" class="btn btn-sm btn-success fa fa-check-square-o" title="konfirmasi"></a>
-                    </td>             
-                </tr> 
-                
-                <div class="modal fade" id="setuju{{ $data->id }}">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Generate Surat</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin generate surat permohonan?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Batal</button>
-                                <a href="{{ route("surat_generate", $data->id) }}" class="btn btn-success">Ya</a>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-
-                <div class="modal modal-danger fade" id="delete{{ $data->id }}">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Tolak Permohonan</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin ingin menolak surat permohonan ini?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
-                                <a href="{{ route('surat_delete', $data->id) }}" class="btn btn-outline">Ya</a>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Jenis Surat</th>
+                        <th>Nama Pemohon</th>
+                        <th>No Surat</th>
+                        <th>TGL Surat</th>
+                        <th>Stts Antar</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <?php $no = 1; ?>
+                    @foreach ($antar as $data)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $data->jenis_surat }}</td>
+                            <td>{{ $data->nama_pemohon }}</td>
+                            <td>{{ $data->no_surat }}</td>
+                            <td>{{ $data->tgl_surat }}</td>
+                            <td><span class="label label-danger">{{ $data->status_antar=="Y"?"ter-Antar" : "Belum" }}</span></td>
+                            <td>
+                                <a data-route="{{ route('show_hilang', $data->id) }}" id="btnShow" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
+                                <a href="{{ route('confirm_antar',$data->id) }}" class="btn btn-sm btn-success fa fa-check-square-o" title="konfirmasi"></a>
+                            </td>             
+                        </tr> 
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 @endsection
 

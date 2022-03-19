@@ -3,46 +3,52 @@
 @section('titleNav','Kelola Surat > Disposisi')
 
 @section('content')
-    @if(auth()->user()->level_id == 3 or auth()->user()->level_id == 4)
-        <a class="btn btn-sm btn-primary" id="tambahDisposisi"><i class="fa fa-plus-square"></i> Tambah Data</a><br>
-        <br>
-    @endif
-    
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Perihal</th>
-                <th>TGL. Surat</th>
-                <th>No. Surat</th>
-                <th>Asal Surat</th>
-                <th>TGL. Terima</th>
-                <th>File Surat</th>
-                <th>Action</th>
-            </tr>
-        </thead>
 
-        <tbody>
-            <?php $no = 1; ?>
-            @foreach($disposisi as $data)
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $data->perihal }}</td>
-                    <td>{{ $data->tgl_surat }}</td>
-                    <td>{{ $data->no_surat }}</td>
-                    <td>{{ $data->asal_surat }}</td>
-                    <td>{{ $data->tgl_terima }}</td>
-                    <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
-                    <td>
-                        <a class="btn btn-sm btn-primary fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
-                        <a class="btn btn-sm btn-warning fa fa-pencil" onclick="edit({{ $data->id }})" title="edit"></a>
-                        <button class="btn btn-sm btn-danger fa fa-trash" onclick="hapus(`{{ route('delete_disposisi', $data->id) }}`)" title="delete"></button>
-                        <a class="btn btn-sm btn-success fa fa-check-square" onclick="process(`{{ route('accept_disposisi', $data->id) }}`)" title="disposisi"></a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            @if(auth()->user()->level_id == 3 or auth()->user()->level_id == 4)
+                <a class="btn btn-sm btn-primary" id="tambahDisposisi"><i class="fa fa-plus-square"></i> Tambah Data</a><br>
+                {{-- <br> --}}
+            @endif
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Perihal</th>
+                        <th>TGL. Surat</th>
+                        <th>No. Surat</th>
+                        <th>Asal Surat</th>
+                        <th>TGL. Terima</th>
+                        <th>File Surat</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <?php $no = 1; ?>
+                    @foreach($disposisi as $data)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $data->perihal }}</td>
+                            <td>{{ $data->tgl_surat }}</td>
+                            <td>{{ $data->no_surat }}</td>
+                            <td>{{ $data->asal_surat }}</td>
+                            <td>{{ $data->tgl_terima }}</td>
+                            <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
+                            <td>
+                                <a class="btn btn-sm btn-primary fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
+                                <a class="btn btn-sm btn-warning fa fa-pencil" onclick="edit({{ $data->id }})" title="edit"></a>
+                                <button class="btn btn-sm btn-danger fa fa-trash" onclick="hapus(`{{ route('delete_disposisi', $data->id) }}`)" title="delete"></button>
+                                <a class="btn btn-sm btn-success fa fa-check-square" onclick="process(`{{ route('accept_disposisi', $data->id) }}`)" title="disposisi"></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('script')
