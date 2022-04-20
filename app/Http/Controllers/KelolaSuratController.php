@@ -39,4 +39,15 @@ class KelolaSuratController extends Controller
         $surat->save();
         return redirect()->route('surat_index')->with($notif);
     }
+
+    public function viewUpload($id) {
+        $data = [
+            'file' => Surat::find($id),
+        ];
+        return view('vArsip.keluar.uploadFile', $data);
+    }
+
+    public function uploadFile(Request $request, $id) {
+
+    }
 }

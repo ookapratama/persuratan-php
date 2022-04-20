@@ -4,6 +4,15 @@
 
 @section('content')
 
+    <?php
+        $jenisSuratUpload = array(
+            "Surat Keterangan Tidak Mampu" => "show_sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "show_hilang",
+        );
+    ?>
+
     <div class="box box-primary">
         <div class="box-header with-border">
             

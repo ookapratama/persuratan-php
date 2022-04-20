@@ -51,10 +51,14 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('/surat', [KelolaSuratController::class, 'index'])->name('surat_index');
     Route::get('/surat/generate/{id}', [KelolaSuratController::class, 'generate'])->name('surat_generate');
     Route::get('/surat/arsip/{id}', [KelolaSuratController::class, 'arsip'])->name('suratKeluar_arsip');
+    Route::get('/arsip/viewUpload/{id}', [KelolaSuratController::class, 'viewUpload'])->name('viewUpload_arsipKeluar');
+    Route::post('/arsip/upload/{id}', [KelolaSuratController::class, 'uploadFile'])->name('upload_arsipKeluar');
 
     Route::get('/arsipKeluar', [ArsipKeluarController::class, 'index'])->name('arsip_keluar');
 
     Route::get('/arsipMasuk', [ArsipMasukController::class, 'index'])->name('arsip_masuk');
+    Route::get('/arsipMasuk/search', [ArsipMasukController::class, 'search'])->name('search_masuk');
+    Route::get('/arsipMasuk/filter', [ArsipMasukController::class, 'filter'])->name('filter_masuk');
     // Route::get('/arsipKeluar', [ArsipKeluarController::class, 'edit'])->name('arsip_editKeluar');
     Route::get('/smasuk/detail/{id_suratmasuk}', [SuratMasukController::class, 'detail']);
 

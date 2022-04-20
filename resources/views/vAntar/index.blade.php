@@ -4,6 +4,15 @@
 
 @section('content')
 
+    <?php 
+        $jenisSuratShow = array(
+            "Surat Keterangan Tidak Mampu" => "show_sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "show_hilang",
+        );
+    ?>
+
     <div class="box box-primary">
         <div class="box-header with-border">
             
@@ -33,8 +42,8 @@
                             <td>{{ $data->tgl_surat }}</td>
                             <td><span class="label label-danger">{{ $data->status_antar=="Y"?"ter-Antar" : "Belum" }}</span></td>
                             <td>
-                                <a data-route="{{ route('show_hilang', $data->id) }}" id="btnShow" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
-                                <a href="{{ route('confirm_antar',$data->id) }}" class="btn btn-sm btn-success fa fa-check-square-o" title="konfirmasi"></a>
+                                <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
+                                <a onclick="confirm(`{{ route('confirm_antar', $data->id) }}`)" class="btn btn-sm btn-success fa fa-check-square-o" title="konfirmasi"></a>
                             </td>             
                         </tr> 
                     @endforeach
@@ -48,98 +57,23 @@
 @section('script')
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function() {        
 
-            $('#btnTambahSurat').on('click', function() {
-
-                let select = $('#selectSurat');
-
-                if(!select.val()) return
-                let route = select.find(":selected").data('route');
-                let title = select.find(":selected").text();
-                $.get(route, function(data){
-                    $("#modalTitle").html('TAMBAH '+ title);
-                    $("#page").html(data);
-                    $('#myModal').modal('show');
-                });
-            });
-
-            $('#btnShow').on('click', function(id) {
-                let route = data('route');
-
-                $.get(route+id, function(data){
-                    $("#modalTitle").html('Detail '+ title);
-                    $("#page").html(data);
-                    $('#myModal').modal('show');
-                });
-            })
-
-            // $('#formInput').validate({
-            //     rules: {
-            //         name: {
-            //             required:true,
-            //         },
-            //         email: {
-            //             required:true,
-            //             email: true
-            //         },
-            //         jabatan: {
-            //             required:true,
-            //         },
-            //         password: {
-            //             required:true,
-            //             minlength:8
-            //         },
-            //         password_confirmation: {
-            //             required:true,
-            //             equalTo:"#password"
-            //         },
-            //         level_id: {
-            //             valueNotEquals: "default",
-            //         },                        
-            //     },
-
-            //     messages: {
-            //         name : "Nama harus diisi.",
-            //         email : {
-            //             required: "Alamat email harus diisi.",
-            //             email : "Masukkan format email yang valid",
-            //         },
-            //         jabatan : "Jabatan harus diisi.",
-            //         password : {
-            //             required: "Password harus diisi.",
-            //             minlength : "Panjang password min 8",
-            //         },
-            //         password_confirmation : {
-            //             required: "Password Confirmation harus diisi.",
-            //             equalTo : "Password tidak sama",
-            //         },
-            //         level_id: {
-            //             valueNotEquals: "Pilih salah satu",
-            //         }
-            //     },
-
-            // });
-
-            // function show(id) {
-            //     $.get("{{ url('/surat/sktm/show') }}/"+id, {}, function(data) {
-            //         $("#modalTitle").html('EDIT SURAT');
-            //         $("#page").html(data);
-            //         $("#myModal").modal('show');
-            //     });
-            // }
-
-            
-
-            
         });
 
-        function show(id) {
-            $.get("{{ url('/surat/sktm/show') }}/"+id, {}, function(data) {
+        function show(route) {
+            $.get(route, function(data){
                 $("#modalTitle").html('DETAIL SURAT');
                 $("#page").html(data);
-                $("#myModal").modal('show');
+                $('#myModal').modal('show');
             });
+        }
+
+        function confirm(route){
+            $("#titleAccept").html('KONFIRMASI SURAT');
+            $("#bodyAccept").html("Apakah surat sudah sampai ke penerima?");
+            $("#actionAccept").attr("href",route);
+            $("#modalAccept").modal('show');
         }
 
     </script>

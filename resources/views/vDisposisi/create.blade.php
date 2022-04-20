@@ -65,7 +65,7 @@
                 </div>                    
 
                 <div class="col-md-6">
-                    <label class="form-label" style="margin-top: 10px">Upload File Surat</label>
+                    <label class="form-label" style="margin-top: 10px">Upload File Surat </label><span> | File size max 2Mb dan berformat pdf</span>
                     <input type="file" name="file_surat" id="file_surat" class="form-control">
                 </div>
 

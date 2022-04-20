@@ -78,7 +78,7 @@
                             <td>{{ $data->nama_pemohon }}</td>
                             <td>{{ $data->no_surat }}</td>
                             <td>{{ $data->tgl_surat }}</td>
-                            <td>{{ $data->status_arsip=="Y"?"Arsip" : "Belum" }}</td>
+                            <td><span class="label label-danger">{{ $data->status_arsip=="Y"?"Arsip" : "Belum" }}</span></td>
                             <td>
                                 <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
                                 <a onclick="edit('{{ route($jenisSuratEdit[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-warning fa fa-pencil" title="edit"></a>
@@ -265,7 +265,6 @@
         });
 
         function show(route) {
-            console.log(route);
             $.get(route, function(data){
                 $("#modalTitle").html('DETAIL SURAT');
                 $("#page").html(data);
@@ -274,7 +273,6 @@
         }
 
         function edit(route) {
-            console.log(route);
             $.get(route, function(data){
                 $("#modalTitle").html('EDIT SURAT');
                 $("#page").html(data);

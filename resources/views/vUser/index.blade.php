@@ -174,13 +174,12 @@
         }
 
         function hapus(route) {
-            $("#modalConfirm").attr("class", "modal modal-danger fade");
             $("#titleDelete").html('HAPUS USER');
             $("#bodyDelete").html("Apakah anda yakin ingin menghapus user ini ?");
-            $("#btnCancel").attr("class", "btn btn-outline pull-left");
-            $("#actionDelete").attr("class", "btn btn-outline");
+            // $("#btnCancel").attr("class", "btn btn-outline pull-left");
+            // $("#actionDelete").attr("class", "btn btn-outline");
             $("#actionDelete").attr("href",route);
-            $("#modalConfirm").modal('show'); 
+            $("#modalDelete").modal('show'); 
         }
 
     </script>

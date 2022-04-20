@@ -21,6 +21,12 @@ class AntarSuratController extends Controller
     }
 
     public function antar($id) {
+
+        $notif = array(
+            'pesan' => 'Surat terkonfirmasi',
+            'alert' => 'success',
+        );
+
         //cari suratnya 
         $surat = Surat::find($id);
         //ubah status
@@ -28,6 +34,6 @@ class AntarSuratController extends Controller
         //save
         $surat->save();
         //redirect ke daftr yang telah di setujui
-        return redirect()->route('index_antar');
+        return redirect()->route('index_antar')->with($notif);
     }
 }

@@ -20,6 +20,12 @@ class PersetujuanController extends Controller
     }
 
     public function accepted($id) {
+
+        $notif = array(
+            'pesan' => 'Surat disetujui',
+            'alert' => 'success',
+        );
+
         //cari suratnya 
         $surat = Surat::find($id);
         //ubah status
@@ -27,7 +33,7 @@ class PersetujuanController extends Controller
         //save
         $surat->save();
         //redirect ke daftr yang telah di setujui
-        return redirect()->route('index_setuju');
+        return redirect()->route('index_setuju')->with($notif);
     }
 
     public function indexSetuju() {
@@ -39,6 +45,12 @@ class PersetujuanController extends Controller
     }
 
     public function arsip($id) {
+
+        $notif = array(
+            'pesan' => 'Surat di Arsipkan !',
+            'alert' => 'info',
+        );
+
         //cari suratnya 
         $surat = Surat::find($id);
         //ubah status
@@ -46,7 +58,7 @@ class PersetujuanController extends Controller
         //save
         $surat->save();
         //redirect ke daftr yang telah di setujui
-        return redirect()->route('index_setujuSurat');
+        return redirect()->route('index_setujuSurat')->with($notif);
     }
 
     public function delete($id){

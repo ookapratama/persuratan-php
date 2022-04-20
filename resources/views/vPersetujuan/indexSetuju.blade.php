@@ -34,12 +34,12 @@
                             <td>{{ $data->no_surat }}</td>
                             <td>{{ $data->asal_surat }}</td>
                             <td>{{ $data->tgl_terima }}</td>
-                            <td>{{ $data->status_arsip=="Y"?"ter-Arsip" : "Belum" }}</td>
+                            <td><span class="label label-danger">{{ $data->status_arsip=="Y"?"ter-Arsip" : "Belum" }}</span></td>
                             <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
                             <td>
                                 <a class="btn btn-sm btn-warning fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
                                 <a href="generateSurat/disposisi/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
-                                <a href="{{ route('surat_arsip',$data->id) }}" class="btn btn-sm btn-success fa fa-archive" title="Arsip"></a>
+                                <a onclick="arsip(`{{ route('surat_arsip',$data->id) }}`)" class="btn btn-sm btn-success fa fa-archive" title="Arsip"></a>
                             </td>
                         </tr>
                     @endforeach
@@ -73,11 +73,17 @@
             });
         }
 
+        function arsip(route) {
+            $("#titleAccept").html('ARSIP SURAT');
+            $("#bodyAccept").html("Data surat akan dimasukkan ke Arsip !");
+            $("#actionAccept").attr("href",route);
+            $("#modalAccept").modal('show');
+        }
+
     </script>
 
     @if (Session::has('pesan'))
     <script>
-        // toastr.warning("{!! Session::get('pesan') !!}");
         toastr.{{ Session::get('alert') }}("{{ Session::get('pesan') }}");
     </script>
     @endif
