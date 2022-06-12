@@ -49,7 +49,7 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-sm btn-primary" id="btnFilter">Filter Data</button>
+                                <button type="submit" class="btn btn-sm btn-primary" id="btnFilter">Filter Dataaaaa</button>
                                 <a href="{{ route('arsip_masuk') }}" class="btn btn-sm btn-primary">Reset</a>
                             </div>
                         </div>
