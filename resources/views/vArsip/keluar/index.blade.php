@@ -5,17 +5,31 @@
 @section('content')
 
     <?php
-        $jenisSuratUpload = array(
+        $jenisSuratGen = array(
+            "Surat Keterangan Tidak Mampu" => "sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "kehilangan",
+        );
+
+        $jenisSuratShow = array(
             "Surat Keterangan Tidak Mampu" => "show_sktm",
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "show_hilang",
         );
+
+        $jenisSuratHapus = array(
+            "Surat Keterangan Tidak Mampu" => "destroy_sktm",
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kehilangan" => "delete_hilang",
+        );
     ?>
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            
+            <h3 align="center"><strong>ARSIP SURAT KELUAR</strong></h3>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-striped">
@@ -27,7 +41,6 @@
                         <th>No Surat</th>
                         <th>TGL Surat</th>
                         <th>Stts Arsip</th>
-                        <th>File Surat</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -41,65 +54,13 @@
                             <td>{{ $data->nama_pemohon }}</td>
                             <td>{{ $data->no_surat }}</td>
                             <td>{{ $data->tgl_surat }}</td>
-                            <td>{{ $data->status_arsip=='Y' ? 'Arsip' : 'Belum' }}</td>
+                            <td><span class="label label-success">{{ $data->status_arsip=='Y' ? 'Arsip' : 'Belum' }}</span></td>
                             <td>
-                                @if($data->file_surat)
-                                    <a href="#" class="btn btn-sm btn-info">Surat</a>
-                                @else
-                                    <a class="btn btn-sm btn-default" disabled>Surat</a>
-                                @endif
-                            </td>
-                            <td> 
-                                <a class="btn btn-sm btn-success fa fa-upload" onclick="" title="detail"></a>
-                                <a class="btn btn-sm btn-warning fa fa-eye" title="edit file" onclick=""></a>
-                                <a href="#" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
-                                <button type="button" class="btn btn-sm btn-danger fa fa-trash" title="delete" data-toggle="modal" data-target="#delete{{ $data->id }}"></button>
+                                <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-warning fa fa-eye" title="detail"></a>
+                                <a href="generateSurat/{{ $jenisSuratGen[$data->jenis_surat] ?? '' }}/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
+                                <a onclick="hapus('{{ route($jenisSuratHapus[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-danger fa fa-trash" title="delete"></a>
                             </td>             
                         </tr> 
-                        
-                        <div class="modal fade" id="setuju{{ $data->id }}">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title">Generate Surat</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Apakah anda yakin generate surat permohonan?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Batal</button>
-                                        <a href="{{ route("surat_generate", $data->id) }}" class="btn btn-success">Ya</a>
-                                    </div>
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-            
-                        <div class="modal modal-danger fade" id="delete{{ $data->id }}">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title">Tolak Permohonan</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Apakah anda yakin ingin menolak surat permohonan ini?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
-                                        <a href="{{ route('surat_delete', $data->id) }}" class="btn btn-outline">Ya</a>
-                                    </div>
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
                     @endforeach
                 </tbody>
             </table>
@@ -112,15 +73,29 @@
 
     <script>
         
-        function edit(id) {
-            // $.get("{{ url('/disposisi/edit') }}/"+id, {}, function(data) {
-                $("#modalTitle").html('EDIT ARSIP SURAT');
-                // $("#page").html(data);
-                $("#myModal").modal('show');
-            // });
+        function show(route) {
+            $.get(route, function(data){
+                $("#modalTitle").html('DETAIL SURAT');
+                $("#page").html(data);
+                $('#myModal').modal('show');
+            });
+        }
+
+        function hapus(route) {
+            $("#titleDelete").html('HAPUS ARSIP SURAT');
+            $("#bodyDelete").html("Apakah anda yakin ingin menghapus surat dari arsip ?");
+            $("#actionDelete").attr("href",route);
+            $("#modalDelete").modal('show'); 
         }
         
     </script>
+
+    @if (Session::has('pesan'))
+    <script>
+        // toastr.warning("{!! Session::get('pesan') !!}");
+        toastr.{{ Session::get('alert') }}("{{ Session::get('pesan') }}");
+    </script>
+@endif
 
 @endsection
 

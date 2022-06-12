@@ -140,13 +140,7 @@
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h4>
-            @yield('titleNav')
-            <!-- Blank page -->
-          </h4>
-        </section>
-
+        
         <!-- Main content -->
         <section class="content">
           @yield('content')

@@ -6,7 +6,7 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            
+            <h3 align="center"><strong>PERSETUJUAN SURAT MASUK</strong></h3>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-striped">

@@ -6,6 +6,7 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
+            <h3 align="center"><strong>DISPOSISI SURAT MASUK</strong></h3>
             @if(auth()->user()->level_id == 3 or auth()->user()->level_id == 4)
                 <a class="btn btn-sm btn-primary" id="tambahDisposisi"><i class="fa fa-plus-square"></i> Tambah Data</a><br>
                 {{-- <br> --}}

@@ -6,6 +6,7 @@
 
 <div class="box box-primary">
     <div class="box-header with-border">
+        <h3 align="center"><strong>KELOLA USER</strong></h3>
         <a class="btn btn-sm btn-primary" id="tambahUser"><i class="fa fa-plus"></i> Tambah User</a>
     </div>
     <div class="box-body">

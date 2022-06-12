@@ -15,7 +15,7 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            
+            <h3 align="center"><strong>PENGANTARAN SURAT KELUAR</strong></h3>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-striped">

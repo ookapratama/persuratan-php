@@ -42,6 +42,7 @@
     ?>
     <div class="box box-primary">
         <div class="box-header with-border">
+            <h3 align="center"><strong>SURAT KELUAR</strong></h3>
             <div class="col">
                 <div class="col">
                     <select class="form-control" id="selectSurat" style="width: 300px; float: left; margin-right: 20px;">
