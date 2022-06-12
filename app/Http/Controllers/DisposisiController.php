@@ -192,7 +192,7 @@ class DisposisiController extends Controller
         $data = [
             'disposisi' => Disposisi::find($id),
         ];
-        // dd($data);
+
         return view('vArsip.masuk.uploadfile', $data);
     }
 
