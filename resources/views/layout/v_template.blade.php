@@ -67,11 +67,11 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
-
+              
               <!-- Notifications: style can be found in dropdown.less -->
-
+              
               <!-- Tasks: style can be found in dropdown.less -->
-
+              
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -104,6 +104,18 @@
               <!-- Control Sidebar Toggle Button -->
             </ul>
           </div>
+
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="hidden-xs"><strong>{{ date('l, d F Y') }}</strong></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+
         </nav>
       </header>
 
@@ -255,7 +267,6 @@
     <script>
       $(document).ready(function () {
         $('.sidebar-menu').tree()
-        
       });
     </script>
 

@@ -1,6 +1,5 @@
 @extends('layout.v_template')
 @section('title', 'Surat Keluar')
-@section('titleNav','Kelola Surat > Surat Keluar')
 
 @section('content')
 
@@ -140,7 +139,9 @@
                             required: true
                         },
                         nik: {
-                            required: true
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
                         },
                         pekerjaan: {
                             required: true
@@ -161,7 +162,11 @@
                         nama_pemohon : "Nama pemohon harus diisi",
                         tempat_lahir : "Tempat lahir harus diisi",
                         tgl_lahir : "Tgl lahir harus diisi",
-                        nik : "NIK harus diisi",
+                        nik : {
+                            required: "NIK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
                         pekerjaan : "Pekerjaan harus diisi",
                         alamat : "Alamat harus diisi",
                         is_antar: {
