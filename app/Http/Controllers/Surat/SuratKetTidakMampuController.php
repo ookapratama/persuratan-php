@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Surat\SuratKetTidakMampu as Model;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 
 class SuratKetTidakMampuController extends Controller
@@ -27,9 +28,9 @@ class SuratKetTidakMampuController extends Controller
      */
     public function create()
     {
-        $data= User::all()->where('level_id', 2);
+        $data = User::all()->where('level_id', 2);
 
-        return view('surat/surat_ket_tidak_mampu/v_create', ['user_approve'=>$data]);
+        return view('surat/surat_ket_tidak_mampu/v_create', ['user_approve' => $data]);
     }
 
     /**
@@ -84,7 +85,7 @@ class SuratKetTidakMampuController extends Controller
      */
     public function show($id)
     {
-        $surat = Model::where('id',$id)->with('approve_by')->first();
+        $surat = Model::where('id', $id)->with('approve_by')->first();
         $data = [
             'sktmShow' => $surat,
         ];
@@ -99,12 +100,12 @@ class SuratKetTidakMampuController extends Controller
      */
     public function edit($id)
     {
-        $surat = Model::where('id',$id)->with('approve_by')->first();
+        $surat = Model::where('id', $id)->with('approve_by')->first();
         $data = [
             'sktmEdit' => $surat,
         ];
         $data2 = User::all()->where('level_id', 2);
-        return view('surat.surat_ket_tidak_mampu.v_edit', $data, ['user_approve'=>$data2]);
+        return view('surat.surat_ket_tidak_mampu.v_edit', $data, ['user_approve' => $data2]);
     }
 
     /**
@@ -149,8 +150,6 @@ class SuratKetTidakMampuController extends Controller
         $data->save();
 
         return redirect()->route('surat_index')->with($notif);
-
-
     }
 
     /**
@@ -159,14 +158,17 @@ class SuratKetTidakMampuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         $notif = array(
             'pesan' => 'Surat dihapus !',
             'alert' => 'error',
         );
-
+        $id = $request->id;
         $data = Model::find($id);
+        if ($data->file_surat) {
+            Storage::delete("file-suratKeluar/" . $data->file_surat);
+        }
         $data->delete();
 
         return redirect()->back()->with($notif);

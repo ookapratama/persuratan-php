@@ -1,6 +1,5 @@
 <form action="{{ route('upload_arsip', $disposisi->id) }}" method="POST" id="formUploadMasuk" enctype="multipart/form-data">
-    @csrf
-                 
+    @csrf      
     <div class="col">
         <div class="row g-3">
             <div class="col-md-12">

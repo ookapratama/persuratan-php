@@ -69,6 +69,8 @@ while ($row = mysqli_fetch_array($surat)) {
         ':',
         ':'
     );
+
+    $pdf->ttd('../../gambar/ttd2.png'); //ttd
 }
 
 

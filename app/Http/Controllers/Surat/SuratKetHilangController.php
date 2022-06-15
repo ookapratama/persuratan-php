@@ -6,20 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Surat\SuratKetTidakMampu as Model;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 
 class SuratKetHilangController extends Controller
 {
     //
 
-    public function create() {
+    public function create()
+    {
         $data = User::all()->where('level_id', 2);
 
-        return view('surat/surat_ket_hilang/v_create', ['user_approve'=>$data]);
+        return view('surat/surat_ket_hilang/v_create', ['user_approve' => $data]);
     }
 
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $notif = array(
             'pesan' => 'Surat berhasil ditambah !',
             'alert' => 'success',
@@ -70,24 +72,26 @@ class SuratKetHilangController extends Controller
 
     public function show($id)
     {
-        
-        $surat = Model::where('id',$id)->with('approve_by')->first();
+
+        $surat = Model::where('id', $id)->with('approve_by')->first();
         $data = [
             'hilangShow' => $surat,
         ];
         return view('surat.surat_ket_hilang.v_show', $data);
     }
 
-    public function edit($id) {
-        $surat = Model::where('id',$id)->with('approve_by')->first();
+    public function edit($id)
+    {
+        $surat = Model::where('id', $id)->with('approve_by')->first();
         $data = [
             'hilangEdit' => $surat,
         ];
         $data2 = User::all()->where('level_id', 2);
-        return view('surat.surat_ket_hilang.v_edit', $data, ['user_approve'=>$data2]);
+        return view('surat.surat_ket_hilang.v_edit', $data, ['user_approve' => $data2]);
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
 
         $notif = array(
             'pesan' => 'Surat berhasil diupdate !',
@@ -136,13 +140,18 @@ class SuratKetHilangController extends Controller
         return redirect()->route('surat_index')->with($notif);
     }
 
-    public function delete($id) {
+    public function delete(Request $request)
+    {
         $notif = array(
             'pesan' => 'Surat dihapus !',
             'alert' => 'error',
         );
 
+        $id = $request->id;
         $data = Model::find($id);
+        if ($data->file_surat) {
+            Storage::delete("file-suratKeluar/" . $data->file_surat);
+        }
         $data->delete();
 
         return redirect()->back()->with($notif);

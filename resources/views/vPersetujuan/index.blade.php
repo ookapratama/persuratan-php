@@ -18,7 +18,7 @@
                         <th>No. Surat</th>
                         <th>Asal Surat</th>
                         <th>TGL. Terima</th>
-                        <th>Stts Setuju</th>
+                        <th>Status Setuju</th>
                         <th>File Surat</th>
                         <th>Action</th>
                     </tr>
@@ -38,7 +38,7 @@
                             <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
                             <td>
                                 <a class="btn btn-sm btn-primary fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
-                                <button class="btn btn-sm btn-danger fa fa-times" onclick="hapus(`{{ route('delete_disposisi', $data->id) }}`)" title="tolak"></button>
+                                <button class="btn btn-sm btn-danger fa fa-times" onclick="hapus(`{{ route('surat_delete', $data->id) }}`)" title="tolak"></button>
                                 {{-- <a href="{{ route('surat_setuju', $data->id) }}" class="btn btn-sm btn-success fa fa-check-square-o" title="setuju"></a> --}}
                                 <a class="btn btn-sm btn-success fa fa-check-square-o" onclick="setuju(`{{ route('surat_setuju', $data->id) }}`)" title="setuju"></a>
                             </td>

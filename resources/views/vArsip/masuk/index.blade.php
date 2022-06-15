@@ -2,7 +2,6 @@
 @section('title', 'Arsip Masuk')
 @section('content')
 
-    <br>
     <?php
 
         $year = date('Y');
@@ -81,7 +80,7 @@
                         <th>No. Surat</th>
                         <th>Asal Surat</th>
                         <th>TGL. Terima</th>
-                        <th>Stts Arsip</th>
+                        <th>Status Arsip</th>
                         <th>File</th>
                         <th>Action</th>
                     </tr>
@@ -109,7 +108,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-primary fa fa-upload" onclick="upload({{ $data->id }})" title="detail"></a>
+                                <a class="btn btn-sm btn-primary fa fa-upload" onclick="upload({{ $data->id }})" title="upload"></a>
                                 <a class="btn btn-sm btn-warning fa fa-eye" onclick="show(`{{ route('show_disposisi', $data->id) }}`)" title="detail"></a>
                                 <a class="btn btn-sm btn-success fa fa-print" href="generateSurat/disposisi/index.php?data={{ base64_encode($data->id) }}" target="_blank" title="cetak"></a>
                                 <a class="btn btn-sm btn-danger fa fa-trash" onclick="hapus(`{{ route('delete_disposisi', $data->id) }}`)" title="Hapus"></a>
@@ -127,15 +126,6 @@
 
     <script>
         $(document).ready(function(){
-
-            //modal add
-            $('#tambahDisposisi').on('click', function() {
-                $.get("{{ route('add_disposisi') }}", function(data){
-                    $("#modalTitle").html('TAMBAH SURAT');
-                    $("#page").html(data);
-                    $('#myModal').modal('show');
-                });
-            });
 
             $(document).on('click', '#btnUploadMasuk', function() {
 
@@ -162,21 +152,6 @@
                 });
             });
 
-            // $('#btnFilter').on('click', function() {
-
-            //     let selectBulan = $('#selectBulan');
-            //     let selectTahun = $('#selectTahun');
-
-            //     if(!selectBulan.val() && !selectTahun.val()) return
-            // });
-
-            // $('#btnSearch').on('click', function() {
-
-            //     let select = $('#inputSearch');
-
-            //     if(!select.val()) return
-            // });
-
         });
 
         function show(route) {
@@ -190,7 +165,7 @@
 
         function upload(id) {
             console.log(id);
-            $.get("{{ url('/arsip/viewUpload') }}/"+id, {}, function(data) {
+            $.get("{{ url('/arsipMasuk/viewUpload') }}/"+id, {}, function(data) {
                 $('#typeModal').attr("class", "modal-dialog")
                 $("#modalTitle").html('UPLOAD FILE DISPOSISI');
                 $("#page").html(data);

@@ -182,6 +182,9 @@ class DisposisiController extends Controller
         if ($data->file_surat) {
             Storage::delete("file-suratMasuk/" . $data->file_surat);
         }
+        if ($data->file_disposisi) {
+            Storage::delete("file-suratDisposisi/" . $data->file_disposisi);
+        }
         $data->delete();
 
         return redirect()->back()->with($notif);
@@ -207,7 +210,6 @@ class DisposisiController extends Controller
         $data = Disposisi::findOrFail($id);
 
         $request->validate([
-
             'file_disposisi' => 'mimes:pdf|file|max:2048',
         ]);
 

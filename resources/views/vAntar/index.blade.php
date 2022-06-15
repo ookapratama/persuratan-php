@@ -26,7 +26,7 @@
                         <th>Nama Pemohon</th>
                         <th>No Surat</th>
                         <th>TGL Surat</th>
-                        <th>Stts Antar</th>
+                        <th>Status Antar</th>
                         <th>Action</th>
                     </tr>
                 </thead>

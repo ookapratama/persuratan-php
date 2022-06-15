@@ -41,13 +41,14 @@
     ?>
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 align="center"><strong>SURAT KELUAR</strong></h3>
+            <h3 class="text-center"><strong>SURAT KELUAR</strong></h3>
             <div class="col">
                 <div class="col">
                     <select class="form-control" id="selectSurat" style="width: 300px; float: left; margin-right: 20px;">
                         <option value="">Pilih Jenis Surat</option>
                         <option data-route="{{ route('create_sktm') }}">SURAT KETERANGAN TIDAK MAMPU</option>
                         <option data-route="{{ route('create_hilang') }}">SURAT KETERANGAN KEHILANGAN</option>
+                        <option data-route="{{ route('create_lahir') }}">SURAT KETERANGAN KELAHIRAN</option>
                     </select>
                 </div>
                 <div class="col">
@@ -64,7 +65,7 @@
                         <th>Nama Pemohon</th>
                         <th>No Surat</th>
                         <th>TGL Surat</th>
-                        <th>Stts Arsip</th>
+                        <th>Status Arsip</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -262,6 +263,107 @@
                         pekerjaan : "Pekerjaan harus diisi",
                         alamat : "Alamat harus diisi",
                         benda_hilang : "Benda hilang harus diisi",
+                        is_antar: {
+                            valueNotEquals: "Pilih salah satu"
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '#btnCreateLahir', function() {
+                $.validator.addMethod('valueNotEquals', function(value, element, arg) {
+                    return arg !== value;
+                });
+
+                $('#formCreateLahir').validate({
+                    rules: {
+                        user_approve: {
+                            valueNotEquals: "default"
+                        },
+                        no_surat: {
+                            required: true
+                        },
+                        hari_lahir: {
+                            required: true
+                        },
+                        tgl_lahir: {
+                            required: true
+                        },
+                        pukul_lahir: {
+                            required: true
+                        },
+                        jenis_kelamin: {
+                            valueNotEquals: "default"
+                        },
+                        tempat_lahir: {
+                            valueNotEquals: "default"
+                        },
+                        nama_bayi: {
+                            required: true
+                        },
+                        nama_ibu: {
+                            required: true
+                        },
+                        nik_ibu: {
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
+                        },
+                        nama_ayah: {
+                            required: true
+                        },
+                        nik_ayah: {
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
+                        },
+                        alamat: {
+                            required: true
+                        },
+                        kecamatan: {
+                            required: true
+                        },
+                        kabupaten: {
+                            required: true
+                        },
+                        tgl_surat: {
+                            required: true
+                        },
+                        is_antar: {
+                            valueNotEquals: "default"
+                        },
+                    },
+                    messages: {
+                        user_approve: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        no_surat : "No surat harus diisi",
+                        hari_lahir : "Hari lahir harus diisi",
+                        tgl_lahir : "Tgl lahir harus diisi",
+                        pukul_lahir : "Pukul lahir harus diisi",
+                        jenis_kelamin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        tempat_lahir: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        nama_bayi : "Nama bayi harus diisi",
+                        nama_ibu : "Nama ibu harus diisi",
+                        nik_ibu : {
+                            required: "NIK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
+                        nama_ayah : "Nama ayah harus diisi",
+                        nik_ayah : {
+                            required: "NIK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
+                        alamat : "Alamat harus diisi",
+                        kecamatan : "Kecamatan harus diisi",
+                        kabupaten : "Kabupaten harus diisi",
+                        tgl_surat : "Tgl surat harus diisi",
                         is_antar: {
                             valueNotEquals: "Pilih salah satu"
                         }

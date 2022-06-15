@@ -13,8 +13,10 @@ use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\KelolaSuratController;
 use App\Http\Controllers\PersetujuanController;
 use App\Http\Controllers\Surat\SuratKetHilangController;
+use App\Http\Controllers\Surat\SuratKetLahirController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\Surat\SuratKetTidakMampuController;
+use App\Models\Surat\SuratKetLahir;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,20 +47,24 @@ Route::group(['middleware' => 'admin'], function () {
   Route::get('/disposisi/edit/{id}', [DisposisiController::class, 'edit'])->name('edit_disposisi');
   Route::post('/disposisi/update/{id}', [DisposisiController::class, 'update'])->name('update_disposisi');
   Route::get('/disposisi/delete/{id}', [DisposisiController::class, 'delete'])->name('delete_disposisi');
-  Route::post('/arsip/upload/{id}', [DisposisiController::class, 'uploadFile'])->name('upload_arsip');
-  Route::get('/arsip/viewUpload/{id}', [DisposisiController::class, 'viewUpload'])->name('viewUpload_arsip');
+  Route::get('/arsipMasuk/viewUpload/{id}', [DisposisiController::class, 'viewUpload'])->name('viewUpload_arsip');
+  Route::post('/arsipMasuk/upload/{id}', [DisposisiController::class, 'uploadFile'])->name('upload_arsip');
+
 
   Route::get('/surat', [KelolaSuratController::class, 'index'])->name('surat_index');
   Route::get('/surat/generate/{id}', [KelolaSuratController::class, 'generate'])->name('surat_generate');
   Route::get('/surat/arsip/{id}', [KelolaSuratController::class, 'arsip'])->name('suratKeluar_arsip');
-  // Route::get('/arsip/viewUpload/{id}', [KelolaSuratController::class, 'viewUpload'])->name('viewUpload_arsipKeluar');
-  // Route::post('/arsip/upload/{id}', [KelolaSuratController::class, 'uploadFile'])->name('upload_arsipKeluar');
+  Route::get('/arsipKeluar/viewUpload/{id}', [KelolaSuratController::class, 'viewUpload'])->name('viewUpload_arsipKeluar');
+  Route::post('/arsipKeluar/upload/{id}', [KelolaSuratController::class, 'uploadFile'])->name('upload_arsipKeluar');
 
   Route::get('/arsipKeluar', [ArsipKeluarController::class, 'index'])->name('arsip_keluar');
+  Route::get('/arsipKeluar/search', [ArsipKeluarController::class, 'search'])->name('search_keluar');
+  Route::get('/arsipKeluar/filter', [ArsipKeluarController::class, 'filter'])->name('filter_keluar');
 
   Route::get('/arsipMasuk', [ArsipMasukController::class, 'index'])->name('arsip_masuk');
   Route::get('/arsipMasuk/search', [ArsipMasukController::class, 'search'])->name('search_masuk');
   Route::get('/arsipMasuk/filter', [ArsipMasukController::class, 'filter'])->name('filter_masuk');
+
   // Route::get('/arsipKeluar', [ArsipKeluarController::class, 'edit'])->name('arsip_editKeluar');
   Route::get('/smasuk/detail/{id_suratmasuk}', [SuratMasukController::class, 'detail']);
 
@@ -68,15 +74,12 @@ Route::group(['middleware' => 'admin'], function () {
   Route::get('/setujuAdmin/arsip/{id}', [PersetujuanController::class, 'arsip'])->name('surat_arsip');
   Route::get('/setuju/delete/{id}', [PersetujuanController::class, 'delete'])->name('surat_delete');
 
-  // Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
-
 
   Route::get('/antar', [AntarSuratController::class, 'index'])->name('index_antar');
   Route::get('/antar/confirm/{id}', [AntarSuratController::class, 'antar'])->name('confirm_antar');
 
   Route::group(['prefix' => 'surat', 'namespace' => 'App\Http\Controllers\Surat'], function () {
     Route::group(['prefix' => 'sktm'], function () {
-      // Route::get('index', [SuratKetTidakMampuController::class, 'index']);
       Route::get('create', [SuratKetTidakMampuController::class, 'create'])->name('create_sktm');
       Route::post('store', [SuratKetTidakMampuController::class, 'store'])->name('store_sktm');
       Route::get('show/{id}', [SuratKetTidakMampuController::class, 'show'])->name('show_sktm');
@@ -92,6 +95,11 @@ Route::group(['middleware' => 'admin'], function () {
       Route::get('edit/{id}', [SuratKetHilangController::class, 'edit'])->name('edit_hilang');
       Route::post('update/{id}', [SuratKetHilangController::class, 'update'])->name('update_hilang');
       Route::get('delete/{id}', [SuratKetHilangController::class, 'delete'])->name('delete_hilang');
+    });
+
+    Route::group(['prefix' => 'lahir'], function () {
+      Route::get('create', [SuratKetLahirController::class, 'create'])->name('create_lahir');
+      Route::post('store', [SuratKetLahirController::class, 'store'])->name('store_lahir');
     });
   });
 

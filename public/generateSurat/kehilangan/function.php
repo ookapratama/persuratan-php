@@ -285,21 +285,6 @@ class pdf extends FPDF
 
     function content5($teks1, $teks2)
     {
-        // if (isset($_POST['optout']) && $_POST['optout'] == "yes") {
-        //     $this->Ln(5);
-        //     $this->SetFont('Times', '', 12);
-        //     $this->SetTextColor(128);
-
-        //     //Your text cell
-        //     $this->SetY(4);
-        //     $this->SetX(4);
-        //     $this->writeHTMLCell($teks1);
-
-        //     //Your bordered cell
-        //     $this->SetY(4);
-        //     $this->SetX(4);
-        //     $this->Cell(1, 5, '', 1, 0, 'C');
-        // }
         $this->Ln(4);
         $this->Cell(10);
         $this->SetFont('Times', '', 12);
@@ -326,5 +311,10 @@ class pdf extends FPDF
         $this->Cell(150);
         $this->SetFont('Times', 'BU', 12);
         $this->Cell(1, 5, $teks3, 0, 1, 'C');
+    }
+
+    function ttd($gambar)
+    {
+        $this->Image($gambar, 135, 202, 50, 30);
     }
 }

@@ -102,6 +102,9 @@ while ($row = mysqli_fetch_array($surat)) {
         $row['jabatan'],
         $row['nama'],
     );
+
+    $pdf->ttd('../../gambar/ttd2.png'); //ttd
+
 }
 
 

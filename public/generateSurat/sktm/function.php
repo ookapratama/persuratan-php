@@ -29,6 +29,11 @@ class pdf extends FPDF
         $this->Image($gambar, 20, 10, 17, 20);
     }
 
+    function ttd($gambar)
+    {
+        $this->Image($gambar, 135, 218, 50, 30);
+    }
+
     function tgl_indo($tanggal)
     {
 
