@@ -35,8 +35,7 @@ class DisposisiController extends Controller
 
     public function index()
     {
-        // $disposisi = Disposisi::all();
-        $disposisi = Disposisi::where("status_setuju", "N")->where("status_disposisi", "N")->get();
+        $disposisi = Disposisi::where("status_setuju", "N")->where("status_disposisi", "N")->get()->sortByDesc("id");
         $data = [
             'disposisi' => $disposisi,
         ];

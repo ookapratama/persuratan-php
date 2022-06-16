@@ -38,10 +38,10 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $data->jenis_surat }}</td>
-                            <td>{{ $data->nama_pemohon }}</td>
+                            <td>{{ $data->nama_pemohon ?? $data->nama_bayi }}</td>
                             <td>{{ $data->no_surat }}</td>
                             <td>{{ $data->tgl_surat }}</td>
-                            <td><span class="label label-danger">{{ $data->status_antar=="Y"?"ter-Antar" : "Belum" }}</span></td>
+                            <td><span class="label {{ $data->status_antar=="Y" ? "label-success" : "label-danger" }}">{{ $data->status_antar=="Y"?"ter-Antar" : "Belum" }}</span></td>
                             <td>
                                 <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
                                 <a onclick="confirm(`{{ route('confirm_antar', $data->id) }}`)" class="btn btn-sm btn-success fa fa-check-square-o" title="konfirmasi"></a>

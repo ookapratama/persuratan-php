@@ -1,26 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Surat\SuratKetTidakMampu as Surat;
 
 use Illuminate\Http\Request;
 
 class AntarSuratController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function index() {
-        
-        $surat = Surat::where("is_antar", "Y")->where("status_antar", "N")->get();
+    public function index()
+    {
+
+        $surat = Surat::where("is_antar", "Y")->get()->sortBy("status_antar")->take(10);
 
         return view('vAntar.index', [
             'antar' => $surat,
         ]);
     }
 
-    public function antar($id) {
+    public function antar($id)
+    {
 
         $notif = array(
             'pesan' => 'Surat terkonfirmasi',
