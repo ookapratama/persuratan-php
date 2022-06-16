@@ -9,6 +9,8 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "kehilangan",
+            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
+
         );
 
         $jenisSuratShow = array(
@@ -16,6 +18,7 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "show_hilang",
+            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
         );
 
         $jenisSuratEdit = array(
@@ -23,6 +26,8 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "edit_hilang",
+            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
+
         );
 
         $jenisSuratHapus = array(
@@ -30,6 +35,8 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "delete_hilang",
+            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
+
         );
 
         $jenisSuratArsip = array(
@@ -37,6 +44,8 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "delete_hilang",
+            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
+
         );
     ?>
     <div class="box box-primary">
@@ -76,7 +85,7 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $data->jenis_surat }}</td>
-                            <td>{{ $data->nama_pemohon }}</td>
+                            <td>{{ $data->nama_pemohon ?? $data->nama_bayi}}</td>
                             <td>{{ $data->no_surat }}</td>
                             <td>{{ $data->tgl_surat }}</td>
                             <td><span class="label label-danger">{{ $data->status_arsip=="Y"?"Arsip" : "Belum" }}</span></td>

@@ -42,7 +42,9 @@
             "Desember" => 12,
         );
     ?>
-
+    @if($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+    @endif
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="text-center"><strong>ARSIP SURAT KELUAR</strong></h3>

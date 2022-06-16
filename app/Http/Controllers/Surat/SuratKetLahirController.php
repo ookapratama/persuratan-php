@@ -26,6 +26,8 @@ class SuratKetLahirController extends Controller
             'alert' => 'success',
         );
 
+        // dump($request->all());
+
         $request->validate([
             'no_surat' => 'required|max:100',
             'hari_lahir' => 'required',
@@ -37,7 +39,7 @@ class SuratKetLahirController extends Controller
             'nama_ibu' => 'required|max:100',
             'nik_ibu' => 'required|max:20',
             'nama_ayah' => 'required|max:100',
-            'nik_ayah   ' => 'required|max:20',
+            'nik_ayah' => 'required|max:20',
             'alamat' => 'required|max:100',
             'kecamatan' => 'required|max:100',
             'kabupaten' => 'required|max:100',
@@ -45,6 +47,9 @@ class SuratKetLahirController extends Controller
             'user_approve' => 'required',
             'is_antar' => 'required'
         ]);
+
+        // dd("rerer");
+
 
 
         $data = new Model();
@@ -69,7 +74,7 @@ class SuratKetLahirController extends Controller
         $data->jenis_surat = "Surat Keterangan Kelahiran";
         $data->save();
 
-        dd($data);
+        // dd($data);
 
         return redirect()->route('surat_index')->with($notif);
     }

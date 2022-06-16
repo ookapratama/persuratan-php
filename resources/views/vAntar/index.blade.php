@@ -10,6 +10,7 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "show_hilang",
+            "Surat Keterangan Kelahiran" => "show_hilang",
         );
     ?>
 
