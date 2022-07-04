@@ -100,6 +100,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::group(['prefix' => 'lahir'], function () {
       Route::get('create', [SuratKetLahirController::class, 'create'])->name('create_lahir');
       Route::post('store', [SuratKetLahirController::class, 'store'])->name('store_lahir');
+      Route::get('show/{id}', [SuratKetLahirController::class, 'show'])->name('show_lahir');
+      Route::get('edit/{id}', [SuratKetLahirController::class, 'edit'])->name('edit_lahir');
+      Route::post('update/{id}', [SuratKetLahirController::class, 'update'])->name('update_lahir');
+      Route::get('delete/{id}', [SuratKetLahirController::class, 'delete'])->name('delete_lahir');
     });
   });
 

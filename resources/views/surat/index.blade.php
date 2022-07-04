@@ -18,7 +18,7 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "show_hilang",
-            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
+            "Surat Keterangan Kelahiran" => "show_lahir",
         );
 
         $jenisSuratEdit = array(
@@ -26,7 +26,7 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "edit_hilang",
-            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
+            "Surat Keterangan Kelahiran" => "edit_lahir",
 
         );
 
