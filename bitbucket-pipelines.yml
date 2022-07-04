@@ -7,23 +7,8 @@ image: atlassian/default-image:3
 
 pipelines:
   default:
-    - parallel:
-      - step:
-          name: 'Build and Test'
-          script:
-            - echo "Your build and test goes here..."
-      - step:
-          name: 'Lint'
-          script:
-            - echo "Your linting goes here..."
-      - step:
-          name: 'Security scan'
-          script:
-            - echo "Your security scan goes here..."
-
-    # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
     - step:
-        name: 'Deployment to Staging'
+        name: 'Deployment VPS AWS'
         deployment: staging
         script:
           - pipe: atlassian/ssh-run:0.4.0
@@ -31,4 +16,4 @@ pipelines:
               SSH_USER: 'admin'
               SERVER: '18.136.126.248'
               PORT: '22'
-              COMMAND: 'pwd'
+              COMMAND: '. build_desa_lampenai.sh'
