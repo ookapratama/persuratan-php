@@ -26,10 +26,9 @@ pipelines:
         name: 'Deployment to Staging'
         deployment: staging
         script:
-          - echo "Your deployment to staging script goes here..."
-    - step:
-        name: 'Deployment to Production'
-        deployment: production
-        trigger: 'manual'
-        script:
-          - echo "Your deployment to production script goes here..."
+          - pipe: atlassian/ssh-run:0.4.0
+            variables:
+              SSH_USER: 'admin'
+              SERVER: '18.136.126.248'
+              PORT: '22'
+              COMMAND: 'pwd'
