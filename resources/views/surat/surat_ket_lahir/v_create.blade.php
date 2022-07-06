@@ -4,7 +4,7 @@
         <div class="row">
             <div class="row g-3">
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Yang Menyetujui</label>                      
                     <select name="user_approve" id="user_approve" class="form-control">
                         <option value="default">Pilih...</option>
@@ -19,9 +19,23 @@
                     <input type="text" name="no_surat" id="no_surat" class="form-control">
                 </div>
 
+                <div class="col-md-4">
+                    <label class="form-label" style="margin-top: 10px">Nama Bayi</label>
+                    <input type="text" name="nama_bayi" id="nama_bayi" class="form-control">                       
+                </div>
+
                 <div class="col-md-2">
                     <label class="form-label" style="margin-top: 10px">Hari Lahir Bayi</label>
-                    <input type="text" name="hari_lahir" id="hari_lahir" class="form-control">
+                    <select name="hari_lahir" id="hari_lahir" class="form-control">
+                        <option value="default">Pilih...</option>
+                        <option value="Senin">Senin</option>
+                        <option value="Selasa">Selasa</option>
+                        <option value="Rabu">Rabu</option>
+                        <option value="Kamis">Kamis</option>
+                        <option value="Jumat">Jumat</option>
+                        <option value="Sabtu">Sabtu</option>
+                        <option value="Minggu">Minggu</option>                    
+                    </select>
                 </div>
 
                 <div class="col-md-3">
@@ -29,8 +43,8 @@
                     <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control">
                 </div>
                 
-                <div class="col-md-2">
-                    <label class="form-label" style="margin-top: 10px">Pukul Lahir Bayi</label>
+                 <div class="col-md-3">
+                    <label class="form-label" style="margin-top: 10px">Jam/Pukul Lahir Bayi</label>
                     <input type="text" name="pukul_lahir" id="pukul_lahir" class="form-control">                       
                 </div>
 
@@ -47,18 +61,13 @@
                     <label class="form-label" style="margin-top: 10px">Tempat Lahir Bayi</label>
                     <select name="tempat_lahir" id="tempat_lahir" class="form-control">
                         <option value="default">Pilih...</option>
-                        <option value="Dirumah">Dirumah</option>
+                        <option value="Rumah">Rumah</option>
                         <option value="Rumah Bidan">Rumah Bidan</option>
                         <option value="Polindes">Polindes</option>
                         <option value="Rumah Bersalin">Rumah Bersalin</option>
                         <option value="Puskesmas">Puskesmas</option>
                         <option value="Rumah Sakit">Rumah Sakit</option>
                     </select>
-                </div>
-
-                <div class="col-md-4">
-                    <label class="form-label" style="margin-top: 10px">Nama Bayi</label>
-                    <input type="text" name="nama_bayi" id="nama_bayi" class="form-control">                       
                 </div>
 
                 <div class="col-md-3">
@@ -80,17 +89,17 @@
                     <input type="number" name="nik_ayah" id="nik_ayah" class="form-control">                       
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Alamat</label>
                     <input type="text" name="alamat" id="alamat" class="form-control">
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Kecamatan</label>
                     <input type="text" name="kecamatan" id="kecamatan" class="form-control">
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Kabupaten</label>
                     <input type="text" name="kabupaten" id="kabupaten" class="form-control">
                 </div>
@@ -100,7 +109,7 @@
                     <input type="date" name="tgl_surat" id="tgl_surat" class="form-control">
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Pengantaran</label>
                     <select name="is_antar" id="is_antar" class="form-control">
                         <option value="default">Pilih..</option>

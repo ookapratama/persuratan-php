@@ -34,7 +34,7 @@
                     <input type="date" name="tgl_surat" id="tgl_surat" class="form-control">                       
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Nama Pemohon</label>
                     <input type="text" name="nama_pemohon" id="nama_pemohon" class="form-control">                        
                 </div>
@@ -48,7 +48,7 @@
                     </select>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Tempat Lahir</label>
                     <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control">                       
                 </div>

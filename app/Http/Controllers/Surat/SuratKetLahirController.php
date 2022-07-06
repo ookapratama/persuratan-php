@@ -140,14 +140,19 @@ class SuratKetLahirController extends Controller
         return redirect()->route('surat_index')->with($notif);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        $notif = array(
+            'pesan' => 'Surat dihapus !',
+            'alert' => 'error',
+        );
+
+        $id = $request->id;
+        $data = Model::find($id);
+        if ($data->file_surat) {
+            Storage::delete("file-suratKeluar/" . $data->file_surat);
+        }
+        $data->delete();
+        return redirect()->back()->with($notif);
     }
 }

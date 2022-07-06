@@ -34,7 +34,7 @@
                     <input type="date" name="tgl_surat" id="tgl_surat" class="form-control" value="{{ $hilangEdit->tgl_surat }}" required>                       
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Nama Pemohon</label>
                     <input type="text" name="nama_pemohon" id="nama_pemohon" class="form-control" value="{{ $hilangEdit->nama_pemohon }}" required>                        
                 </div>
@@ -48,7 +48,7 @@
                     </select>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Tempat Lahir</label>
                     <input type="text" name="tempat_lahir" class="form-control" value="{{ $hilangEdit->tempat_lahir }}" required>                       
                 </div>

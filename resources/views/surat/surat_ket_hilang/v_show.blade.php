@@ -27,7 +27,7 @@
                 <input class="form-control" value="{{ $hilangShow->tgl_surat }}" readonly>                       
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label class="form-label" style="margin-top: 10px">Nama Pemohon</label>
                 <input class="form-control" value="{{ $hilangShow->nama_pemohon }}" readonly>                        
             </div>
@@ -37,7 +37,7 @@
                 <input class="form-control" value="{{ $hilangShow->jenis_kelamin }}" readonly>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label class="form-label" style="margin-top: 10px">Tempat Lahir</label>
                 <input class="form-control" value="{{ $hilangShow->tempat_lahir }}" readonly>                       
             </div>

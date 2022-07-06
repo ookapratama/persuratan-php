@@ -15,7 +15,7 @@ class KelolaSuratController extends Controller
 
     public function index()
     {
-        $surat = Surat::where("status_arsip", "N")->get();
+        $surat = Surat::where("status_arsip", "N")->get()->sortByDesc("id");
 
         return view('surat.index', [
             'surat' => $surat,

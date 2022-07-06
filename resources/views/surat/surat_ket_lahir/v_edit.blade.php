@@ -4,7 +4,7 @@
         <div class="row">
             <div class="row g-3">
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Yang Menyetujui</label>                      
                     <select name="user_approve" id="user_approve" class="form-control">
                         <option value="default">Pilih...</option>
@@ -19,9 +19,23 @@
                     <input type="text" name="no_surat" class="form-control" value="{{ $lahirEdit->no_surat }}" required>
                 </div>
 
+                <div class="col-md-4">
+                    <label class="form-label" style="margin-top: 10px">Nama Bayi</label>
+                    <input type="text" name="nama_bayi" class="form-control" value="{{ $lahirEdit->nama_bayi }}" required>                       
+                </div>
+
                 <div class="col-md-2">
                     <label class="form-label" style="margin-top: 10px">Hari Lahir Bayi</label>
-                    <input type="text" name="hari_lahir" class="form-control" value="{{ $lahirEdit->hari_lahir }}" required>
+                    <select name="hari_lahir" class="form-control">
+                        <option value="default">Pilih...</option>
+                        <option value="Senin" {{ $lahirEdit->hari_lahir == 'Senin' ? 'selected' : '' }}>Senin</option>
+                        <option value="Selasa" {{ $lahirEdit->hari_lahir == 'Selasa' ? 'selected' : '' }}>Selasa</option>
+                        <option value="Rabu" {{ $lahirEdit->hari_lahir == 'Rabu' ? 'selected' : '' }}>Rabu</option>
+                        <option value="Kamis" {{ $lahirEdit->hari_lahir == 'Kamis' ? 'selected' : '' }}>Kamis</option>
+                        <option value="Jumat" {{ $lahirEdit->hari_lahir == 'Jumat' ? 'selected' : '' }}>Jumat</option>
+                        <option value="Sabtu" {{ $lahirEdit->hari_lahir == 'Sabtu' ? 'selected' : '' }}>Sabtu</option>
+                        <option value="Minggu" {{ $lahirEdit->hari_lahir == 'Minggu' ? 'selected' : '' }}>Minggu</option>                    
+                    </select>
                 </div>
 
                 <div class="col-md-3">
@@ -29,8 +43,8 @@
                     <input type="date" name="tgl_lahir" class="form-control" value="{{ $lahirEdit->tgl_lahir }}" required>
                 </div>
                 
-                <div class="col-md-2">
-                    <label class="form-label" style="margin-top: 10px">Pukul Lahir Bayi</label>
+                <div class="col-md-3">
+                    <label class="form-label" style="margin-top: 10px">Jam/Pukul Lahir Bayi</label>
                     <input type="text" name="pukul_lahir" class="form-control" value="{{ $lahirEdit->pukul_lahir }}" required>                       
                 </div>
 
@@ -47,7 +61,7 @@
                     <label class="form-label" style="margin-top: 10px">Tempat Lahir Bayi</label>
                     <select name="tempat_lahir" class="form-control">
                         <option value="default">Pilih...</option>
-                        <option value="Dirumah" {{ $lahirEdit->tempat_lahir == 'Dirumah' ? 'selected' : '' }}>Dirumah</option>
+                        <option value="Rumah" {{ $lahirEdit->tempat_lahir == 'Rumah' ? 'selected' : '' }}>Rumah</option>
                         <option value="Rumah Bidan" {{ $lahirEdit->tempat_lahir == 'Rumah Bidan' ? 'selected' : '' }}>Rumah Bidan</option>
                         <option value="Polindes" {{ $lahirEdit->tempat_lahir == 'Polindes' ? 'selected' : '' }}>Polindes</option>
                         <option value="Rumah Bersalin" {{ $lahirEdit->tempat_lahir == 'Rumah Bersalin' ? 'selected' : '' }}>Rumah Bersalin</option>
@@ -56,10 +70,7 @@
                     </select>
                 </div>
 
-                <div class="col-md-4">
-                    <label class="form-label" style="margin-top: 10px">Nama Bayi</label>
-                    <input type="text" name="nama_bayi" class="form-control" value="{{ $lahirEdit->nama_bayi }}" required>                       
-                </div>
+                
 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Nama Ibu</label>
@@ -80,17 +91,17 @@
                     <input type="number" name="nik_ayah" class="form-control" value="{{ $lahirEdit->nik_ayah }}" required>                       
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Alamat</label>
                     <input type="text" name="alamat" class="form-control" value="{{ $lahirEdit->alamat }}" required>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Kecamatan</label>
                     <input type="text" name="kecamatan" class="form-control" value="{{ $lahirEdit->kecamatan }}" required>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Kabupaten</label>
                     <input type="text" name="kabupaten" class="form-control" value="{{ $lahirEdit->kabupaten }}" required>
                 </div>
@@ -100,7 +111,7 @@
                     <input type="date" name="tgl_surat" class="form-control" value="{{ $lahirEdit->tgl_surat }}" required>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Pengantaran</label>
                     <select name="is_antar" class="form-control">
                         <option value="default">Pilih..</option>

@@ -4,14 +4,6 @@
 @section('content')
 
     <?php 
-        $jenisSuratGen = array(
-            "Surat Keterangan Tidak Mampu" => "sktm",
-            "Surat Keterangan Domisili" => "domisili",
-            "Surat Keterangan Kematian" => "kematian",
-            "Surat Keterangan Kehilangan" => "kehilangan",
-            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
-
-        );
 
         $jenisSuratShow = array(
             "Surat Keterangan Tidak Mampu" => "show_sktm",
@@ -27,7 +19,6 @@
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "edit_hilang",
             "Surat Keterangan Kelahiran" => "edit_lahir",
-
         );
 
         $jenisSuratHapus = array(
@@ -35,17 +26,15 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "delete_hilang",
-            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
-
+            "Surat Keterangan Kelahiran" => "delete_lahir",
         );
 
-        $jenisSuratArsip = array(
-            "Surat Keterangan Tidak Mampu" => "destroy_sktm",
+        $jenisSuratGen = array(
+            "Surat Keterangan Tidak Mampu" => "sktm",
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
-            "Surat Keterangan Kehilangan" => "delete_hilang",
-            "Surat Keterangan Kelahiran" => "show_hilang",//ganti
-
+            "Surat Keterangan Kehilangan" => "kehilangan",
+            "Surat Keterangan Kelahiran" => "kelahiran",
         );
     ?>
     <div class="box box-primary">
@@ -293,13 +282,14 @@
                             required: true
                         },
                         hari_lahir: {
-                            required: true
+                            valueNotEquals: "default"
                         },
                         tgl_lahir: {
                             required: true
                         },
                         pukul_lahir: {
-                            required: true
+                            required: true,
+                            maxlength: 15
                         },
                         jenis_kelamin: {
                             valueNotEquals: "default"
@@ -347,9 +337,14 @@
                             valueNotEquals: "Pilih salah satu"
                         },
                         no_surat : "No surat harus diisi",
-                        hari_lahir : "Hari lahir harus diisi",
+                        hari_lahir: {
+                            valueNotEquals: "Pilih hari lahir"
+                        },
                         tgl_lahir : "Tgl lahir harus diisi",
-                        pukul_lahir : "Pukul lahir harus diisi",
+                        pukul_lahir : {
+                            required: "Pukul lahir harus diisi",
+                            maxlength: "Jumlah karakter lebih"
+                        },
                         jenis_kelamin: {
                             valueNotEquals: "Pilih salah satu"
                         },

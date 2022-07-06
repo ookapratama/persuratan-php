@@ -18,7 +18,7 @@ class ArsipMasukController extends Controller
     {
         $month = date('m');
         $year = date('Y');
-        $surat = Surat::where("status_arsip", "Y")->whereMonth("tgl_surat", $month)->whereYear("tgl_surat", $year)->get();
+        $surat = Surat::where("status_arsip", "Y")->whereMonth("tgl_surat", $month)->whereYear("tgl_surat", $year)->get()->sortByDesc("id");
 
         return view('vArsip.masuk.index', [
             'surat' => $surat,

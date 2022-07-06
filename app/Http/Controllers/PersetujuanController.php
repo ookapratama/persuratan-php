@@ -15,7 +15,7 @@ class PersetujuanController extends Controller
 
     public function index()
     {
-        $surat = Surat::where("status_setuju", "N")->where("status_disposisi", "Y")->get();
+        $surat = Surat::where("status_setuju", "N")->where("status_disposisi", "Y")->get()->sortByDesc("id");
 
         return view('vPersetujuan.index', [
             'disposisi' => $surat,
@@ -42,7 +42,7 @@ class PersetujuanController extends Controller
 
     public function indexSetuju()
     {
-        $surat = Surat::where("status_setuju", "Y")->where("status_arsip", "N")->get();
+        $surat = Surat::where("status_setuju", "Y")->where("status_arsip", "N")->get()->sortByDesc("id");
 
         return view('vPersetujuan.indexSetuju', [
             'surat' => $surat,

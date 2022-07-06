@@ -42,105 +42,48 @@ class pdf extends FPDF
 
     function content1(
         $teks1,
-        $teks2,
-        $teks3,
-        $teks4
+        $teks2
     ) {
-        $this->Ln(7);
-        $this->Cell(125);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks1, 0, 1, 'L');
-        $this->Ln(2);
+        $this->Ln(9);
+        $this->Cell(93);
+        $this->SetFont('Times', 'BU', 12);
+        $this->Cell(1, 5, $teks1, 0, 1, 'C');
+        $this->Ln(0.1);
 
-        $this->Cell(125);
+        $this->Cell(93);
         $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks2, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Cell(125);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks3, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Cell(125);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks4, 0, 1, 'L');
-        $this->Ln(2);
+        $this->Cell(1, 5, $teks2, 0, 1, 'C');
+        $this->Ln(10);
     }
 
     function content2(
-        $teks1,
-        $td1,
-        $teks2,
-        $teks3,
-        $td2,
-        $teks4,
-        $teks5,
-        $td3,
-        $teks6
+        $teks1
     ) {
-        $this->Ln(-21);
-        $this->Cell(10);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks1, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Ln(-7);
-        $this->Cell(28);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $td1, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Ln(-7);
-        $this->Cell(30);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks2, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Cell(10);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks3, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Ln(-7);
-        $this->Cell(28);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $td2, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Ln(-7);
-        $this->Cell(30);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks4, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Cell(10);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks5, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Ln(-7);
-        $this->Cell(28);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $td3, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Ln(-7);
-        $this->Cell(30);
-        $this->SetFont('Times', 'BU', 12);
-        $this->Cell(1, 5, $teks6, 0, 1, 'L');
-        $this->Ln(2);
-    }
-
-    function content3($teks1)
-    {
-        $this->Ln(11);
         $this->Cell(10);
         $this->SetFont('Times', '', 12);
         $this->MultiCell(0, 7, $teks1, 0, 1, '');
+        $this->Ln(5);
+    }
+
+    function content3(
+        $teks1
+    ) {
+        $this->Cell(93);
+        $this->SetFont('Times', 'B', 12);
+        $this->Cell(1, 5, $teks1, 0, 1, 'C');
+        $this->Ln(5);
     }
 
     function content4(
+        $teks1
+    ) {
+        $this->Cell(10);
+        $this->SetFont('Times', '', 12);
+        $this->MultiCell(0, 7, $teks1, 0, 1, '');
+        $this->Ln(5);
+    }
+
+    function content5(
         $teks1,
         $td1,
         $teks2,
@@ -161,12 +104,8 @@ class pdf extends FPDF
         $teks12,
         $teks13,
         $td7,
-        $teks14,
-        $teks15,
-        $td8,
-        $teks16
+        $teks14
     ) {
-        $this->Ln(5);
         $this->Cell(30);
         $this->SetFont('Times', '', 12);
         $this->Cell(1, 5, $teks1, 0, 1, 'L');
@@ -182,7 +121,7 @@ class pdf extends FPDF
         $this->Cell(70);
         $this->SetFont('Times', 'B', 12);
         $this->Cell(1, 5, $teks2, 0, 1, 'L');
-        $this->Ln(3);
+        $this->Ln(5); //nama ibu
 
         $this->Cell(30);
         $this->SetFont('Times', '', 12);
@@ -199,7 +138,7 @@ class pdf extends FPDF
         $this->Cell(70);
         $this->SetFont('Times', '', 12);
         $this->Cell(1, 5, $teks4, 0, 1, 'L');
-        $this->Ln(3);
+        $this->Ln(5); //nik ibu
 
         $this->Cell(30);
         $this->SetFont('Times', '', 12);
@@ -214,9 +153,9 @@ class pdf extends FPDF
 
         $this->Ln(-7);
         $this->Cell(70);
-        $this->SetFont('Times', '', 12);
+        $this->SetFont('Times', 'B', 12);
         $this->Cell(1, 5, $teks6, 0, 1, 'L');
-        $this->Ln(3);
+        $this->Ln(5); //nama ayah
 
         $this->Cell(30);
         $this->SetFont('Times', '', 12);
@@ -233,7 +172,7 @@ class pdf extends FPDF
         $this->Cell(70);
         $this->SetFont('Times', '', 12);
         $this->Cell(1, 5, $teks8, 0, 1, 'L');
-        $this->Ln(3);
+        $this->Ln(5); //nik ayah
 
         $this->Cell(30);
         $this->SetFont('Times', '', 12);
@@ -250,7 +189,7 @@ class pdf extends FPDF
         $this->Cell(70);
         $this->SetFont('Times', '', 12);
         $this->Cell(1, 5, $teks10, 0, 1, 'L');
-        $this->Ln(3);
+        $this->Ln(5); //alamat
 
         $this->Cell(30);
         $this->SetFont('Times', '', 12);
@@ -267,7 +206,7 @@ class pdf extends FPDF
         $this->Cell(70);
         $this->SetFont('Times', '', 12);
         $this->Cell(1, 5, $teks12, 0, 1, 'L');
-        $this->Ln(3);
+        $this->Ln(5); //kecamatan
 
         $this->Cell(30);
         $this->SetFont('Times', '', 12);
@@ -284,42 +223,12 @@ class pdf extends FPDF
         $this->Cell(70);
         $this->SetFont('Times', '', 12);
         $this->Cell(1, 5, $teks14, 0, 1, 'L');
-        $this->Ln(3);
-
-        $this->Cell(30);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks15, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Ln(-7);
-        $this->Cell(68);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $td8, 0, 1, 'L');
-        $this->Ln(2);
-
-        $this->Ln(-7);
-        $this->Cell(70);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(1, 5, $teks16, 0, 1, 'L');
-        $this->Ln(3);
-    }
-
-    function content5($teks1, $teks2)
-    {
-        $this->Ln(4);
-        $this->Cell(10);
-        $this->SetFont('Times', '', 12);
-        $this->MultiCell(0, 7, $teks1, 0, 1, '');
-        $this->Ln(1);
-
-        $this->Cell(10);
-        $this->SetFont('Times', '', 12);
-        $this->Cell(0, 7, $teks2, 0, 1, '');
+        $this->Ln(5); //kabupaten
     }
 
     function content6($teks1, $teks2, $teks3)
     {
-        $this->Ln(8);
+        $this->Ln(9);
         $this->Cell(150);
         $this->SetFont('Times', '', 12);
         $this->Cell(1, 5, $teks1, 0, 1, 'C');
@@ -336,6 +245,6 @@ class pdf extends FPDF
 
     function ttd($gambar)
     {
-        $this->Image($gambar, 140, 217, 48, 28);
+        $this->Image($gambar, 140, 205, 48, 28);
     }
 }

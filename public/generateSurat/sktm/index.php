@@ -30,9 +30,9 @@ $pdf->kop(
 
 //atur garis kop
 $pdf->setLineWidth(0.5);
-$pdf->Line(10, 33, 200, 33);
+$pdf->Line(10, 49, 200, 49);
 $pdf->setLineWidth(0.1);
-$pdf->Line(10, 33.8, 200, 33.8);
+$pdf->Line(10, 49.8, 200, 49.8);
 
 $pdf->logo('../../gambar/logo-lutim.png');
 

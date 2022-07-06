@@ -5,6 +5,7 @@ class pdf extends FPDF
 
     function kop($teks1, $teks2, $teks3, $teks4)
     {
+        $this->Ln(16);
         $this->Cell(93);
         $this->SetFont('Times', 'B', 14);
         $this->Cell(1, 5, $teks1, 0, 1, 'C');
@@ -26,12 +27,12 @@ class pdf extends FPDF
 
     function logo($gambar)
     {
-        $this->Image($gambar, 20, 10, 17, 20);
+        $this->Image($gambar, 93, 4, 17, 20);
     }
 
     function ttd($gambar)
     {
-        $this->Image($gambar, 135, 218, 50, 30);
+        $this->Image($gambar, 140, 228, 48, 28);
     }
 
     function tgl_indo($tanggal)
