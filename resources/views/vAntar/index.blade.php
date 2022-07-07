@@ -7,7 +7,7 @@
     <?php 
         $jenisSuratShow = array(
             "Surat Keterangan Tidak Mampu" => "show_sktm",
-            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Domisili" => "show_domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "show_hilang",
             "Surat Keterangan Kelahiran" => "show_hilang",
@@ -25,7 +25,6 @@
                         <th>No</th>
                         <th>Jenis Surat</th>
                         <th>Nama Pemohon</th>
-                        <th>No Surat</th>
                         <th>TGL Surat</th>
                         <th>Status Antar</th>
                         <th>Action</th>
@@ -39,7 +38,6 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $data->jenis_surat }}</td>
                             <td>{{ $data->nama_pemohon ?? $data->nama_bayi }}</td>
-                            <td>{{ $data->no_surat }}</td>
                             <td>{{ $data->tgl_surat }}</td>
                             <td><span class="label {{ $data->status_antar=="Y" ? "label-success" : "label-danger" }}">{{ $data->status_antar=="Y"?"ter-Antar" : "Belum" }}</span></td>
                             <td>

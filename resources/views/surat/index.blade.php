@@ -7,34 +7,34 @@
 
         $jenisSuratShow = array(
             "Surat Keterangan Tidak Mampu" => "show_sktm",
-            "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "show_hilang",
             "Surat Keterangan Kelahiran" => "show_lahir",
+            "Surat Keterangan Domisili" => "show_domisili",
         );
 
         $jenisSuratEdit = array(
             "Surat Keterangan Tidak Mampu" => "edit_sktm",
-            "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "edit_hilang",
             "Surat Keterangan Kelahiran" => "edit_lahir",
+            "Surat Keterangan Domisili" => "edit_domisili",
         );
 
         $jenisSuratHapus = array(
             "Surat Keterangan Tidak Mampu" => "destroy_sktm",
-            "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "delete_hilang",
             "Surat Keterangan Kelahiran" => "delete_lahir",
+            "Surat Keterangan Domisili" => "delete_domisili",
         );
 
         $jenisSuratGen = array(
             "Surat Keterangan Tidak Mampu" => "sktm",
-            "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "kehilangan",
             "Surat Keterangan Kelahiran" => "kelahiran",
+            "Surat Keterangan Domisili" => "domisili",//
         );
     ?>
     <div class="box box-primary">
@@ -47,6 +47,7 @@
                         <option data-route="{{ route('create_sktm') }}">SURAT KETERANGAN TIDAK MAMPU</option>
                         <option data-route="{{ route('create_hilang') }}">SURAT KETERANGAN KEHILANGAN</option>
                         <option data-route="{{ route('create_lahir') }}">SURAT KETERANGAN KELAHIRAN</option>
+                        <option data-route="{{ route('create_domisili') }}">SURAT KETERANGAN DOMISILI</option>
                     </select>
                 </div>
                 <div class="col">
@@ -188,9 +189,6 @@
                         no_surat: {
                             required: true
                         },
-                        perihal: {
-                            required: true
-                        },
                         lampiran: {
                             required: true
                         },
@@ -238,7 +236,6 @@
                             valueNotEquals: "Pilih salah satu"
                         },
                         no_surat : "No surat harus diisi",
-                        perihal : "Perihal harus diisi",
                         lampiran : "Lampiran harus diisi",
                         tgl_surat : "Tgl surat harus diisi",
                         nama_pemohon : "Nama pemohon harus diisi",
@@ -368,6 +365,81 @@
                         kecamatan : "Kecamatan harus diisi",
                         kabupaten : "Kabupaten harus diisi",
                         tgl_surat : "Tgl surat harus diisi",
+                        is_antar: {
+                            valueNotEquals: "Pilih salah satu"
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '#btnCreateDomisili', function() {
+                $.validator.addMethod('valueNotEquals', function(value, element, arg) {
+                    return arg !== value;
+                });
+
+                $('#formCreateDomisili').validate({
+                    rules: {
+                        user_approve: {
+                            valueNotEquals: "default"
+                        },
+                        no_surat: {
+                            required: true
+                        },
+                        tgl_surat: {
+                            required: true
+                        },
+                        nama_pemohon: {
+                            required: true
+                        },
+                        jenis_kelamin: {
+                            valueNotEquals: "default"
+                        },
+                        tempat_lahir: {
+                            required: true
+                        },
+                        tgl_lahir: {
+                            required: true
+                        },
+                        nik: {
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
+                        },
+                        agama: {
+                            valueNotEquals: "default"
+                        },
+                        pekerjaan: {
+                            required: true
+                        },
+                        alamat: {
+                            required: true
+                        },
+                        is_antar: {
+                            valueNotEquals: "default"
+                        },
+                    },
+                    messages: {
+                        user_approve: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        no_surat : "No surat harus diisi",
+                        tgl_surat : "Tgl surat harus diisi",
+                        nama_pemohon : "Nama pemohon harus diisi",
+                        jenis_kelamin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        tempat_lahir : "Tempat lahir harus diisi",
+                        tgl_lahir : "Tgl lahir harus diisi",
+                        nik : {
+                            required: "NIK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
+                        agama: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        pekerjaan : "Pekerjaan harus diisi",
+                        alamat : "Alamat harus diisi",
                         is_antar: {
                             valueNotEquals: "Pilih salah satu"
                         }

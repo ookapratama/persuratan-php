@@ -336,6 +336,6 @@ class pdf extends FPDF
 
     function ttd($gambar)
     {
-        $this->Image($gambar, 140, 217, 48, 28);
+        $this->Image($gambar, 140, 227, 44, 24);
     }
 }

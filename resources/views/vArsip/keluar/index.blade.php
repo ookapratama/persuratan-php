@@ -9,24 +9,24 @@
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "kehilangan",
-            "Surat Keterangan Kelahiran" => "show_hilang",//edit
+            "Surat Keterangan Kelahiran" => "kelahiran",
 
         );
 
         $jenisSuratShow = array(
             "Surat Keterangan Tidak Mampu" => "show_sktm",
-            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Domisili" => "show_domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "show_hilang",
-            "Surat Keterangan Kelahiran" => "show_hilang",//edit
+            "Surat Keterangan Kelahiran" => "show_lahir",
         );
 
         $jenisSuratHapus = array(
             "Surat Keterangan Tidak Mampu" => "destroy_sktm",
-            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Domisili" => "delete_domisili",
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "delete_hilang",
-            "Surat Keterangan Kelahiran" => "show_hilang",//edit
+            "Surat Keterangan Kelahiran" => "delete_lahir",
 
         );
 

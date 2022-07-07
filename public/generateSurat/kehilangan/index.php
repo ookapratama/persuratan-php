@@ -5,7 +5,7 @@ require('function.php');
 include '../koneksi.php';
 
 $data = base64_decode($_REQUEST['data']);
-$surat = mysqli_query($connect, "SELECT surat_ket_tidak_mampus.id, no_surat, lampiran, perihal, user_approve, UPPER(users.name) AS nama, users.jabatan, UPPER(nama_pemohon) AS nama_pemohon, jenis_kelamin, tempat_lahir, tgl_lahir, nik, status_kawin, agama, pekerjaan, alamat, UPPER(benda_hilang) AS benda_hilang, tgl_surat FROM surat_ket_tidak_mampus JOIN users ON(users.id = surat_ket_tidak_mampus.user_approve) WHERE surat_ket_tidak_mampus.id='$data'");
+$surat = mysqli_query($connect, "SELECT surat_ket_tidak_mampus.id, UPPER(no_surat) AS no_surat, lampiran, perihal, user_approve, UPPER(users.name) AS nama, users.jabatan, UPPER(nama_pemohon) AS nama_pemohon, jenis_kelamin, tempat_lahir, DATE_FORMAT(tgl_lahir, '%d-%m-%Y') AS tgl_lahir, nik, status_kawin, agama, pekerjaan, alamat, UPPER(benda_hilang) AS benda_hilang, tgl_surat FROM surat_ket_tidak_mampus JOIN users ON(users.id = surat_ket_tidak_mampus.user_approve) WHERE surat_ket_tidak_mampus.id='$data'");
 if ($surat->num_rows == 0) {
     exit('data tidak ditemukan');
 }
@@ -72,9 +72,9 @@ while ($row = mysqli_fetch_array($surat)) {
         'Jenis Kelamin',
         ':',
         $row['jenis_kelamin'],
-        'Tempat / Tgl Lahir',
+        'Tempat/Tgl. Lahir',
         ':',
-        $row['tempat_lahir'] . ", " . $pdf->tgl_indo($row['tgl_lahir']),
+        $row['tempat_lahir'] . ", " . $row['tgl_lahir'],
         'NIK',
         ':',
         $row['nik'],
@@ -93,7 +93,7 @@ while ($row = mysqli_fetch_array($surat)) {
     );
 
     $pdf->content5(
-        '         Nama tersebut di atas benar adalah Penduduk Desa Lampenai Kec. Wotu Kab. Luwu Timur dan nama tersebut benar memiliki ' . $row['benda_hilang'] . ' dan ' .  $row['benda_hilang'] . ' tersebut telah hilang atau tercecer di sekitar Kecamatan Wotu.',
+        '         Nama tersebut di atas benar adalah penduduk Desa Lampenai Kec. Wotu Kab. Luwu Timur dan nama tersebut benar memiliki ' . $row['benda_hilang'] . ' dan ' .  $row['benda_hilang'] . ' tersebut telah hilang atau tercecer di sekitar Kecamatan Wotu.',
         '         Demikian surat keterangan ini kami buat untuk ditindak lanjuti.',
     );
 

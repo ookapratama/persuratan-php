@@ -21,22 +21,22 @@
 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Perihal</label>
-                    <input type="text" name="perihal" id="perihal" class="form-control" value="{{ $hilangEdit->perihal }}" required>
+                    <input class="form-control" value="{{ $hilangEdit->perihal }}" readonly>
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Lampiran</label>
-                    <input type="text" name="lampiran" id="lampiran" class="form-control" value="{{ $hilangEdit->lampiran }}" required>
+                    <input type="text" name="lampiran" class="form-control" value="{{ $hilangEdit->lampiran }}" required>
                 </div>
                 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Tanggal Surat</label>
-                    <input type="date" name="tgl_surat" id="tgl_surat" class="form-control" value="{{ $hilangEdit->tgl_surat }}" required>                       
+                    <input type="date" name="tgl_surat" class="form-control" value="{{ $hilangEdit->tgl_surat }}" required>                       
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Nama Pemohon</label>
-                    <input type="text" name="nama_pemohon" id="nama_pemohon" class="form-control" value="{{ $hilangEdit->nama_pemohon }}" required>                        
+                    <input type="text" name="nama_pemohon" class="form-control" value="{{ $hilangEdit->nama_pemohon }}" required>                        
                 </div>
 
                 <div class="col-md-3">

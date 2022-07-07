@@ -69,7 +69,7 @@ class pdf extends FPDF
         $teks1
     ) {
         $this->Cell(93);
-        $this->SetFont('Times', 'B', 12);
+        $this->SetFont('Times', 'B', 14);
         $this->Cell(1, 5, $teks1, 0, 1, 'C');
         $this->Ln(5);
     }
@@ -245,6 +245,6 @@ class pdf extends FPDF
 
     function ttd($gambar)
     {
-        $this->Image($gambar, 140, 205, 48, 28);
+        $this->Image($gambar, 140, 207, 44, 24);
     }
 }

@@ -5,7 +5,7 @@ require('function.php');
 include '../koneksi.php';
 
 $data = base64_decode($_REQUEST['data']);
-$disposisi = mysqli_query($connect, "SELECT tbl_disposisi.id, user_approve, UPPER(users.name) AS nama, users.jabatan, perihal, DATE_FORMAT(tgl_surat, '%d-%m-%Y') AS tgl_surat, no_surat, kode_surat, asal_surat, isi_ringkas, DATE_FORMAT(tgl_terima, '%d-%m-%Y') AS tgl_terima, DATE_FORMAT(tgl_selesai, '%d-%m-%Y') AS tgl_selesai, isi_disposisi, tgl_disposisi FROM tbl_disposisi JOIN users ON(users.id = tbl_disposisi.user_approve) where tbl_disposisi.id='$data'");
+$disposisi = mysqli_query($connect, "SELECT tbl_disposisi.id, user_approve, UPPER(users.name) AS nama, users.jabatan, perihal, DATE_FORMAT(tgl_surat, '%d-%m-%Y') AS tgl_surat, UPPER(no_surat) AS no_surat, kode_surat, asal_surat, isi_ringkas, DATE_FORMAT(tgl_terima, '%d-%m-%Y') AS tgl_terima, DATE_FORMAT(tgl_selesai, '%d-%m-%Y') AS tgl_selesai, isi_disposisi, tgl_disposisi FROM tbl_disposisi JOIN users ON(users.id = tbl_disposisi.user_approve) where tbl_disposisi.id='$data'");
 if ($disposisi->num_rows == 0) {
     exit('data tidak ditemukan');
 }
@@ -72,32 +72,32 @@ while ($row = mysqli_fetch_array($disposisi)) {
     $pdf->Cell(85, 8.5, '', 0, 1);
     $pdf->Ln(-8.5);
     $pdf->Cell(85, 59.5, '', 1, 0,);
-    $pdf->Cell(60, 8.5, '1.', 1, 0,);
+    $pdf->Cell(60, 8.5, '1. Kaur Tata Usaha & Umum', 1, 0,);
     $pdf->Cell(25, 8.5, '', 1, 0,);
     $pdf->Ln(8.5);
 
     $pdf->Cell(85, 50, '', 0, 0,);
-    $pdf->Cell(60, 8.5, '2.', 1, 0,);
+    $pdf->Cell(60, 8.5, '2. Kaur Perencanaan', 1, 0,);
     $pdf->Cell(25, 8.5, '', 1, 0,);
     $pdf->Ln(8.5);
 
     $pdf->Cell(85, 50, '', 0, 0,);
-    $pdf->Cell(60, 8.5, '3.', 1, 0,);
+    $pdf->Cell(60, 8.5, '3. Kaur Keuangan', 1, 0,);
     $pdf->Cell(25, 8.5, '', 1, 0,);
     $pdf->Ln(8.5);
 
     $pdf->Cell(85, 50, '', 0, 0,);
-    $pdf->Cell(60, 8.5, '4.', 1, 0,);
+    $pdf->Cell(60, 8.5, '4. Kasi Pemerintah', 1, 0,);
     $pdf->Cell(25, 8.5, '', 1, 0,);
     $pdf->Ln(8.5);
 
     $pdf->Cell(85, 50, '', 0, 0,);
-    $pdf->Cell(60, 8.5, '5.', 1, 0,);
+    $pdf->Cell(60, 8.5, '5. Kasi Kesejahteraan', 1, 0,);
     $pdf->Cell(25, 8.5, '', 1, 0,);
     $pdf->Ln(8.5);
 
     $pdf->Cell(85, 50, '', 0, 0,);
-    $pdf->Cell(60, 8.5, '6.', 1, 0,);
+    $pdf->Cell(60, 8.5, '6. Kasi Pelayanan', 1, 0,);
     $pdf->Cell(25, 8.5, '', 1, 0,);
     $pdf->Ln(8.5);
 

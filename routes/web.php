@@ -14,9 +14,13 @@ use App\Http\Controllers\KelolaSuratController;
 use App\Http\Controllers\PersetujuanController;
 use App\Http\Controllers\Surat\SuratKetHilangController;
 use App\Http\Controllers\Surat\SuratKetLahirController;
+use App\Http\Controllers\Surat\SuratKetDomisiliController;
+use App\Http\Controllers\Surat\SuratKetBaikController;
+use App\Http\Controllers\Surat\SuratKetUsahaController;
+use App\Http\Controllers\Surat\SuratKetMatiController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\Surat\SuratKetTidakMampuController;
-use App\Models\Surat\SuratKetLahir;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +108,15 @@ Route::group(['middleware' => 'admin'], function () {
       Route::get('edit/{id}', [SuratKetLahirController::class, 'edit'])->name('edit_lahir');
       Route::post('update/{id}', [SuratKetLahirController::class, 'update'])->name('update_lahir');
       Route::get('delete/{id}', [SuratKetLahirController::class, 'delete'])->name('delete_lahir');
+    });
+
+    Route::group(['prefix' => 'domisili'], function () {
+      Route::get('create', [SuratKetDomisiliController::class, 'create'])->name('create_domisili');
+      Route::post('store', [SuratKetDomisiliController::class, 'store'])->name('store_domisili');
+      Route::get('show/{id}', [SuratKetDomisiliController::class, 'show'])->name('show_domisili');
+      Route::get('edit/{id}', [SuratKetDomisiliController::class, 'edit'])->name('edit_domisili');
+      Route::post('update/{id}', [SuratKetDomisiliController::class, 'update'])->name('update_domisili');
+      Route::get('delete/{id}', [SuratKetDomisiliController::class, 'delete'])->name('delete_domisili');
     });
   });
 

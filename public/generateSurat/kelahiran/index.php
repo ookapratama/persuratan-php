@@ -5,7 +5,7 @@ require('function.php');
 include '../koneksi.php';
 
 $data = base64_decode($_REQUEST['data']);
-$surat = mysqli_query($connect, "SELECT surat_ket_tidak_mampus.id, no_surat, user_approve, UPPER(users.name) AS nama, users.jabatan, UPPER(nama_bayi) AS nama_bayi, jenis_kelamin, hari_lahir, pukul_lahir, UPPER(nama_ibu) AS nama_ibu, UPPER(nama_ayah) AS nama_ayah, nik_ibu, nik_ayah, kecamatan, kabupaten, tempat_lahir, tgl_lahir, alamat, tgl_surat FROM surat_ket_tidak_mampus JOIN users ON(users.id = surat_ket_tidak_mampus.user_approve) WHERE surat_ket_tidak_mampus.id='$data'");
+$surat = mysqli_query($connect, "SELECT surat_ket_tidak_mampus.id, UPPER(no_surat) AS no_surat, user_approve, UPPER(users.name) AS nama, users.jabatan, UPPER(nama_bayi) AS nama_bayi, UPPER(jenis_kelamin) AS jenis_kelamin, UPPER(hari_lahir) AS hari_lahir, pukul_lahir, UPPER(nama_ibu) AS nama_ibu, UPPER(nama_ayah) AS nama_ayah, nik_ibu, nik_ayah, kecamatan, kabupaten, UPPER(tempat_lahir) AS tempat_lahir, tgl_lahir, alamat, tgl_surat FROM surat_ket_tidak_mampus JOIN users ON(users.id = surat_ket_tidak_mampus.user_approve) WHERE surat_ket_tidak_mampus.id='$data'");
 if ($surat->num_rows == 0) {
     exit('data tidak ditemukan');
 }
@@ -82,7 +82,7 @@ while ($row = mysqli_fetch_array($surat)) {
     );
 
     $pdf->content6(
-        'Lampenai ' . $pdf->tgl_indo($row['tgl_surat']),
+        'Lampenai, ' . $pdf->tgl_indo($row['tgl_surat']),
         $row['jabatan'],
         $row['nama'],
     );

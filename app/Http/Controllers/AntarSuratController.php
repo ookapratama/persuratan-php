@@ -16,7 +16,7 @@ class AntarSuratController extends Controller
     public function index()
     {
 
-        $surat = Surat::where("is_antar", "Y")->get()->sortBy("status_antar")->take(10);
+        $surat = Surat::where("is_antar", "Y")->get()->sortByDesc("id")->sortBy("status_antar")->take(15);
 
         return view('vAntar.index', [
             'antar' => $surat,
