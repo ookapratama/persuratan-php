@@ -34,6 +34,7 @@ class SuratKetDomisiliController extends Controller
             'agama' => 'required',
             'pekerjaan' => 'required|max:100',
             'alamat' => 'required|max:100',
+            'alamat_domisili' => 'required|max:100',
             'tgl_surat' => 'required',
             'user_approve' => 'required',
             'is_antar' => 'required'
@@ -50,6 +51,7 @@ class SuratKetDomisiliController extends Controller
         $data->agama = $request->get('agama');
         $data->pekerjaan = $request->get('pekerjaan');
         $data->alamat = $request->get('alamat');
+        $data->alamat_domisili = $request->get('alamat_domisili');
         $data->tgl_surat = $request->get('tgl_surat');
         $data->user_approve = $request->get('user_approve');
         $data->is_antar = $request->get('is_antar');
@@ -98,6 +100,7 @@ class SuratKetDomisiliController extends Controller
             'agama' => 'required',
             'pekerjaan' => 'required|max:100',
             'alamat' => 'required|max:100',
+            'alamat_domisili' => 'required|max:100',
             'tgl_surat' => 'required',
             'user_approve' => 'required',
             'is_antar' => 'required'
@@ -112,6 +115,7 @@ class SuratKetDomisiliController extends Controller
         $data->agama = $request->get('agama');
         $data->pekerjaan = $request->get('pekerjaan');
         $data->alamat = $request->get('alamat');
+        $data->alamat_domisili = $request->get('alamat_domisili');
         $data->tgl_surat = $request->get('tgl_surat');
         $data->user_approve = $request->get('user_approve');
         $data->is_antar = $request->get('is_antar');

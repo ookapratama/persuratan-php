@@ -42,19 +42,24 @@
                 <input class="form-control" value="{{ $domisiliShow->nik }}" readonly>                       
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label class="form-label" style="margin-top: 10px">Agama</label>
                 <input class="form-control" value="{{ $domisiliShow->agama }}" readonly>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label class="form-label" style="margin-top: 10px">Pekerjaan</label>
                 <input class="form-control" value="{{ $domisiliShow->pekerjaan }}" readonly>                        
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label class="form-label" style="margin-top: 10px">Alamat</label>
                 <input class="form-control" value="{{ $domisiliShow->alamat }}" readonly>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label" style="margin-top: 10px">Alamat Domisili</label>
+                <input class="form-control" value="{{ $domisiliShow->alamat_domisili }}" readonly>
             </div>
 
             <div class="col-md-12">

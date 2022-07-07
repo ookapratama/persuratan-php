@@ -76,6 +76,11 @@
                 </div>
 
                 <div class="col-md-3">
+                    <label class="form-label" style="margin-top: 10px">Alamat Domisili</label>
+                    <input type="text" name="alamat_domisili" class="form-control" value="{{ $domisiliEdit->alamat_domisili }}" required>
+                </div>
+
+                <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Pengantaran</label>
                     <select name="is_antar" class="form-control">
                         <option value="default">Pilih..</option>

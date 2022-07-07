@@ -243,8 +243,8 @@ class pdf extends FPDF
         $this->Cell(1, 5, $teks3, 0, 1, 'C');
     }
 
-    function ttd($gambar)
+    function ttd($gambar, $y = 218)
     {
-        $this->Image($gambar, 140, 218, 44, 24);
+        $this->Image($gambar, 140, $y, 44, 24);
     }
 }

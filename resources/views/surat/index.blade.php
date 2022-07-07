@@ -414,6 +414,9 @@
                         alamat: {
                             required: true
                         },
+                        alamat_domisili: {
+                            required: true
+                        },
                         is_antar: {
                             valueNotEquals: "default"
                         },
@@ -440,6 +443,7 @@
                         },
                         pekerjaan : "Pekerjaan harus diisi",
                         alamat : "Alamat harus diisi",
+                        alamat_domisili : "Alamat harus diisi",
                         is_antar: {
                             valueNotEquals: "Pilih salah satu"
                         }
