@@ -135,7 +135,7 @@ class pdf extends FPDF
 
         $this->Ln(-7);
         $this->Cell(81);
-        $this->SetFont('Times', 'B', 12);
+        $this->SetFont('Times', '', 12);
         $this->Cell(1, 5, $teks6, 0, 1, 'L');
         $this->Ln(5);
 
