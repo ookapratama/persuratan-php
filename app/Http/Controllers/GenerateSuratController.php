@@ -13,13 +13,14 @@ class GenerateSuratController extends Controller
     {
         $this->fpdf = new Fpdf;
         $this->fpdf->AddPage('P', 'A4');
-        $this->fpdf->SetMargins(10, 10, 20);
+        $this->fpdf->SetMargins(30, 10, 30);
         // $this->fpdf->AddPage('P', 'A4');
     }
 
     // main function
-    function generateSurat($type = "sktm", $id = 85)
+    function generateSurat($type = "sktm", $id)
     {
+        $id = base64_decode($id);
         // Load Model Surat
         $surat = Surat::where("id", $id)->first();
 
@@ -44,8 +45,8 @@ class GenerateSuratController extends Controller
 
         // Bagian TTD
         $currentY = $this->fpdf->getY();
-        $this->printPenandatangan();
-        $this->insertImageTTD('/gambar/ttd2.png', $currentY);
+        $this->printPenandatangan($surat);
+        $this->insertImageTTD($surat->approve_by->ttd, $currentY);
 
         $this->fpdf->Output();
         exit;
@@ -56,21 +57,21 @@ class GenerateSuratController extends Controller
         $this->fpdf->Image(public_path($gambar), 93, 4, 17, 20);
 
         $this->fpdf->Ln(16);
-        $this->fpdf->Cell(93);
+        $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', 'B', 14);
         $this->fpdf->Cell(1, 5, 'PEMERINTAH KABUPATEN LUWU TIMUR', 0, 1, 'C');
         $this->fpdf->Ln(1.5);
 
-        $this->fpdf->Cell(93);
+        $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', 'B', 16);
         $this->fpdf->Cell(1, 5, 'KECAMATAN WOTU', 0, 1, 'C');
         $this->fpdf->Ln(1.5);
 
-        $this->fpdf->Cell(93);
+        $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', 'B', 16);
         $this->fpdf->Cell(1, 5, 'DESA LAMPENAI', 0, 1, 'C');
 
-        $this->fpdf->Cell(93);
+        $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', '', 10);
         $this->fpdf->Cell(1, 5, 'Alamat : Jl. Batara Guru No. 08 Wotu (92971)', 0, 1, 'C');
 
@@ -80,42 +81,44 @@ class GenerateSuratController extends Controller
         $this->fpdf->Line(10, 49.8, 200, 49.8);
     }
 
-    function printPenandatangan()
+    function printPenandatangan($dataSurat)
     {
         $this->fpdf->Ln(9);
-        $this->fpdf->Cell(150);
+        $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, 'Lampenai, 20 Agustus 2022', 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, 'Lampenai, ' . $dataSurat->tgl_surat ?? "-", 0, 1, 'C');
 
-        $this->fpdf->Cell(150);
+        $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, 'Kepala Desa Lampenai', 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, $dataSurat->approve_by->jabatan ?? "-", 0, 1, 'C');
         $this->fpdf->Ln(20);
 
-        $this->fpdf->Cell(150);
+        $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', 'BU', 12);
-        $this->fpdf->Cell(1, 5, 'Baharuddin Kasim', 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, strtoupper($dataSurat->approve_by->name) ?? "-", 0, 1, 'C');
     }
 
-    function insertImageTTD($filePath = '/gambar/ttd2.png', $y = 200)
+    function insertImageTTD($filePath, $y = 200)
     {
-        $this->fpdf->Image(public_path($filePath), 140, $y + 17, 44, 24);
+        $this->fpdf->Image(asset($filePath), 140, $y + 17, 44, 24);
     }
 
     function setLabelValue($label, $value, $style = "")
     {
-        $this->fpdf->Cell(35);
+        $this->fpdf->Cell(20);
         $this->fpdf->Cell(1, 5, $label, 0, 1, 'L');
         $this->fpdf->Ln(1);
 
-        $this->fpdf->Cell(80);
+        $this->fpdf->Cell(65);
         $this->fpdf->Cell(1, -7, ":", 0, 1, 'L');
         $this->fpdf->Ln(12);
 
-        $this->fpdf->Cell(82);
+        $this->fpdf->Cell(67);
         $this->fpdf->SetFont('Times', $style, 12);
         $this->fpdf->Cell(0, -17, $value, 0, 1, 'L');
         $this->fpdf->Ln(17);
+
+        $this->fpdf->SetFont('Times', '', 12);
     }
 
     // todo: function GenerateSKTM
@@ -187,27 +190,33 @@ class GenerateSuratController extends Controller
 
         $this->fpdf->Ln(9);
         $this->fpdf->SetFont('Times', 'BU', 12);
-        $this->fpdf->Cell(93);
+        $this->fpdf->Cell(73);
         $this->fpdf->Cell(1, 5, 'SURAT KETERANGAN DOMISILI', 0, 1, 'C');
         $this->fpdf->Ln(0.1);
 
-        $this->fpdf->Cell(93);
+        $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', '', 12);
         $this->fpdf->Cell(1, 5, 'Nomor : ' . ($dataSurat->no_surat ?? "-"), 0, 1, 'C');
-        $this->fpdf->Ln(12);
+        $this->fpdf->Ln(9);
 
-        $this->fpdf->Cell(10);
+        // $this->fpdf->Cell(1);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->MultiCell(0, 7, 'Yang bertanda tangan di bawah ini ' . ($dataSurat->approve_by->jabatan ?? "-") . ' Kecamatan Wotu Kabupaten Luwu Timur menerangkan dengan sesungguhnya bahwa:', 0, 1, '');
+        $this->fpdf->MultiCell(0, 7, '       Yang bertanda tangan di bawah ini ' . ($dataSurat->approve_by->jabatan ?? "-") . ' Kecamatan Wotu Kabupaten Luwu Timur menerangkan dengan sesungguhnya bahwa:', 0, 'J', false);
         $this->fpdf->Ln(5);
 
         foreach ($pemohon as $label => $value) {
-            $this->setLabelValue($label, $value);
+            if ($label == 'Nama') {
+                $value = strtoupper($value);
+                $this->setLabelValue($label, $value, 'B');
+            } else {
+                $this->setLabelValue($label, $value);
+            }
         }
 
-        $this->fpdf->Cell(10);
+
+        // $this->fpdf->Cell(10);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->MultiCell(0, 7, 'Nama tersebut di atas benar adalah  penduduk ' . ($dataSurat->alamat ?? "-") . ' yang saat ini berdomisili tetap di ' . ($dataSurat->alamat_domisili ?? "-") . '.', 0, 1, '');
+        $this->fpdf->MultiCell(0, 7, '       Nama tersebut di atas benar adalah  penduduk ' . ($dataSurat->alamat ?? "-") . ' yang saat ini berdomisili tetap di ' . ($dataSurat->alamat_domisili ?? "-") . '.', 0, 'J', false);
         $this->fpdf->Ln(1);
     }
 
