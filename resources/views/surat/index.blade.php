@@ -7,26 +7,29 @@
 
         $jenisSuratShow = array(
             "Surat Keterangan Tidak Mampu" => "show_sktm",
-            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kematian" => "show_mati",
             "Surat Keterangan Kehilangan" => "show_hilang",
             "Surat Keterangan Kelahiran" => "show_lahir",
             "Surat Keterangan Domisili" => "show_domisili",
+            "Surat Keterangan Usaha" => "show_usaha",
         );
 
         $jenisSuratEdit = array(
             "Surat Keterangan Tidak Mampu" => "edit_sktm",
-            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kematian" => "edit_mati",
             "Surat Keterangan Kehilangan" => "edit_hilang",
             "Surat Keterangan Kelahiran" => "edit_lahir",
             "Surat Keterangan Domisili" => "edit_domisili",
+            "Surat Keterangan Usaha" => "edit_usaha",
         );
 
         $jenisSuratHapus = array(
             "Surat Keterangan Tidak Mampu" => "destroy_sktm",
-            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kematian" => "delete_mati",
             "Surat Keterangan Kehilangan" => "delete_hilang",
             "Surat Keterangan Kelahiran" => "delete_lahir",
             "Surat Keterangan Domisili" => "delete_domisili",
+            "Surat Keterangan Usaha" => "delete_usaha",
         );
 
         $jenisSuratGen = array(
@@ -34,7 +37,8 @@
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "kehilangan",
             "Surat Keterangan Kelahiran" => "kelahiran",
-            "Surat Keterangan Domisili" => "domisili",//
+            "Surat Keterangan Domisili" => "domisili",
+            "Surat Keterangan Usaha" => "usaha",
         );
     ?>
     <div class="box box-primary">
@@ -48,6 +52,8 @@
                         <option data-route="{{ route('create_hilang') }}">SURAT KETERANGAN KEHILANGAN</option>
                         <option data-route="{{ route('create_lahir') }}">SURAT KETERANGAN KELAHIRAN</option>
                         <option data-route="{{ route('create_domisili') }}">SURAT KETERANGAN DOMISILI</option>
+                        <option data-route="{{ route('create_mati') }}">SURAT KETERANGAN KEMATIAN</option>
+                        <option data-route="{{ route('create_usaha') }}">SURAT KETERANGAN USAHA</option>
                     </select>
                 </div>
                 <div class="col">
@@ -61,7 +67,7 @@
                     <tr>
                         <th>No</th>
                         <th>Jenis Surat</th>
-                        <th>Nama Pemohon</th>
+                        <th>Nama</th>
                         <th>No Surat</th>
                         <th>TGL Surat</th>
                         <th>Status Arsip</th>
@@ -444,6 +450,220 @@
                         pekerjaan : "Pekerjaan harus diisi",
                         alamat : "Alamat harus diisi",
                         alamat_domisili : "Alamat harus diisi",
+                        is_antar: {
+                            valueNotEquals: "Pilih salah satu"
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '#btnCreateMati', function() {
+                $.validator.addMethod('valueNotEquals', function(value, element, arg) {
+                    return arg !== value;
+                });
+
+                $('#formCreateMati').validate({
+                    rules: {
+                        user_approve: {
+                            valueNotEquals: "default"
+                        },
+                        no_surat: {
+                            required: true
+                        },
+                        nama_pemohon: {
+                            required: true
+                        },
+                        nik: {
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
+                        },
+                        no_kk: {
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
+                        },
+                        tempat_lahir: {
+                            required: true
+                        },
+                        tgl_lahir: {
+                            required: true
+                        },
+                        jenis_kelamin: {
+                            valueNotEquals: "default"
+                        },
+                        warga_negara: {
+                            required: true
+                        },
+                        agama: {
+                            valueNotEquals: "default"
+                        },
+                        status_kawin: {
+                            valueNotEquals: "default"
+                        },
+                        pekerjaan: {
+                            required: true
+                        },
+                        alamat: {
+                            required: true
+                        },
+                        hari_mati: {
+                            valueNotEquals: "default"
+                        },
+                        tgl_mati: {
+                            required: true
+                        },
+                        tempat_mati: {
+                            required: true
+                        },
+                        kecamatan: {
+                            required: true
+                        },
+                        kabupaten: {
+                            required: true
+                        },
+                        provinsi: {
+                            required: true
+                        },
+                        sebab_mati: {
+                            required: true
+                        },
+                        tgl_surat: {
+                            required: true
+                        },        
+                        is_antar: {
+                            valueNotEquals: "default"
+                        },
+                    },
+                    messages: {
+                        user_approve: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        no_surat : "No surat harus diisi",
+                        nama_pemohon : "Nama harus diisi",
+                        nik : {
+                            required: "NIK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
+                        no_kk : {
+                            required: "No. KK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
+                        tempat_lahir : "Tempat lahir harus diisi",
+                        tgl_lahir : "Tgl lahir harus diisi",
+                        jenis_kelamin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        warga_negara : "Warga Negara harus diisi",
+                        agama: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        status_kawin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        pekerjaan : "Pekerjaan harus diisi",
+                        alamat : "Alamat harus diisi",
+                        hari_mati: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        tgl_mati : "Tgl mati harus diisi",
+                        tempat_mati : "Tempat mati harus diisi",
+                        kecamatan : "Kecamatan mati harus diisi",
+                        kabupaten : "Kabupaten mati harus diisi",
+                        provinsi : "Provinsi mati harus diisi",
+                        sebab_mati : "Sebab mati harus diisi",
+                        tgl_surat : "Tgl surat harus diisi",
+                        is_antar: {
+                            valueNotEquals: "Pilih salah satu"
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '#btnCreateUsaha', function() {
+                $.validator.addMethod('valueNotEquals', function(value, element, arg) {
+                    return arg !== value;
+                });
+
+                $('#formCreateUsaha').validate({
+                    rules: {
+                        user_approve: {
+                            valueNotEquals: "default"
+                        },
+                        no_surat: {
+                            required: true
+                        },
+                        nama_pemohon: {
+                            required: true
+                        },
+                        tempat_lahir: {
+                            required: true
+                        },
+                        tgl_lahir: {
+                            required: true
+                        },
+                        jenis_kelamin: {
+                            valueNotEquals: "default"
+                        },
+                        agama: {
+                            valueNotEquals: "default"
+                        },
+                        pekerjaan: {
+                            required: true
+                        },
+                        alamat: {
+                            required: true
+                        },
+                        nik: {
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
+                        },
+                        jenis_usaha: {
+                            required: true
+                        },
+                        alamat_usaha: {
+                            required: true
+                        },
+                        tahun_usaha: {
+                            valueNotEquals: "default"
+                        },
+                        tgl_surat: {
+                            required: true
+                        },        
+                        is_antar: {
+                            valueNotEquals: "default"
+                        },
+                    },
+                    messages: {
+                        user_approve: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        no_surat : "No surat harus diisi",
+                        nama_pemohon : "Nama harus diisi",
+                        tempat_lahir : "Tempat lahir harus diisi",
+                        tgl_lahir : "Tgl lahir harus diisi",
+                        jenis_kelamin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        agama: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        pekerjaan : "Pekerjaan harus diisi",
+                        alamat : "Alamat harus diisi",
+                        nik : {
+                            required: "NIK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
+                        jenis_usaha : "Jenis usaha harus diisi",
+                        alamat_usaha : "Alamat usaha harus diisi",
+                        tahun_usaha : {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        tgl_surat : "Tgl surat harus diisi",
                         is_antar: {
                             valueNotEquals: "Pilih salah satu"
                         }

@@ -8,6 +8,7 @@ use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\AntarSuratController;
 use App\Http\Controllers\ArsipKeluarController;
 use App\Http\Controllers\ArsipMasukController;
+use App\Http\Controllers\GenerateSuratController;
 use App\Http\Controllers\KelolaUserController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\KelolaSuratController;
@@ -41,6 +42,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //hak akses
 Route::group(['middleware' => 'admin'], function () {
+  Route::get('cetak/{type}/{id}', [GenerateSuratController::class, 'generateSurat'])->name('cetak_surat');
   Route::get('/skeluar', [SuratKeluarController::class, 'index']);
 
   Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');
@@ -117,6 +119,24 @@ Route::group(['middleware' => 'admin'], function () {
       Route::get('edit/{id}', [SuratKetDomisiliController::class, 'edit'])->name('edit_domisili');
       Route::post('update/{id}', [SuratKetDomisiliController::class, 'update'])->name('update_domisili');
       Route::get('delete/{id}', [SuratKetDomisiliController::class, 'delete'])->name('delete_domisili');
+    });
+
+    Route::group(['prefix' => 'mati'], function () {
+      Route::get('create', [SuratKetMatiController::class, 'create'])->name('create_mati');
+      Route::post('store', [SuratKetMatiController::class, 'store'])->name('store_mati');
+      Route::get('show/{id}', [SuratKetMatiController::class, 'show'])->name('show_mati');
+      Route::get('edit/{id}', [SuratKetMatiController::class, 'edit'])->name('edit_mati');
+      Route::post('update/{id}', [SuratKetMatiController::class, 'update'])->name('update_mati');
+      Route::get('delete/{id}', [SuratKetMatiController::class, 'delete'])->name('delete_mati');
+    });
+
+    Route::group(['prefix' => 'usaha'], function () {
+      Route::get('create', [SuratKetUsahaController::class, 'create'])->name('create_usaha');
+      Route::post('store', [SuratKetUsahaController::class, 'store'])->name('store_usaha');
+      Route::get('show/{id}', [SuratKetUsahaController::class, 'show'])->name('show_usaha');
+      Route::get('edit/{id}', [SuratKetUsahaController::class, 'edit'])->name('edit_usaha');
+      Route::post('update/{id}', [SuratKetUsahaController::class, 'update'])->name('update_usaha');
+      Route::get('delete/{id}', [SuratKetUsahaController::class, 'delete'])->name('delete_usaha');
     });
   });
 

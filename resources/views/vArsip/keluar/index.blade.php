@@ -104,7 +104,7 @@
                     <tr>
                         <th>No</th>
                         <th>Jenis Surat</th>
-                        <th>Nama Pemohon</th>
+                        <th>Nama</th>
                         <th>No Surat</th>
                         <th>TGL Surat</th>
                         <th>Status Arsip</th>
