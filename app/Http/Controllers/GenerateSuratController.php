@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\Models\Surat\SuratKetTidakMampu as Surat;
+use Illuminate\Support\Facades\Storage;
 
 class GenerateSuratController extends Controller
 {
@@ -100,7 +101,8 @@ class GenerateSuratController extends Controller
 
     function insertImageTTD($filePath, $y = 200)
     {
-        $this->fpdf->Image(asset($filePath), 140, $y + 17, 44, 24);
+        $url = (__DIR__ . "/../../../");
+        $this->fpdf->Image($url . $filePath, 140, $y + 17, 44, 24);
     }
 
     function setLabelValue($label, $value, $style = "")

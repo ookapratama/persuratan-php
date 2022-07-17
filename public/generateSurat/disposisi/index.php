@@ -114,7 +114,7 @@ while ($row = mysqli_fetch_array($disposisi)) {
     $pdf->Cell(70, 10, $row['jabatan'], 0, 0); //jabatan
     $pdf->Ln(25);
 
-    $pdf->ttd('../../gambar/ttd2.png'); //ttd
+    $pdf->ttd('../../gambar/ttdSekdes.png'); //ttd
 
     $pdf->Cell(100, 10, '', 0, 0);
     $pdf->setFont('Times', 'BU', 12); // user_approve

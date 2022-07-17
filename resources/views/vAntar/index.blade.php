@@ -8,15 +8,16 @@
         $jenisSuratShow = array(
             "Surat Keterangan Tidak Mampu" => "show_sktm",
             "Surat Keterangan Domisili" => "show_domisili",
-            "Surat Keterangan Kematian" => "kematian",
+            "Surat Keterangan Kematian" => "show_mati",
             "Surat Keterangan Kehilangan" => "show_hilang",
             "Surat Keterangan Kelahiran" => "show_hilang",
+            "Surat Keterangan Usaha" => "show_usaha",
         );
     ?>
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 align="center"><strong>PENGANTARAN SURAT KELUAR</strong></h3>
+            <h3 class="text-center"><strong>PENGANTARAN SURAT KELUAR</strong></h3>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-striped">
