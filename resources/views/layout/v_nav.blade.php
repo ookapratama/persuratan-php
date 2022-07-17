@@ -20,11 +20,34 @@
         @endif
 
         @if(auth()->user()->level_id == 3 or auth()->user()->level_id == 4 or auth()->user()->level_id == 2 or auth()->user()->level_id == 1)
-            <li class="{{ request()->is('antar') ? 'active' : '' }}"><a href="/antar"><i class="fa fa-send"></i> <span>Pengantaran Surat</span></a></li>
+            <li class="{{ request()->is('antar') ? 'active' : '' }}">
+                <a href="/antar">
+                    <i class="fa fa-send"></i>
+                    <span>Pengantaran Surat 
+                        <span 
+                            class="badge badge-prima" 
+                            id="notifAntar" 
+                            style="margin-top: 0px; background-color: #fa2929; display:none">0
+                        </span>
+                    </span>
+                </a>
+            </li>
         @endif
 
         @if(auth()->user()->level_id == 4 or auth()->user()->level_id == 3 or auth()->user()->level_id == 2)
-            <li class="{{ request()->is('setuju') ? 'active' : '' }}"><a href="/setuju"><i class="fa fa-hourglass-start"></i> <span>Persetujuan</span></a></li>
+            <li class="{{ request()->is('setuju') ? 'active' : '' }}">
+                <a href="/setuju">
+                    <i class="fa fa-hourglass-start"></i>
+                    <span>Persetujuan 
+                        <span 
+                            class="badge badge-prima" 
+                            id="notifPersetujuan" 
+                            style="margin-top: 0px; background-color: #fa2929; display:none">0
+                        </span>
+                    </span>
+                </a>
+            </li>
+
             <li class="{{ request()->is('setujuAdmin') ? 'active' : '' }}"><a href="/setujuAdmin"><i class="fa fa-check-square-o"></i> <span>Surat Disetujui</span></a></li>
 
             <li class="treeview">

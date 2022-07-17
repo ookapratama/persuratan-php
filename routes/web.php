@@ -13,6 +13,7 @@ use App\Http\Controllers\KelolaUserController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\KelolaSuratController;
 use App\Http\Controllers\PersetujuanController;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\Surat\SuratKetHilangController;
 use App\Http\Controllers\Surat\SuratKetLahirController;
 use App\Http\Controllers\Surat\SuratKetDomisiliController;
@@ -39,6 +40,11 @@ Route::get('/', [HomeController::class, 'index']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'notif', 'namespace' => 'App\Http\Controllers'], function () {
+  Route::get('persetujuan', [NotifikasiController::class, 'CountUnapprove']);
+  Route::get('antar', [NotifikasiController::class, 'CountBelumAntar']);
+});
 
 //hak akses
 Route::group(['middleware' => 'admin'], function () {

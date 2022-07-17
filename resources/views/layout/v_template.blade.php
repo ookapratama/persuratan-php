@@ -267,8 +267,22 @@
     <script>
       $(document).ready(function () {
         $('.sidebar-menu').tree()
+
+        $.get('/notif/persetujuan').done(function(response){
+          if(response && response > 0){
+            $('#notifPersetujuan').show().text(response)
+          }
+        });
+
+        $.get('/notif/antar').done(function(response){
+          if(response && response > 0){
+            $('#notifAntar').show().text(response)
+          }
+        });
+
       });
     </script>
+    
 
 
 @yield('script')
