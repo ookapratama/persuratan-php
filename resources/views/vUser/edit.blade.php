@@ -29,7 +29,7 @@
         <label class="form-label">Level User</label>
         <select name="level_id" class="form-control" id="level_id">
             <option value="default">Pilih Level</option>
-            <option value="4" {{ $edit->level_id == '4' ? 'selected' : '' }}>Admin</option>
+            <option value="3" {{ $edit->level_id == '3' ? 'selected' : '' }}>Admin</option>
             <option value="2" {{ $edit->level_id == '2' ? 'selected' : '' }}>Pimpinan</option>
             <option value="1" {{ $edit->level_id == '1' ? 'selected' : '' }}>Kurir</option>
         </select>              
