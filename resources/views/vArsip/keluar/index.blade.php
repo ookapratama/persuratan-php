@@ -131,10 +131,14 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-primary fa fa-upload" onclick="upload({{ $data->id }})" title="upload"></a>
+                                @if(Auth::user()->level_id == 3)
+                                    <a class="btn btn-sm btn-primary fa fa-upload" onclick="upload({{ $data->id }})" title="upload"></a>
+                                @endif
                                 <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-warning fa fa-eye" title="detail"></a>
                                 <a href="generateSurat/{{ $jenisSuratGen[$data->jenis_surat] ?? '' }}/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
-                                <a onclick="hapus('{{ route($jenisSuratHapus[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-danger fa fa-trash" title="delete"></a>
+                                @if(Auth::user()->level_id == 3)
+                                    <a onclick="hapus('{{ route($jenisSuratHapus[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-danger fa fa-trash" title="delete"></a>
+                                @endif
                             </td>             
                         </tr> 
                     @endforeach

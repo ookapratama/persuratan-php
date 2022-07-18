@@ -147,6 +147,7 @@ Route::group(['middleware' => 'admin'], function () {
   });
 
   Route::group(['middleware' => 'superAdmin'], function () {
+
     Route::get('/user', [KelolaUserController::class, 'index'])->name('user');
     Route::get('/user/add', [KelolaUserController::class, 'add'])->name('user_add');
     Route::get('/user/read', [KelolaUserController::class, 'read'])->name('user_read');
@@ -155,16 +156,16 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/user/update/{id}', [KelolaUserController::class, 'update'])->name('user_update');
     Route::get('/user/delete/{id}', [KelolaUserController::class, 'delete'])->name('user_delete');
 
-    Route::get('/smasuk/add', [SuratMasukController::class, 'add']);
-    Route::post('/smasuk/insert', [SuratMasukController::class, 'insert']);
-    Route::get('/edit/{id_suratmasuk}', [SuratMasukController::class, 'edit']);
-    Route::post('/smasuk/update/{id_suratmasuk}', [SuratMasukController::class, 'update']);
-    Route::get('/smasuk/delete/{id_suratmasuk}', [SuratMasukController::class, 'delete']);
+    // Route::get('/smasuk/add', [SuratMasukController::class, 'add']);
+    // Route::post('/smasuk/insert', [SuratMasukController::class, 'insert']);
+    // Route::get('/edit/{id_suratmasuk}', [SuratMasukController::class, 'edit']);
+    // Route::post('/smasuk/update/{id_suratmasuk}', [SuratMasukController::class, 'update']);
+    // Route::get('/smasuk/delete/{id_suratmasuk}', [SuratMasukController::class, 'delete']);
   });
 
-  Route::group(['middleware' => 'kepalaDesa'], function () {
-  });
+  // Route::group(['middleware' => 'kepalaDesa'], function () {
+  // });
 
-  Route::group(['middleware' => 'kurir'], function () {
-  });
+  // Route::group(['middleware' => 'kurir'], function () {
+  // });
 });
