@@ -40,7 +40,7 @@ class GenerateSuratController extends Controller
                 $this->printBodySuratKehilangan($surat);
                 break;
             case "kematian":
-                //   $this->printBodySuratSKTM($surat);
+                $this->printBodySuratKematian($surat);
                 break;
         }
 
@@ -98,7 +98,7 @@ class GenerateSuratController extends Controller
         setlocale(LC_ALL, 'id-ID', 'id_ID');
         $tglIndo = strftime("%d %B %Y", strtotime($dataSurat->tgl_surat ?? "-"));
 
-        $this->fpdf->Ln(9);
+        $this->fpdf->Ln(7.5);
         $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', '', 12);
         $this->fpdf->Cell(1, 5, 'Lampenai, ' . $tglIndo, 0, 1, 'C');
@@ -132,7 +132,7 @@ class GenerateSuratController extends Controller
         $this->fpdf->Cell(67);
         $this->fpdf->SetFont('Times', $style, 12);
         $this->fpdf->Cell(0, -17, $value, 0, 1, 'L');
-        $this->fpdf->Ln(16);
+        $this->fpdf->Ln(11.5);
 
         $this->fpdf->SetFont('Times', '', 12);
     }
@@ -161,7 +161,7 @@ class GenerateSuratController extends Controller
 
         $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, 'Nomor : ' . ($dataSurat->no_surat ?? "-"), 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, 'Nomor : ' . strtoupper($dataSurat->no_surat ?? "-"), 0, 1, 'C');
         $this->fpdf->Ln(12);
 
         // $this->fpdf->Cell(20);
@@ -172,8 +172,10 @@ class GenerateSuratController extends Controller
             if ($label == 'Nama') {
                 $value = strtoupper($value);
                 $this->setLabelValue($label, $value, 'B');
+                $this->fpdf->Ln(4);
             } else {
                 $this->setLabelValue($label, $value);
+                $this->fpdf->Ln(4);
             }
         }
 
@@ -185,8 +187,10 @@ class GenerateSuratController extends Controller
             if ($label == 'Nama') {
                 $value = strtoupper($value);
                 $this->setLabelValue($label, $value, 'B');
+                $this->fpdf->Ln(4);
             } else {
                 $this->setLabelValue($label, $value);
+                $this->fpdf->Ln(4);
             }
         }
 
@@ -222,7 +226,7 @@ class GenerateSuratController extends Controller
 
         $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, 'Nomor : ' . ($dataSurat->no_surat ?? "-"), 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, 'Nomor : ' . strtoupper($dataSurat->no_surat ?? "-"), 0, 1, 'C');
         $this->fpdf->Ln(9);
 
         // $this->fpdf->Cell(1);
@@ -234,8 +238,10 @@ class GenerateSuratController extends Controller
             if ($label == 'Nama') {
                 $value = strtoupper($value);
                 $this->setLabelValue($label, $value, 'B');
+                $this->fpdf->Ln(3);
             } else {
                 $this->setLabelValue($label, $value);
+                $this->fpdf->Ln(3);
             }
         }
 
@@ -258,7 +264,6 @@ class GenerateSuratController extends Controller
             "Agama" => $dataSurat->agama ?? "-",
             "Pekerjaan" => $dataSurat->pekerjaan ?? "-",
             "Alamat" => $dataSurat->alamat ?? "-",
-
         ];
 
         $this->fpdf->Ln(7);
@@ -298,7 +303,7 @@ class GenerateSuratController extends Controller
         $this->fpdf->Ln(-7);
         $this->fpdf->Cell(10);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, ($dataSurat->no_surat ?? "-"), 0, 1, 'L');
+        $this->fpdf->Cell(1, 5, strtoupper($dataSurat->no_surat ?? "-"), 0, 1, 'L');
         $this->fpdf->Ln(2);
 
         $this->fpdf->Cell(-10);
@@ -346,8 +351,10 @@ class GenerateSuratController extends Controller
             if ($label == 'Nama') {
                 $value = strtoupper($value);
                 $this->setLabelValue($label, $value, 'B');
+                $this->fpdf->Ln(3);
             } else {
                 $this->setLabelValue($label, $value);
+                $this->fpdf->Ln(3);
             }
         }
 
@@ -362,5 +369,74 @@ class GenerateSuratController extends Controller
         $this->fpdf->Cell(0, 7, '       Demikian surat keterangan ini kami buat untuk ditindak lanjuti.', 0, 1, '');
     }
 
-    // todo: function GenerateKeteranganTidakMampu
+    // todo: function GenerateKematian
+    function printBodySuratKematian($dataSurat)
+    {
+        $pemohon = [
+            "Nama" => $dataSurat->nama_pemohon ?? "-",
+            "NIK" => $dataSurat->nik ?? "-",
+            "No. KK" => $dataSurat->no_kk ?? "-",
+            "Tempat/Tanggal Lahir" => ($dataSurat->tempat_lahir ?? "-") . ", " . ($dataSurat->tgl_lahir ?? "-"), // date_format($dataSurat->tgl_lahir, "d-m-Y")
+            "Jenis Kelamin" => $dataSurat->jenis_kelamin ?? "-",
+            "Kewarganegaraan" => $dataSurat->warga_negara ?? "-",
+            "Agama" => $dataSurat->agama ?? "-",
+            "Status Perkawinan" => $dataSurat->status_kawin ?? "-",
+            "Pekerjaan" => $dataSurat->pekerjaan ?? "-",
+            "Alamat" => $dataSurat->alamat ?? "-",
+        ];
+
+        $dataMati = [
+            "Hari/Tanggal" => ($dataSurat->hari_mati ?? "-") . ", " . ($dataSurat->tgl_mati ?? "-"), // date_format($dataSurat->tgl_lahir, "d-m-Y")
+            "Tempat Kematian" => $dataSurat->tempat_mati ?? "-",
+            "Kecamatan" => $dataSurat->kecamatan ?? "-",
+            "Kabupaten/Kota" => $dataSurat->kabupaten ?? "-",
+            "Provinsi" => $dataSurat->provinsi ?? "-",
+            "Sebab Kematian" => $dataSurat->sebab_mati ?? "-",
+            "Yang Menentukan" => "...........................................",
+            "Keterangan Visum" => "...........................................",
+        ];
+
+        $this->fpdf->Ln(4.5);
+        $this->fpdf->SetFont('Times', 'BU', 12);
+        $this->fpdf->Cell(73);
+        $this->fpdf->Cell(1, 5, 'SURAT KETERANGAN KEMATIAN', 0, 1, 'C');
+        $this->fpdf->Ln(0.1);
+
+        $this->fpdf->Cell(73);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, 'Nomor : ' . strtoupper($dataSurat->no_surat ?? "-"), 0, 1, 'C');
+        $this->fpdf->Ln(4);
+
+        // $this->fpdf->Ln(2);
+        // $this->fpdf->Cell(10);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->MultiCell(0, 6, '       Yang bertanda tangan di bawah ini ' . ($dataSurat->approve_by->jabatan ?? "-") . ' Lampenai menerangkan dengan sesungguhnya bahwa:', 0, 'J', false);
+        $this->fpdf->Ln(2);
+
+        foreach ($pemohon as $label => $value) {
+            if ($label == 'Nama') {
+                $value = strtoupper($value);
+                $this->setLabelValue($label, $value, 'B');
+                $this->fpdf->Ln(1.5);
+            } else {
+                $this->setLabelValue($label, $value);
+                $this->fpdf->Ln(1.5);
+            }
+        }
+
+        // $this->fpdf->Ln(1.5);
+        // $this->fpdf->Cell(10);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(0, 7, 'Telah meninggal dunia pada:', 0, 1, 'L');
+        $this->fpdf->Ln(1.5);
+
+        foreach ($dataMati as $label => $value) {
+            $this->setLabelValue($label, $value);
+            $this->fpdf->Ln(1.5);
+        }
+
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(0, 7, 'Demikian Surat Keterangan Kematian ini kami buat untuk dipergunakan seperlunya.', 0, 1, 'L');
+        // $this->fpdf->Ln(1.5);
+    }
 }
