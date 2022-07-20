@@ -49,6 +49,8 @@ Route::group(['prefix' => 'notif', 'namespace' => 'App\Http\Controllers'], funct
 //hak akses
 Route::group(['middleware' => 'admin'], function () {
   Route::get('cetak/{type}/{id}', [GenerateSuratController::class, 'generateSurat'])->name('cetak_surat');
+  Route::get('cetak-disposisi/{id}', [GenerateSuratController::class, 'generateDisposisi'])->name('cetak_disposisi');
+
   Route::get('/skeluar', [SuratKeluarController::class, 'index']);
 
   Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi');

@@ -38,7 +38,7 @@
                             <td><a href="{{ asset('storage/file-suratMasuk/'.$data->file_surat) }}" class="btn btn-sm btn-info" target="_blank">File</a></td>
                             <td>
                                 <a class="btn btn-sm btn-warning fa fa-eye" onclick="show({{ $data->id }})" title="detail"></a>
-                                <a href="generateSurat/disposisi/index.php?data={{ base64_encode($data->id) }}" target="_blank" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
+                                <a href="{{ route('cetak_disposisi', base64_encode($data->id))}}" target="_blank" class="btn btn-sm btn-primary fa fa-print" title="cetak"></a>
                                 <a onclick="arsip(`{{ route('surat_arsip',$data->id) }}`)" class="btn btn-sm btn-success fa fa-archive" title="Arsip"></a>
                             </td>
                         </tr>

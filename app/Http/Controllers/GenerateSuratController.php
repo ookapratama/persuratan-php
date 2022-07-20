@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\Models\Surat\SuratKetTidakMampu as Surat;
+use App\Models\Disposisi;
 use Illuminate\Support\Facades\Storage;
 
 class GenerateSuratController extends Controller
@@ -53,6 +54,112 @@ class GenerateSuratController extends Controller
         exit;
     }
 
+    function generateDisposisi($id)
+    {
+        $id = base64_decode($id);
+
+        $disposisi = Disposisi::where("id", $id)->first();
+
+        $this->fpdf->Cell(93);
+        $this->fpdf->SetFont('Times', 'B', 16);
+        $this->fpdf->Cell(1, 5, 'LEMBAR DISPOSISI', 0, 1, 'C');
+        $this->fpdf->Ln(5);
+
+        $this->fpdf->setFont('Times', '', 12);
+
+        $this->fpdf->Cell(-10);
+        $this->fpdf->Cell(85, 10, 'Indeks : ' . ($disposisi->perihal ?? "-"), 1, 0); // perihal
+        $this->fpdf->Cell(85, 10, 'Kode : ' . ($disposisi->kode_surat ?? "-"), 1, 0); //kode surat
+        $this->fpdf->Ln(10);
+
+        $this->fpdf->Cell(-10);
+        $this->fpdf->Cell(170, 175, '', 1, 0); //manual
+        $this->fpdf->Ln(0);
+
+        $suratMasuk = [
+            "Tanggal/Nomor" => date("d-m-Y", strtotime($disposisi->tgl_surat ?? "-")) . ' / ' . strtoupper($disposisi->no_surat ?? "-"),
+            "Asal Surat" => ($disposisi->asal_surat ?? "-"),
+            "Diterima Tanggal" => date("d-m-Y", strtotime($disposisi->tgl_terima ?? "-")),
+            "Tanggal Penyelesaian" => date("d-m-Y", strtotime($disposisi->tgl_selesai ?? "-")),
+            "Isi Ringkas" => ($disposisi->isi_ringkas ?? "-"),
+        ];
+
+        foreach ($suratMasuk as $label => $value) {
+            $this->fpdf->Cell(-10);
+            $this->fpdf->Cell(42, 10, $label, 0, 0); //tgl dan no surat
+            $this->fpdf->Cell(2, 10, ':', 0, 0);
+            $this->fpdf->Cell(126, 10, $value, 0, 0);
+            $this->fpdf->Ln(9);
+        }
+
+        $this->fpdf->Cell(-10);
+        $this->fpdf->Cell(85, 14, 'ISI DISPOSISI', 1, 0, 'C');
+        $this->fpdf->Cell(85, 7, 'Disalurkan', 1, 0, 'C');
+        $this->fpdf->Ln(7);
+        $this->fpdf->Cell(-10);
+        $this->fpdf->Cell(85, 7, '', 0, 0,);
+        $this->fpdf->Cell(60, 7, 'Kepada', 1, 0, 'C');
+        $this->fpdf->Cell(25, 7, 'Paraf', 1, 0, 'C');
+        $this->fpdf->Ln(7);
+
+        $this->fpdf->Cell(85, 8.5, '', 0, 1);
+        $this->fpdf->Ln(-8.5);
+        $this->fpdf->Cell(-10);
+        $this->fpdf->Cell(85, 59.5, '', 1, 0,);
+        $this->fpdf->Cell(60, 8.5, '1. Kaur Tata Usaha & Umum', 1, 0,);
+        $this->fpdf->Cell(25, 8.5, '', 1, 0,);
+        $this->fpdf->Ln(8.5);
+
+        $text = "";
+        $arr = array(
+            // "1. Kaur Tata Usaha & Umum",
+            "2. Kaur Perencanaan",
+            "3. Kaur Keuangan",
+            "4. Kasi Pemerintah",
+            "5. Kasi Kesejahteraan",
+            "6. Kasi Pelayanan", "7."
+        );
+
+        foreach ($arr as $text) {
+            $this->fpdf->Cell(85, 50, '', 0, 0,);
+            $this->fpdf->Cell(-10);
+            $this->fpdf->Cell(60, 8.5, $text, 1, 0,);
+            $this->fpdf->Cell(25, 8.5, '', 1, 0,);
+            if ($text == "7.") {
+                $this->fpdf->Ln(13);
+            } else {
+                $this->fpdf->Ln(8.5);
+            }
+        }
+
+        $this->fpdf->Cell(100, 10, '', 0, 0);
+        $this->fpdf->Cell(70, 10, 'Lampenai, ' . $this->tglIndo($disposisi->tgl_disposisi ?? "-"), 0, 0); //tgl disposisi
+        $this->fpdf->Ln(6);
+
+        $this->fpdf->Cell(100, 10, '', 0, 0);
+        $this->fpdf->Cell(70, 10, ($disposisi->approve_by->jabatan ?? "-"), 0, 0); //jabatan
+        $this->fpdf->Ln(25); //184
+
+        $currentY = $this->fpdf->getY();
+        $url = (__DIR__ . "/../../../");
+        $file = $disposisi->approve_by->ttd;
+        $this->fpdf->Image($url . $file, 132, $currentY - 18, 44, 24);
+
+
+        $this->fpdf->Ln(4.5);
+        $this->fpdf->Cell(100, 10, '', 0, 0);
+        $this->fpdf->setFont('Times', 'BU', 12); // user_approve
+        $this->fpdf->Cell(70, 10, strtoupper($disposisi->approve_by->name ?? "-"), 0, 0);
+
+        $this->fpdf->Ln(-98); //isi disposisi
+        $this->fpdf->Cell(-9);
+        $this->fpdf->setFont('Times', '', 12);
+        $this->fpdf->MultiCell(83, 6, ($disposisi->isi_disposisi ?? "-"), 0, 'J', false);
+
+        $this->fpdf->Output();
+        exit;
+    }
+
     function printKopSurat($gambar = 'gambar/logo-lutim.png')
     {
         $this->fpdf->Image(public_path($gambar), 93, 4, 17, 20);
@@ -82,21 +189,19 @@ class GenerateSuratController extends Controller
         $this->fpdf->Line(10, 49.8, 200, 49.8);
     }
 
-    // function tglIndo($tanggal)
-    // {
-    //     $bulan = array(
-    //         1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-    //     );
+    function tglIndo($tanggal)
+    {
+        $bulan = array(
+            1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        );
 
-    //     $pecah = explode('-', $tanggal);
-    //     return $pecah[2] . ' ' . $bulan[(int)$pecah[1]] . ' ' . $pecah[0];
-    // }
+        $pecah = explode('-', $tanggal);
+        return substr($pecah[2], 0, 2) . ' ' . $bulan[(int)$pecah[1]] . ' ' . $pecah[0];
+    }
 
     function printPenandatangan($dataSurat)
     {
-        //set tgl indo
-        setlocale(LC_ALL, 'id-ID', 'id_ID');
-        $tglIndo = strftime("%d %B %Y", strtotime($dataSurat->tgl_surat ?? "-"));
+        $tglIndo = $this->tglIndo($dataSurat->tgl_surat ?? "-");
 
         $this->fpdf->Ln(7.5);
         $this->fpdf->Cell(130);
@@ -145,9 +250,10 @@ class GenerateSuratController extends Controller
             "Jabatan" => $dataSurat->approve_by->jabatan ?? "-",
         ];
 
+        $dataTgl = date("d-m-Y", strtotime($dataSurat->tgl_lahir));
         $pemohon = [
             "Nama" => $dataSurat->nama_pemohon ?? "-",
-            "Tempat/Tanggal Lahir" => ($dataSurat->tempat_lahir ?? "-") . ", " . ($dataSurat->tgl_lahir ?? "-"), // date_format($dataSurat->tgl_lahir, "d-m-Y") 
+            "Tempat/Tanggal Lahir" => ($dataSurat->tempat_lahir ?? "-") . ", " . ($dataTgl),
             "NIK" => $dataSurat->nik ?? "-",
             "Pekerjaan" => $dataSurat->pekerjaan ?? "-",
             "Alamat" => $dataSurat->alamat ?? "-",
