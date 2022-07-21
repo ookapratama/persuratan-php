@@ -146,6 +146,15 @@ Route::group(['middleware' => 'admin'], function () {
       Route::post('update/{id}', [SuratKetUsahaController::class, 'update'])->name('update_usaha');
       Route::get('delete/{id}', [SuratKetUsahaController::class, 'delete'])->name('delete_usaha');
     });
+
+    Route::group(['prefix' => 'baik'], function () {
+      Route::get('create', [SuratKetBaikController::class, 'create'])->name('create_baik');
+      Route::post('store', [SuratKetBaikController::class, 'store'])->name('store_baik');
+      Route::get('show/{id}', [SuratKetBaikController::class, 'show'])->name('show_baik');
+      Route::get('edit/{id}', [SuratKetBaikController::class, 'edit'])->name('edit_baik');
+      Route::post('update/{id}', [SuratKetBaikController::class, 'update'])->name('update_baik');
+      Route::get('delete/{id}', [SuratKetBaikController::class, 'delete'])->name('delete_baik');
+    });
   });
 
   Route::group(['middleware' => 'superAdmin'], function () {

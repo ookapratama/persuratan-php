@@ -12,6 +12,7 @@
             "Surat Keterangan Kehilangan" => "show_hilang",
             "Surat Keterangan Kelahiran" => "show_hilang",
             "Surat Keterangan Usaha" => "show_usaha",
+            "Surat Keterangan Berkelakuan Baik" => "show_baik",
         );
     ?>
 

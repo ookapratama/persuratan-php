@@ -12,6 +12,7 @@
             "Surat Keterangan Kelahiran" => "show_lahir",
             "Surat Keterangan Domisili" => "show_domisili",
             "Surat Keterangan Usaha" => "show_usaha",
+            "Surat Keterangan Berkelakuan Baik" => "show_baik",
         );
 
         $jenisSuratEdit = array(
@@ -21,6 +22,7 @@
             "Surat Keterangan Kelahiran" => "edit_lahir",
             "Surat Keterangan Domisili" => "edit_domisili",
             "Surat Keterangan Usaha" => "edit_usaha",
+            "Surat Keterangan Berkelakuan Baik" => "edit_baik",
         );
 
         $jenisSuratHapus = array(
@@ -30,6 +32,7 @@
             "Surat Keterangan Kelahiran" => "delete_lahir",
             "Surat Keterangan Domisili" => "delete_domisili",
             "Surat Keterangan Usaha" => "delete_usaha",
+            "Surat Keterangan Berkelakuan Baik" => "delete_baik",
         );
 
         $jenisSuratGen = array(
@@ -39,6 +42,7 @@
             "Surat Keterangan Kelahiran" => "kelahiran",
             "Surat Keterangan Domisili" => "domisili",
             "Surat Keterangan Usaha" => "usaha",
+            "Surat Keterangan Berkelakuan Baik" => "baik",
         );
     ?>
     <div class="box box-primary">
@@ -54,6 +58,7 @@
                         <option data-route="{{ route('create_domisili') }}">SURAT KETERANGAN DOMISILI</option>
                         <option data-route="{{ route('create_mati') }}">SURAT KETERANGAN KEMATIAN</option>
                         <option data-route="{{ route('create_usaha') }}">SURAT KETERANGAN USAHA</option>
+                        <option data-route="{{ route('create_baik') }}">SURAT KETERANGAN BERKELAKUAN BAIK</option>
                     </select>
                 </div>
                 <div class="col">
@@ -664,6 +669,85 @@
                             valueNotEquals: "Pilih salah satu"
                         },
                         tgl_surat : "Tgl surat harus diisi",
+                        is_antar: {
+                            valueNotEquals: "Pilih salah satu"
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '#btnCreateBaik', function() {
+                $.validator.addMethod('valueNotEquals', function(value, element, arg) {
+                    return arg !== value;
+                });
+
+                $('#formCreateBaik').validate({
+                    rules: {
+                        user_approve: {
+                            valueNotEquals: "default"
+                        },
+                        no_surat: {
+                            required: true
+                        },
+                        tgl_surat: {
+                            required: true
+                        },
+                        nama_pemohon: {
+                            required: true
+                        },
+                        jenis_kelamin: {
+                            valueNotEquals: "default"
+                        },
+                        tempat_lahir: {
+                            required: true
+                        },
+                        tgl_lahir: {
+                            required: true
+                        },
+                        nik: {
+                            required: true,
+                            minlength: 16,
+                            maxlength: 16
+                        },
+                        status_kawin: {
+                            valueNotEquals: "default"
+                        },
+                        warga_negara: {
+                            required: true
+                        },
+                        pekerjaan: {
+                            required: true
+                        },
+                        alamat: {
+                            required: true
+                        },
+                        is_antar: {
+                            valueNotEquals: "default"
+                        },
+                    },
+                    messages: {
+                        user_approve: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        no_surat : "No surat harus diisi",
+                        tgl_surat : "Tgl surat harus diisi",
+                        nama_pemohon : "Nama pemohon harus diisi",
+                        jenis_kelamin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        tempat_lahir : "Tempat lahir harus diisi",
+                        tgl_lahir : "Tgl lahir harus diisi",
+                        nik : {
+                            required: "NIK harus diisi",
+                            minlength: "Jumlah karakter kurang",
+                            maxlength: "Jumlah karakter lebih"
+                        },
+                        status_kawin: {
+                            valueNotEquals: "Pilih salah satu"
+                        },
+                        warga_negara : "Warga negara harus diisi",
+                        pekerjaan : "Pekerjaan harus diisi",
+                        alamat : "Alamat harus diisi",
                         is_antar: {
                             valueNotEquals: "Pilih salah satu"
                         }

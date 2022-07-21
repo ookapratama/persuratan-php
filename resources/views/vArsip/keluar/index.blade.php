@@ -10,6 +10,8 @@
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "kehilangan",
             "Surat Keterangan Kelahiran" => "kelahiran",
+            "Surat Keterangan Usaha" => "usaha",
+            "Surat Keterangan Berkelakuan Baik" => "baik",
 
         );
 
@@ -19,6 +21,8 @@
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "show_hilang",
             "Surat Keterangan Kelahiran" => "show_lahir",
+            "Surat Keterangan Usaha" => "show_usaha",
+            "Surat Keterangan Berkelakuan Baik" => "show_baik",
         );
 
         $jenisSuratHapus = array(
@@ -27,6 +31,8 @@
             "Surat Keterangan Kematian" => "kematian",
             "Surat Keterangan Kehilangan" => "delete_hilang",
             "Surat Keterangan Kelahiran" => "delete_lahir",
+            "Surat Keterangan Usaha" => "delete_usaha",
+            "Surat Keterangan Berkelakuan Baik" => "delete_baik",
 
         );
 
