@@ -32,7 +32,7 @@
         </a>
     </li>
 
-    @if(auth()->user()->level_id == 2 or auth()->user()->level_id == 3)
+    @if(auth()->user()->level_id == 2)
         <li class="{{ request()->is('setuju') ? 'active' : '' }}">
             <a href="/setuju">
                 <i class="fa fa-hourglass-start"></i>
