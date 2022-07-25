@@ -31,7 +31,7 @@
                 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Tanggal Surat</label>
-                    <input type="date" name="tgl_surat" id="tgl_surat" class="form-control">                       
+                    <input type="date" name="tgl_surat" id="tgl_surat" class="form-control" value="{{ (new DateTime())->format('Y-m-d'); }}">                       
                 </div>
 
                 <div class="col-md-3">

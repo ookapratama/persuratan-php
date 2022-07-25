@@ -31,17 +31,17 @@
 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Tanggal Terima Surat</label>
-                    <input type="date" name="tgl_terima" id="tgl_terima" class="form-control">
+                    <input type="date" name="tgl_terima" id="tgl_terima" class="form-control" value="{{ (new DateTime())->format('Y-m-d'); }}">
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Tanggal Penyelesaian</label>
-                    <input type="date" name="tgl_selesai" id="tgl_selesai" class="form-control">
+                    <input type="date" name="tgl_selesai" id="tgl_selesai" class="form-control" value="{{ (new DateTime())->format('Y-m-d'); }}">
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Tanggal Disposisi</label>
-                    <input type="date" name="tgl_disposisi" id="tgl_disposisi" class="form-control">
+                    <input type="date" name="tgl_disposisi" id="tgl_disposisi" class="form-control" value="{{ (new DateTime())->format('Y-m-d'); }}">
                 </div>
 
                 <div class="col-md-6">
