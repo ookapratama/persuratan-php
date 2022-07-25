@@ -59,10 +59,11 @@ class GenerateSuratController extends Controller
         $this->printPenandatangan($surat);
         $this->insertImageTTD($surat->approve_by->ttd, $currentY);
 
-        // if ($this->printBodySuratBaik($surat)) {
-        //     $this->fpdf->AddPage('P', 'A4');
-        //     $this->fpdf->SetMargins(30, 10, 30);
-        // }
+        if ($type == "baik") {
+            $this->fpdf->AddPage('P', 'A4');
+            $this->fpdf->SetMargins(30, 10, 30);
+            $this->printBodySuratBaik2($surat);
+        }
 
         $this->fpdf->Output();
         exit;
@@ -741,5 +742,99 @@ class GenerateSuratController extends Controller
 
         // $this->fpdf->AddPage('P', 'A4');
         // $this->fpdf->SetMargins(30, 10, 30);
+    }
+
+    function printBodySuratBaik2($dataSurat)
+    {
+        $pemohon = [
+            "Nama" => $dataSurat->nama_pemohon ?? "-",
+            "Tempat/Tanggal Lahir" => ($dataSurat->tempat_lahir ?? "-") . ", " . date("d-m-Y", strtotime($dataSurat->tgl_lahir ?? "-")),
+            "NIK" => $dataSurat->nik ?? "-",
+            "Jenis Kelamin" => $dataSurat->jenis_kelamin ?? "-",
+            "Status Perkawinan" => $dataSurat->status_kawin ?? "-",
+            "Kewarganegaraan" => $dataSurat->warga_negara ?? "-",
+            "Pekerjaan" => $dataSurat->pekerjaan ?? "-",
+            "Alamat" => $dataSurat->alamat ?? "-",
+        ];
+
+        $this->fpdf->Ln(10);
+        $tglIndo = $this->tglIndo($dataSurat->tgl_surat ?? "-");
+        $this->fpdf->Cell(105);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, 'Lampenai, ' . $tglIndo, 0, 1, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->Ln(2);
+        $this->fpdf->Cell(105);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, 'Kepada', 0, 1, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->Cell(105);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, 'Yth. Bapak Kapolsek Wotu', 0, 1, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->Cell(105);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, 'Di', 0, 1, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->Cell(105);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, '        Wotu', 0, 1, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->Cell(-10);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, 'Perihal', 0, 1, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->Ln(-7);
+        $this->fpdf->Cell(8);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, ':', 0, 1, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->Ln(-7);
+        $this->fpdf->Cell(10);
+        $this->fpdf->SetFont('Times', 'B', 12);
+        $this->fpdf->MultiCell(70, 5, 'Permohonan Surat Keterangan Berkelakuan Baik', 0, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Ln(5);
+        $this->fpdf->Cell(1, 5, 'Dengan Hormat,', 0, 1, 'L');
+        $this->fpdf->Ln(2);
+
+        $this->fpdf->Cell(1, 5, 'Yang bertanda tangan dibawah ini:', 0, 1, 'L');
+        $this->fpdf->Ln(5);
+
+        foreach ($pemohon as $label => $value) {
+            if ($label == 'Nama') {
+                $value = strtoupper($value);
+                $this->setLabelValue($label, $value, 'B');
+                $this->fpdf->Ln(3);
+            } else {
+                $this->setLabelValue($label, $value);
+                $this->fpdf->Ln(3);
+            }
+        }
+
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->MultiCell(0, 7, 'Dengan ini bermohon Kepada Bapak kiranya dapat diberikan Surat Keterangan Berkelakuan Baik untuk kelengkapan berkas.', 0, 'J', false);
+        $this->fpdf->Ln(3);
+
+        $this->fpdf->MultiCell(0, 7, 'Demikian permohonan saya buat atas bantuan Bapak saya ucapkan terima kasih.', 0, 'J', false);
+
+        $this->fpdf->Ln(10);
+        $this->fpdf->Cell(130);
+        $this->fpdf->SetFont('Times', '', 12);
+        $this->fpdf->Cell(1, 5, 'Hormat Saya,', 0, 1, 'C');
+        $this->fpdf->Ln(20);
+
+        $this->fpdf->Cell(130);
+        $this->fpdf->SetFont('Times', 'BU', 12);
+        $this->fpdf->Cell(1, 5, strtoupper($dataSurat->nama_pemohon) ?? "-", 0, 1, 'C');
     }
 }
