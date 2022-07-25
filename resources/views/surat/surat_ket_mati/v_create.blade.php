@@ -115,17 +115,17 @@
                 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Kecamatan</label>
-                    <input type="text" name="kecamatan" id="kecamatan" class="form-control">
+                    <input type="text" name="kecamatan" id="kecamatan" class="form-control" value="Wotu">
                 </div>
                 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Kabupaten</label>
-                    <input type="text" name="kabupaten" id="kabupaten" class="form-control">
+                    <input type="text" name="kabupaten" id="kabupaten" class="form-control" value="Luwu Timur">
                 </div>
                 
                 <div class="col-md-3">
                     <label class="form-label" style="margin-top: 10px">Provinsi</label>
-                    <input type="text" name="provinsi" id="provinsi" class="form-control">
+                    <input type="text" name="provinsi" id="provinsi" class="form-control" value="Sulawesi Selatan">
                 </div>
                 
                 <div class="col-md-3">
