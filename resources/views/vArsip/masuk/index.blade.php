@@ -112,7 +112,7 @@
                                     <a class="btn btn-sm btn-primary fa fa-upload" onclick="upload({{ $data->id }})" title="upload"></a>
                                 @endif
                                 <a class="btn btn-sm btn-warning fa fa-eye" onclick="show(`{{ route('show_disposisi', $data->id) }}`)" title="detail"></a>
-                                <a class="btn btn-sm btn-success fa fa-print" href="generateSurat/disposisi/index.php?data={{ base64_encode($data->id) }}" target="_blank" title="cetak"></a>
+                                <a class="btn btn-sm btn-success fa fa-print" href="{{ route('cetak_disposisi', base64_encode($data->id))}}" target="_blank" title="cetak"></a>
                                 @if(Auth::user()->level_id == 3)
                                     <a class="btn btn-sm btn-danger fa fa-trash" onclick="hapus(`{{ route('delete_disposisi', $data->id) }}`)" title="Hapus"></a>
                                 @endif

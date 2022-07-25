@@ -6,7 +6,7 @@
     </div>
     
     <div class="form-group">
-        <label class="form-label">Alamat</label>
+        <label class="form-label">Email</label>
         <input type="email" name="email" id="email" class="form-control" placeholder="Alamat Email">                   
     </div>
     
