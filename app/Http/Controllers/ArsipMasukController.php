@@ -49,8 +49,8 @@ class ArsipMasukController extends Controller
         $tahun = $request->get('tahun');
 
         $filter = Surat::where("status_arsip", "Y")
-            ->whereMonth("tgl_surat", $bulan)
-            ->whereYear("tgl_surat", $tahun)
+            ->whereMonth("tgl_disposisi", $bulan)
+            ->whereYear("tgl_disposisi", $tahun)
             ->get();
 
         return view('vArsip.masuk.index', [
