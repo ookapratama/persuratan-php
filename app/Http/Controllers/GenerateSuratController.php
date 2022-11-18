@@ -148,7 +148,7 @@ class GenerateSuratController extends Controller
         }
 
         $this->fpdf->Cell(100, 10, '', 0, 0);
-        $this->fpdf->Cell(70, 10, 'Lampenai, ' . $this->tglIndo($disposisi->tgl_disposisi ?? "-"), 0, 0); //tgl disposisi
+        $this->fpdf->Cell(70, 10, 'Digital, ' . $this->tglIndo($disposisi->tgl_disposisi ?? "-"), 0, 0); //tgl disposisi
         $this->fpdf->Ln(6);
 
         $this->fpdf->Cell(100, 10, '', 0, 0);
@@ -221,7 +221,7 @@ class GenerateSuratController extends Controller
         $this->fpdf->Ln(7.5);
         $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, 'Lampenai, ' . $tglIndo, 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, 'Digital, ' . $tglIndo, 0, 1, 'C');
 
         $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', '', 12);
@@ -538,7 +538,7 @@ class GenerateSuratController extends Controller
         // $this->fpdf->Ln(2);
         // $this->fpdf->Cell(10);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->MultiCell(0, 6, 'Yang bertanda tangan di bawah ini ' . ($dataSurat->approve_by->jabatan ?? "-") . ' Lampenai menerangkan dengan sesungguhnya bahwa:', 0, 'J', false);
+        $this->fpdf->MultiCell(0, 6, 'Yang bertanda tangan di bawah ini ' . ($dataSurat->approve_by->jabatan ?? "-") . ' Digital menerangkan dengan sesungguhnya bahwa:', 0, 'J', false);
         $this->fpdf->Ln(2);
 
         foreach ($pemohon as $label => $value) {
@@ -761,7 +761,7 @@ class GenerateSuratController extends Controller
         $tglIndo = $this->tglIndo($dataSurat->tgl_surat ?? "-");
         $this->fpdf->Cell(105);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, 'Lampenai, ' . $tglIndo, 0, 1, 'L');
+        $this->fpdf->Cell(1, 5, 'Digital, ' . $tglIndo, 0, 1, 'L');
         $this->fpdf->Ln(2);
 
         $this->fpdf->Ln(2);
