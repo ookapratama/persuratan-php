@@ -52,7 +52,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">SIM</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">SIM Desa Lampenai</span>
+          <span class="logo-lg">SIM Desa Digital</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -162,7 +162,7 @@
       <!-- /.content-wrapper -->
 
       <footer class="main-footer">
-        <strong>Copyright &copy; 2022 <span style="color:#3C8DBC;">Desa Lampenai</span>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2022 <span style="color:#3C8DBC;">Desa Digital</span>.</strong> All rights reserved.
       </footer>
 
       <!-- Add the sidebar's background. This div must be placed

@@ -192,7 +192,7 @@ class GenerateSuratController extends Controller
 
         $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', 'B', 16);
-        $this->fpdf->Cell(1, 5, 'DESA LAMPENAI', 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, 'DESA DIGITAL', 0, 1, 'C');
 
         $this->fpdf->Cell(73);
         $this->fpdf->SetFont('Times', '', 10);
@@ -489,7 +489,7 @@ class GenerateSuratController extends Controller
         $this->fpdf->Ln(4);
         $this->fpdf->Cell(-10);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->MultiCell(0, 7, 'Nama tersebut di atas benar adalah penduduk Desa Lampenai Kec. Wotu Kab. Luwu Timur dan nama tersebut benar memiliki ' . ($dataSurat->benda_hilang ?? "-") . ' dan ' .  ($dataSurat->benda_hilang ?? "-") . ' tersebut telah hilang atau tercecer di sekitar Kecamatan Wotu.', 0, 'J', false);
+        $this->fpdf->MultiCell(0, 7, 'Nama tersebut di atas benar adalah penduduk Desa Digital Kec. Wotu Kab. Luwu Timur dan nama tersebut benar memiliki ' . ($dataSurat->benda_hilang ?? "-") . ' dan ' .  ($dataSurat->benda_hilang ?? "-") . ' tersebut telah hilang atau tercecer di sekitar Kecamatan Wotu.', 0, 'J', false);
         $this->fpdf->Ln(1);
 
         $this->fpdf->Cell(-10);
@@ -734,7 +734,7 @@ class GenerateSuratController extends Controller
 
         // $this->fpdf->Cell(10);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->MultiCell(0, 7, 'Nama yang tersebut di atas benar-benar penduduk Desa Lampenai, Kecamatan Wotu, Kabupaten Luwu Timur yang berdomisili di ' . ($dataSurat->alamat ?? "-") . '. Sepanjang pengamatan kami, oknum tersebut tidak pernah Terpidana.', 0, 'J', false);
+        $this->fpdf->MultiCell(0, 7, 'Nama yang tersebut di atas benar-benar penduduk Desa Digital, Kecamatan Wotu, Kabupaten Luwu Timur yang berdomisili di ' . ($dataSurat->alamat ?? "-") . '. Sepanjang pengamatan kami, oknum tersebut tidak pernah Terpidana.', 0, 'J', false);
         $this->fpdf->Ln(3);
 
         $this->fpdf->MultiCell(0, 7, 'Demikian Surat Keterangan ini diberikan kepada yang bersangkutan untuk digunakan seperlunya.', 0, 'J', false);
