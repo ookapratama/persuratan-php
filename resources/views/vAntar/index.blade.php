@@ -44,7 +44,7 @@
                             <td><span class="label {{ $data->status_antar=="Y" ? "label-success" : "label-danger" }}">{{ $data->status_antar=="Y"?"ter-Antar" : "Belum" }}</span></td>
                             <td>
                                 <a onclick="show('{{ route($jenisSuratShow[$data->jenis_surat], $data->id) }}')" class="btn btn-sm btn-info fa fa-eye" title="detail"></a>
-                                @if(Auth::user()->level_id == 1)
+                                @if(Auth::user()->level_id == 1 || Auth::user()->level_id == 3)
                                     <a onclick="confirm(`{{ route('confirm_antar', $data->id) }}`)" class="btn btn-sm btn-success fa fa-check-square-o" title="konfirmasi"></a>
                                 @endif
                             </td>             
