@@ -228,19 +228,25 @@ class GenerateSuratController extends Controller
     {
         $tglIndo = $this->tglIndo($dataSurat->tgl_surat ?? "-");
 
-        $this->fpdf->Ln(7.5);
+        $this->fpdf->Ln(3);
         $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', '', 12);
         $this->fpdf->Cell(1, 5, 'Kalabbirang, ' . $tglIndo, 0, 1, 'C');
 
         $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, "Pak Lurah", 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, "Lurah Kalabbirang", 0, 1, 'C');
         $this->fpdf->Ln(20);
 
         $this->fpdf->Cell(130);
         $this->fpdf->SetFont('Times', 'BU', 12);
-        $this->fpdf->Cell(1, 5, strtoupper("Lurah"), 0, 1, 'C');
+        $this->fpdf->Cell(1, 5, strtoupper("H.AMIRUDDIN, SE.,M.AP"), 0, 1, 'C');
+        
+        $this->fpdf->Cell(126);
+        $this->fpdf->SetFont('Times', '', 10);
+        $this->fpdf->Cell(1, 5, strtoupper("Pangkat : Penata Tk.1"), 0, 1, 'C');
+        $this->fpdf->Cell(125);
+        $this->fpdf->Cell(1, 5, strtoupper("NIP. 197609192010011014"), 0, 1, 'C');
     }
 
     function insertImageTTD($filePath, $y = 200)
