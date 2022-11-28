@@ -28,11 +28,14 @@ class GenerateSuratController extends Controller
 
         // Bagian Kop Surat
         $this->printKopSurat();
+       
+        // dd($cut);
 
         // Bagian Bodi Surat
         switch ($type) {
             case "sktm":
                 $this->printBodySuratSKTM($surat);
+                $nama = $surat->jenis_surat;
                 break;
             case "domisili":
                 $this->printBodySuratDomisili($surat);
@@ -42,15 +45,19 @@ class GenerateSuratController extends Controller
                 break;
             case "kematian":
                 $this->printBodySuratKematian($surat);
+                $nama = $surat->jenis_surat;
                 break;
             case "usaha":
                 $this->printBodySuratUsaha($surat);
+                $nama = $surat->jenis_surat;
                 break;
             case "kelahiran":
                 $this->printBodySuratLahir($surat);
+                $nama = $surat->jenis_surat;
                 break;
             case "baik":
                 $this->printBodySuratBaik($surat);
+                $nama = $surat->jenis_surat;
                 break;
         }
 
@@ -65,7 +72,8 @@ class GenerateSuratController extends Controller
             $this->printBodySuratBaik2($surat);
         }
 
-        $this->fpdf->Output();
+        $filename = $nama.".pdf"; 
+        $this->fpdf->Output('', $filename);
         exit;
     }
 
@@ -411,7 +419,7 @@ class GenerateSuratController extends Controller
 
         $this->fpdf->Cell(105);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, 'Yth. Bapak Kapolsek Wotu', 0, 1, 'L');
+        $this->fpdf->Cell(1, 5, 'Yth. Bapak Lurah', 0, 1, 'L');
         $this->fpdf->Ln(2);
 
         $this->fpdf->Cell(105);
@@ -421,7 +429,7 @@ class GenerateSuratController extends Controller
 
         $this->fpdf->Cell(105);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->Cell(1, 5, '        Wotu', 0, 1, 'L');
+        $this->fpdf->Cell(1, 5, '        Kalabbirang', 0, 1, 'L');
         $this->fpdf->Ln(2);
 
 
@@ -481,7 +489,7 @@ class GenerateSuratController extends Controller
         $this->fpdf->Ln(11);
         $this->fpdf->Cell(-10);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->MultiCell(0, 7, 'Yang bertanda tangan di bawah ini ' . ($dataSurat->approve_by->jabatan ?? "-") . ' Kecamatan Wotu Kabupaten Luwu Timur. Menerangkan dengan sebenarnya bahwa :', 0, 'J', false);
+        $this->fpdf->MultiCell(0, 7, 'Yang bertanda tangan di bawah ini ' . ("Pak Lurah") . ' Kecamatan ' . "-" . ' Kabupaten ' . ("-") . '. Menerangkan dengan sebenarnya bahwa :', 0, 'J', false);
         $this->fpdf->Ln(4);
 
         foreach ($pemohon as $label => $value) {
@@ -500,7 +508,7 @@ class GenerateSuratController extends Controller
         $this->fpdf->Ln(4);
         $this->fpdf->Cell(-10);
         $this->fpdf->SetFont('Times', '', 12);
-        $this->fpdf->MultiCell(0, 7, 'Nama tersebut di atas benar adalah penduduk Desa Digital Kec. Wotu Kab. Luwu Timur dan nama tersebut benar memiliki ' . ($dataSurat->benda_hilang ?? "-") . ' dan ' .  ($dataSurat->benda_hilang ?? "-") . ' tersebut telah hilang atau tercecer di sekitar Kecamatan Wotu.', 0, 'J', false);
+        $this->fpdf->MultiCell(0, 7, 'Nama tersebut di atas benar adalah penduduk Desa Digital Kec. Kalabbirang Kab. Takalar dan nama tersebut benar memiliki ' . ($dataSurat->benda_hilang ?? "-") . ' dan ' .  ($dataSurat->benda_hilang ?? "-") . ' tersebut telah hilang atau tercecer di sekitar Kecamatan Kalabbirang.', 0, 'J', false);
         $this->fpdf->Ln(1);
 
         $this->fpdf->Cell(-10);
